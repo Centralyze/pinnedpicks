@@ -863,6 +863,8 @@
         section.classList.remove('open');
       } else {
         section.classList.add('open');
+        wrap.style.opacity = '1';
+        wrap.style.padding = '24px';
         wrap.style.maxHeight = wrap.scrollHeight + 'px';
         setTimeout(() => { wrap.style.maxHeight = '4000px'; }, 450);
       }
