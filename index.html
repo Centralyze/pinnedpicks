@@ -37,6 +37,9 @@
     }
 
     html { scroll-behavior: smooth; }
+    * { scrollbar-width: none; -ms-overflow-style: none; }
+    *::-webkit-scrollbar { display: none; }
+    
     body {
       background: var(--bg);
       color: var(--text);
@@ -165,10 +168,19 @@
 
     /* ── GRID ── */
     .cards-wrap {
-      display: none;
-      padding: 24px;
+      max-height: 0;
+      overflow: hidden;
+      padding: 0 24px;
+      transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+                  padding 0.35s ease,
+                  opacity 0.35s ease;
+      opacity: 0;
     }
-    .shop-section.open .cards-wrap { display: block; }
+    .shop-section.open .cards-wrap {
+      max-height: 4000px;
+      padding: 24px;
+      opacity: 1;
+    }
     .cards-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -838,7 +850,22 @@
     // ── COLLAPSIBLE SECTIONS ──
     function toggleSection(header) {
       const section = header.closest('.shop-section');
-      section.classList.toggle('open');
+      const wrap = section.querySelector('.cards-wrap');
+      const isOpen = section.classList.contains('open');
+
+      if (isOpen) {
+        wrap.style.maxHeight = wrap.scrollHeight + 'px';
+        requestAnimationFrame(() => {
+          wrap.style.maxHeight = '0';
+          wrap.style.opacity = '0';
+          wrap.style.padding = '0 24px';
+        });
+        section.classList.remove('open');
+      } else {
+        section.classList.add('open');
+        wrap.style.maxHeight = wrap.scrollHeight + 'px';
+        setTimeout(() => { wrap.style.maxHeight = '4000px'; }, 450);
+      }
     }
   </script>
 
