@@ -267,6 +267,20 @@
     }
     .empty-notice strong { display: block; font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: var(--text); margin-bottom: 8px; }
 
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    
+    .site-logo {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+    }
+
     /* ── HOW TO ADD SECTION COMMENT (visible as code comment only) ── */
     /*
     ╔══════════════════════════════════════════════╗
@@ -310,16 +324,20 @@
 
   <!-- ── HEADER ── -->
   <header>
-    <div class="logo">Pinned<span>Picks</span></div>
-    <div class="header-right">
-      <button class="theme-btn" id="themeBtn" title="Toggle /light">🌙</button>
-    </div>
-  </header>
+  <div class="logo">
+    <img src="images/favicon.png" alt="PinnedPicks Logo" class="site-logo">
+    Pinned<span>Picks</span>
+  </div>
+
+  <div class="header-right">
+    <button class="theme-btn" id="themeBtn" title="Toggle Light">☽</button>
+  </div>
+</header>
 
   <!-- ── HERO ── -->
   <div class="hero-strip">
     <h1>Curated picks.<br><em>Real deals.</em></h1>
-    <p>Hand-picked products across Amazon, Shopee, and Shein. Things I actually recommend!</p>
+    <p>Hand-picked products from Shopee, Amazon, SHEIN, and other partner platforms. Things I actually recommend!</p>
   </div>
 
   <!-- ── MAIN ── -->
