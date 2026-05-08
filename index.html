@@ -383,6 +383,16 @@
       .cards-wrap { padding: 14px; }
       .cards-grid,
       .category-cards.active { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+      .category-tags {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        justify-items: center;
+      }
+      .cat-tag {
+        width: 100%;
+        text-align: center;
+      }
     }
   </style>
 </head>
@@ -1597,6 +1607,21 @@
   </footer>
 
   <script>
+
+    // ── FIX: force closed state on page load ──
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.shop-section:not(.open) .cards-wrap').forEach(wrap => {
+        wrap.style.transition = 'none';
+        wrap.style.maxHeight = '0';
+        wrap.style.opacity = '0';
+        wrap.style.padding = '0 24px';
+        wrap.style.overflow = 'hidden';
+        requestAnimationFrame(() => {
+          wrap.style.transition = '';
+        });
+      });
+    });
+    
     // ── THEME TOGGLE ──
     const html = document.documentElement;
     const btn  = document.getElementById('themeBtn');
