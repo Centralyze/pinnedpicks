@@ -308,6 +308,71 @@
     }
     footer strong { color: var(--accent); }
 
+    .section-subheading {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.1rem;
+      color: var(--text);
+      margin-bottom: 18px;
+    }
+    .category-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      justify-content: center;
+    }
+    .cat-tag {
+      padding: 8px 22px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: var(--text);
+      background: var(--bg2);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+    .cat-tag:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .cat-tag.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+    .category-cards {
+      display: none;
+      margin-top: 20px;
+    }
+    .category-cards.active {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 18px;
+    }
+    .blank-card {
+      background: var(--bg2);
+      border: 2px dashed var(--border);
+      border-radius: 10px;
+      aspect-ratio: 3/4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 20px;
+    }
+    .blank-card svg { opacity: 0.3; }
+
     /* ── MOBILE ── */
     @media (max-width: 600px) {
       header { padding: 14px 18px; }
@@ -364,6 +429,7 @@
         <span class="chevron">▾</span>
       </div>
       <div class="cards-wrap">
+        <p class="section-subheading">20 Best Selling Products</p>
         <div class="cards-grid">
 
           <a class="card" href="https://s.shopee.ph/6AheA263W5" target="_blank" rel="noopener nofollow">
@@ -527,6 +593,205 @@
           </a>
 
         </div>
+        <div class="category-tags">
+          <span class="cat-tag" onclick="filterCategory(this, 'fashion')">Fashion & Apparel</span>
+          <span class="cat-tag" onclick="filterCategory(this, 'electronics')">Electronics & Technology</span>
+          <span class="cat-tag" onclick="filterCategory(this, 'health')">Health & Beauty</span>
+          <span class="cat-tag" onclick="filterCategory(this, 'groceries')">Groceries & Consumables</span>
+        </div>
+
+        <!-- ══ FASHION & APPAREL CARDS ══
+             Add your fashion product cards below.
+             Copy a .blank-card and replace with a real .card block.
+             Keep data-category="fashion" on the parent .category-cards div.
+        ══════════════════════════════════ -->
+        <div class="category-cards" data-category="fashion">
+          <!-- ADD FASHION CARDS HERE ↓ -->
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+        </div>
+
+        <!-- ══ ELECTRONICS & TECHNOLOGY CARDS ══
+             Add your electronics product cards below.
+             Keep data-category="electronics" on the parent .category-cards div.
+        ══════════════════════════════════ -->
+        <div class="category-cards" data-category="electronics">
+          <!-- ADD ELECTRONICS CARDS HERE ↓ -->
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+        </div>
+
+        <!-- ══ HEALTH & BEAUTY CARDS ══
+             Add your health and beauty product cards below.
+             Keep data-category="health" on the parent .category-cards div.
+        ══════════════════════════════════ -->
+        <div class="category-cards" data-category="health">
+          <!-- ADD HEALTH & BEAUTY CARDS HERE ↓ -->
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+        </div>
+
+        <!-- ══ GROCERIES & CONSUMABLES CARDS ══
+             Add your grocery and consumable product cards below.
+             Keep data-category="groceries" on the parent .category-cards div.
+        ══════════════════════════════════ -->
+        <div class="category-cards" data-category="groceries">
+          <!-- ADD GROCERIES CARDS HERE ↓ -->
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+        </div>
       </div>
     </section>
 
@@ -559,6 +824,7 @@
         <span class="chevron">▾</span>
       </div>
       <div class="cards-wrap">
+        <p class="section-subheading">20 Best Selling Products</p>
         <div class="cards-grid">
 
           <!--
@@ -734,6 +1000,205 @@
           </a>
 
         </div>
+        <div class="category-tags">
+          <span class="cat-tag" onclick="filterCategory(this, 'fashion')">Fashion & Apparel</span>
+          <span class="cat-tag" onclick="filterCategory(this, 'electronics')">Electronics & Technology</span>
+          <span class="cat-tag" onclick="filterCategory(this, 'health')">Health & Beauty</span>
+          <span class="cat-tag" onclick="filterCategory(this, 'groceries')">Groceries & Consumables</span>
+        </div>
+
+        <!-- ══ FASHION & APPAREL CARDS ══
+             Add your fashion product cards below.
+             Copy a .blank-card and replace with a real .card block.
+             Keep data-category="fashion" on the parent .category-cards div.
+        ══════════════════════════════════ -->
+        <div class="category-cards" data-category="fashion">
+          <!-- ADD FASHION CARDS HERE ↓ -->
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+        </div>
+
+        <!-- ══ ELECTRONICS & TECHNOLOGY CARDS ══
+             Add your electronics product cards below.
+             Keep data-category="electronics" on the parent .category-cards div.
+        ══════════════════════════════════ -->
+        <div class="category-cards" data-category="electronics">
+          <!-- ADD ELECTRONICS CARDS HERE ↓ -->
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+        </div>
+
+        <!-- ══ HEALTH & BEAUTY CARDS ══
+             Add your health and beauty product cards below.
+             Keep data-category="health" on the parent .category-cards div.
+        ══════════════════════════════════ -->
+        <div class="category-cards" data-category="health">
+          <!-- ADD HEALTH & BEAUTY CARDS HERE ↓ -->
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+        </div>
+
+        <!-- ══ GROCERIES & CONSUMABLES CARDS ══
+             Add your grocery and consumable product cards below.
+             Keep data-category="groceries" on the parent .category-cards div.
+        ══════════════════════════════════ -->
+        <div class="category-cards" data-category="groceries">
+          <!-- ADD GROCERIES CARDS HERE ↓ -->
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+          
+        </div>
       </div>
     </section>
 
@@ -750,6 +1215,7 @@
         <span class="chevron">▾</span>
       </div>
       <div class="cards-wrap">
+        <p class="section-subheading">20 Best Selling Products</p>
         <div class="cards-grid">
 
           <!-- CARD: images/1.jpg | Title: Why Everyone Is Buying This Owala Water Bottle | Link: https://amzn.to/48FxKfk -->
@@ -948,9 +1414,208 @@
           ╚══════════════════════════════════════════════════╝
           -->
 
-        </div><!-- /.cards-grid -->
-      </div><!-- /.cards-wrap -->
-    </section><!-- /#amazon -->
+        </div>
+        <div class="category-tags">
+          <span class="cat-tag" onclick="filterCategory(this, 'fashion')">Fashion & Apparel</span>
+          <span class="cat-tag" onclick="filterCategory(this, 'electronics')">Electronics & Technology</span>
+          <span class="cat-tag" onclick="filterCategory(this, 'health')">Health & Beauty</span>
+          <span class="cat-tag" onclick="filterCategory(this, 'groceries')">Groceries & Consumables</span>
+        </div>
+
+        <!-- ══ FASHION & APPAREL CARDS ══
+             Add your fashion product cards below.
+             Copy a .blank-card and replace with a real .card block.
+             Keep data-category="fashion" on the parent .category-cards div.
+        ══════════════════════════════════ -->
+        <div class="category-cards" data-category="fashion">
+          <!-- ADD FASHION CARDS HERE ↓ -->
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+        </div>
+
+        <!-- ══ ELECTRONICS & TECHNOLOGY CARDS ══
+             Add your electronics product cards below.
+             Keep data-category="electronics" on the parent .category-cards div.
+        ══════════════════════════════════ -->
+        <div class="category-cards" data-category="electronics">
+          <!-- ADD ELECTRONICS CARDS HERE ↓ -->
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+        </div>
+
+        <!-- ══ HEALTH & BEAUTY CARDS ══
+             Add your health and beauty product cards below.
+             Keep data-category="health" on the parent .category-cards div.
+        ══════════════════════════════════ -->
+        <div class="category-cards" data-category="health">
+          <!-- ADD HEALTH & BEAUTY CARDS HERE ↓ -->
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+        </div>
+
+        <!-- ══ GROCERIES & CONSUMABLES CARDS ══
+             Add your grocery and consumable product cards below.
+             Keep data-category="groceries" on the parent .category-cards div.
+        ══════════════════════════════════ -->
+        <div class="category-cards" data-category="groceries">
+          <!-- ADD GROCERIES CARDS HERE ↓ -->
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+
+          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+            <div class="card-body">
+              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
+            </div>
+          </a>
+          
+        </div>
+      </div>
+    </section>
 
 
 
@@ -978,6 +1643,23 @@
       localStorage.setItem('pp-theme', next);
       btn.textContent = next === 'dark' ? '☀' : '☽';
     });
+
+    // ── CATEGORY FILTER ──
+    function filterCategory(tag, category) {
+      const section = tag.closest('.shop-section');
+      const allTags = section.querySelectorAll('.cat-tag');
+      const allGrids = section.querySelectorAll('.category-cards');
+      const isActive = tag.classList.contains('active');
+
+      allTags.forEach(t => t.classList.remove('active'));
+      allGrids.forEach(g => g.classList.remove('active'));
+
+      if (!isActive) {
+        tag.classList.add('active');
+        const target = section.querySelector(`.category-cards[data-category="${category}"]`);
+        if (target) target.classList.add('active');
+      }
+    }
 
     // ── COLLAPSIBLE SECTIONS ──
     function toggleSection(header) {
