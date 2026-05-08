@@ -349,18 +349,30 @@
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
       gap: 18px;
-      max-height: 0;
       overflow: hidden;
       opacity: 0;
+      visibility: hidden;
+      height: 0;
       margin-top: 0;
-      transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1),
-                  opacity 0.35s ease,
-                  margin-top 0.35s ease;
+      transition: opacity 0.35s ease, visibility 0.35s ease;
     }
     .category-cards.active {
-      max-height: 4000px;
       opacity: 1;
+      visibility: visible;
+      height: auto;
       margin-top: 20px;
+    }
+
+    .category-panel {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+                  margin-top 0.35s ease;
+      margin-top: 0;
+    }
+    .category-panel.open {
+      max-height: 4000px;
+      margin-top: 0;
     }
     .blank-card {
       background: var(--bg2);
@@ -623,6 +635,7 @@
              Copy a .blank-card and replace with a real .card block.
              Keep data-category="fashion" on the parent .category-cards div.
         ══════════════════════════════════ -->
+        <div class="category-panel" id="panel-shopee">
         <div class="category-cards" data-category="fashion">
           <!-- ADD FASHION CARDS HERE ↓ -->
           <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
@@ -794,6 +807,7 @@
           </a>
 
         </div>
+        </div>
       </div>
     </section>
 
@@ -816,6 +830,7 @@
     ║  Use your Shein affiliate link in href="".               ║
     ╚══════════════════════════════════════════════════════════╝
     -->
+    
     <section class="shop-section" data-section="shein">
       <div class="section-header" onclick="toggleSection(this)">
         <div class="section-header-left">
@@ -1013,6 +1028,7 @@
              Copy a .blank-card and replace with a real .card block.
              Keep data-category="fashion" on the parent .category-cards div.
         ══════════════════════════════════ -->
+        <div class="category-panel" id="panel-shein">
         <div class="category-cards" data-category="fashion">
           <!-- ADD FASHION CARDS HERE ↓ -->
           <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
@@ -1185,7 +1201,8 @@
           
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
 
 
@@ -1411,6 +1428,7 @@
              Copy a .blank-card and replace with a real .card block.
              Keep data-category="fashion" on the parent .category-cards div.
         ══════════════════════════════════ -->
+        <div class="category-panel" id="panel-amazon">
         <div class="category-cards" data-category="fashion">
           <!-- ADD FASHION CARDS HERE ↓ -->
           <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
@@ -1583,7 +1601,8 @@
           
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
 
 
@@ -1643,30 +1662,39 @@
       const section = tag.closest('.shop-section');
       const allTags = section.querySelectorAll('.cat-tag');
       const allGrids = section.querySelectorAll('.category-cards');
+      const panel = section.querySelector('.category-panel');
       const isActive = tag.classList.contains('active');
+      const isSameCategory = isActive;
 
-      allTags.forEach(t => t.classList.remove('active'));
-
-      allGrids.forEach(g => {
-        g.style.maxHeight = g.scrollHeight + 'px';
-        requestAnimationFrame(() => {
-          g.style.maxHeight = '0';
-          g.style.opacity = '0';
-          g.style.marginTop = '0';
+      if (isSameCategory) {
+        // clicked same tag — close the panel
+        allTags.forEach(t => t.classList.remove('active'));
+        allGrids.forEach(g => {
+          g.classList.remove('active');
         });
-        g.classList.remove('active');
-      });
+        panel.style.maxHeight = panel.scrollHeight + 'px';
+        requestAnimationFrame(() => {
+          panel.style.maxHeight = '0';
+          panel.style.marginTop = '0';
+        });
+        panel.classList.remove('open');
+        return;
+      }
 
-      if (!isActive) {
-        tag.classList.add('active');
-        const target = section.querySelector(`.category-cards[data-category="${category}"]`);
-        if (target) {
-          target.classList.add('active');
-          target.style.maxHeight = target.scrollHeight + 'px';
-          target.style.opacity = '1';
-          target.style.marginTop = '20px';
-          setTimeout(() => { target.style.maxHeight = '4000px'; }, 450);
-        }
+      // switching to a different category
+      allTags.forEach(t => t.classList.remove('active'));
+      tag.classList.add('active');
+
+      // just swap cards, no collapse
+      allGrids.forEach(g => g.classList.remove('active'));
+      const target = section.querySelector(`.category-cards[data-category="${category}"]`);
+      if (target) target.classList.add('active');
+
+      // open panel if not already open
+      if (!panel.classList.contains('open')) {
+        panel.classList.add('open');
+        panel.style.maxHeight = panel.scrollHeight + 'px';
+        setTimeout(() => { panel.style.maxHeight = '4000px'; }, 450);
       }
     }
 
