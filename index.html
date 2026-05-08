@@ -120,7 +120,7 @@
     main { max-width: 1280px; margin: 0 auto; padding: 48px 24px 80px; }
 
     /* ── SECTION ── */
-    .shop-section { margin-bottom: 40px; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; background: var(--card); box-shadow: var(--shadow); }
+    .shop-section { margin-bottom: 20px; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; background: var(--card); box-shadow: var(--shadow); }
 
     .section-header {
       display: flex;
@@ -346,13 +346,21 @@
       border-color: var(--accent);
     }
     .category-cards {
-      display: none;
-      margin-top: 20px;
-    }
-    .category-cards.active {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
       gap: 18px;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      margin-top: 0;
+      transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+                  opacity 0.35s ease,
+                  margin-top 0.35s ease;
+    }
+    .category-cards.active {
+      max-height: 4000px;
+      opacity: 1;
+      margin-top: 20px;
     }
     .blank-card {
       background: var(--bg2);
@@ -1584,26 +1592,20 @@
   <!-- ── FOOTER — DISCLOSURE REQUIRED ── -->
   <footer>
     <p>
-    <strong>Affiliate Disclosure:</strong>
-    This page contains affiliate links. We may earn commissions from qualifying purchases made through partner platforms at no extra cost to you.
-    </p>
-    
-    <p style="margin-top:8px;">
-      © 2026 PinnedPicks. All rights reserved.
-    </p>
-    
-    <p style="margin-top:8px; font-weight: 500;">
-      PinnedPicks™ | Curated Product Recommendations
+      <strong>Affiliate Disclosure:</strong>
+      This page contains affiliate links. We may earn commissions from qualifying purchases made through partner platforms at no extra cost to you.
     </p>
 
-    <p style="margin-top:10px;">
-      <a href="https://ph.pinterest.com/centralyze_pinnedpicks/" 
-         target="_blank" 
+    <div style="margin-top:20px; display:flex; justify-content:center; align-items:center; gap:32px; flex-wrap:wrap;">
+      <span style="font-weight:600;">PinnedPicks™</span>
+      <span>© 2026. All rights reserved.</span>
+      <a href="https://ph.pinterest.com/centralyze_pinnedpicks/"
+         target="_blank"
          rel="noopener noreferrer"
-         style="color: var(--accent); text-decoration: none; font-weight: 600;">
-        Follow PinnedPicks on Pinterest →
+         style="color:var(--accent); text-decoration:none; font-weight:600;">
+        Follow on Pinterest →
       </a>
-    </p>
+    </div>
   </footer>
 
   <script>
@@ -1644,12 +1646,27 @@
       const isActive = tag.classList.contains('active');
 
       allTags.forEach(t => t.classList.remove('active'));
-      allGrids.forEach(g => g.classList.remove('active'));
+
+      allGrids.forEach(g => {
+        g.style.maxHeight = g.scrollHeight + 'px';
+        requestAnimationFrame(() => {
+          g.style.maxHeight = '0';
+          g.style.opacity = '0';
+          g.style.marginTop = '0';
+        });
+        g.classList.remove('active');
+      });
 
       if (!isActive) {
         tag.classList.add('active');
         const target = section.querySelector(`.category-cards[data-category="${category}"]`);
-        if (target) target.classList.add('active');
+        if (target) {
+          target.classList.add('active');
+          target.style.maxHeight = target.scrollHeight + 'px';
+          target.style.opacity = '1';
+          target.style.marginTop = '20px';
+          setTimeout(() => { target.style.maxHeight = '4000px'; }, 450);
+        }
       }
     }
 
