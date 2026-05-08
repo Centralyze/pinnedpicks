@@ -1664,36 +1664,32 @@
       const allGrids = section.querySelectorAll('.category-cards');
       const panel = section.querySelector('.category-panel');
       const isActive = tag.classList.contains('active');
-      const isSameCategory = isActive;
 
-      if (isSameCategory) {
-        // clicked same tag — close the panel
+      if (isActive) {
+        // same tag clicked — close smoothly
         allTags.forEach(t => t.classList.remove('active'));
-        allGrids.forEach(g => {
-          g.classList.remove('active');
-        });
-        panel.style.maxHeight = panel.scrollHeight + 'px';
-        requestAnimationFrame(() => {
-          requestAnimationFrame(() => {
-            panel.style.maxHeight = '0';
-            panel.style.marginTop = '0';
-          });
-        });
+        allGrids.forEach(g => g.classList.remove('active'));
         panel.classList.remove('open');
+
+        const h = panel.scrollHeight;
+        panel.style.maxHeight = h + 'px';
+        panel.offsetHeight; // force reflow — browser must paint this height first
+        panel.style.transition = 'max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1)';
+        panel.style.maxHeight = '0';
         return;
       }
 
-      // switching to a different category
+      // different category — just swap cards, keep panel open
       allTags.forEach(t => t.classList.remove('active'));
       tag.classList.add('active');
-
-      // just swap cards, no collapse
       allGrids.forEach(g => g.classList.remove('active'));
       const target = section.querySelector(`.category-cards[data-category="${category}"]`);
       if (target) target.classList.add('active');
 
-      // open panel if not already open
       if (!panel.classList.contains('open')) {
+        panel.style.maxHeight = '0';
+        panel.offsetHeight; // force reflow
+        panel.style.transition = 'max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1)';
         panel.classList.add('open');
         panel.style.maxHeight = panel.scrollHeight + 'px';
         setTimeout(() => { panel.style.maxHeight = '4000px'; }, 450);
