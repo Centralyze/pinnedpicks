@@ -1666,20 +1666,20 @@
       const isActive = tag.classList.contains('active');
 
       if (isActive) {
-        // same tag clicked — close smoothly
         allTags.forEach(t => t.classList.remove('active'));
         allGrids.forEach(g => g.classList.remove('active'));
-        panel.classList.remove('open');
 
-        const h = panel.scrollHeight;
-        panel.style.maxHeight = h + 'px';
-        panel.offsetHeight; // force reflow — browser must paint this height first
-        panel.style.transition = 'max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1)';
+        panel.style.maxHeight = panel.scrollHeight + 'px';
+        panel.offsetHeight; // force browser to paint that height
         panel.style.maxHeight = '0';
+
+        setTimeout(() => {
+          panel.classList.remove('open');
+          panel.style.maxHeight = '';
+        }, 450);
         return;
       }
 
-      // different category — just swap cards, keep panel open
       allTags.forEach(t => t.classList.remove('active'));
       tag.classList.add('active');
       allGrids.forEach(g => g.classList.remove('active'));
@@ -1688,8 +1688,7 @@
 
       if (!panel.classList.contains('open')) {
         panel.style.maxHeight = '0';
-        panel.offsetHeight; // force reflow
-        panel.style.transition = 'max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1)';
+        panel.offsetHeight;
         panel.classList.add('open');
         panel.style.maxHeight = panel.scrollHeight + 'px';
         setTimeout(() => { panel.style.maxHeight = '4000px'; }, 450);
