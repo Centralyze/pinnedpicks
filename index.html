@@ -1674,8 +1674,10 @@
         });
         panel.style.maxHeight = panel.scrollHeight + 'px';
         requestAnimationFrame(() => {
-          panel.style.maxHeight = '0';
-          panel.style.marginTop = '0';
+          requestAnimationFrame(() => {
+            panel.style.maxHeight = '0';
+            panel.style.marginTop = '0';
+          });
         });
         panel.classList.remove('open');
         return;
