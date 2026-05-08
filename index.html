@@ -1669,32 +1669,37 @@
         allTags.forEach(t => t.classList.remove('active'));
         allGrids.forEach(g => g.classList.remove('active'));
 
-        panel.style.maxHeight = panel.scrollHeight + 'px';
-        panel.offsetHeight; // force browser to paint that height
-        panel.style.maxHeight = '0';
+        const h = panel.scrollHeight;
 
-        setTimeout(() => {
+        const anim = panel.animate(
+          [{ maxHeight: h + 'px' }, { maxHeight: '0px' }],
+          { duration: 450, easing: 'cubic-bezier(0.4, 0, 0.2, 1)', fill: 'forwards' }
+        );
+
+        anim.onfinish = () => {
           panel.classList.remove('open');
           panel.style.maxHeight = '';
-        }, 450);
+          anim.cancel();
+        };
         return;
       }
 
       allTags.forEach(t => t.classList.remove('active'));
       tag.classList.add('active');
       allGrids.forEach(g => g.classList.remove('active'));
+
       const target = section.querySelector(`.category-cards[data-category="${category}"]`);
       if (target) target.classList.add('active');
 
       if (!panel.classList.contains('open')) {
-        panel.style.maxHeight = '0';
-        panel.offsetHeight;
         panel.classList.add('open');
-        panel.style.maxHeight = panel.scrollHeight + 'px';
-        setTimeout(() => { panel.style.maxHeight = '4000px'; }, 450);
+        const h = panel.scrollHeight;
+        panel.animate(
+          [{ maxHeight: '0px' }, { maxHeight: h + 'px' }],
+          { duration: 450, easing: 'cubic-bezier(0.4, 0, 0.2, 1)' }
+        ).onfinish = () => { panel.style.maxHeight = '4000px'; };
       }
     }
-
     // ── COLLAPSIBLE SECTIONS ──
     function toggleSection(header) {
       const section = header.closest('.shop-section');
