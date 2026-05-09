@@ -1775,37 +1775,85 @@
       wrapper.querySelector('.slider-btn-right').classList.toggle('visible', newX > maxX);
     }
 
-    // ── TOUCH SWIPE ──
+    // ── TOUCH SWIPE — MOMENTUM SCROLLING ──
     document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('.slider-grid').forEach(grid => {
-        const viewport = () => grid.closest('.slider-viewport');
-        const maxX     = () => -(grid.scrollWidth - viewport().offsetWidth);
-        let startX = 0, startVal = 0;
+        const getViewport = () => grid.closest('.slider-viewport');
+        const getMaxX     = () => -(grid.scrollWidth - getViewport().offsetWidth);
 
-       grid.addEventListener('touchstart', e => {
+        let startX     = 0;
+        let startVal   = 0;
+        let lastX      = 0;
+        let lastTime   = 0;
+        let velocity   = 0;
+        let rafId      = null;
+        let isDragging = false;
+
+        function getCurrentX() {
+          return parseFloat(grid.dataset.x || 0);
+        }
+
+        function setX(x) {
+          const maxX = getMaxX();
+          const clamped = Math.max(maxX, Math.min(0, x));
+          grid.dataset.x = clamped;
+          grid.style.transition = 'none';
+          grid.style.transform = `translateX(${clamped}px)`;
+          const rowWrap = grid.closest('.slider-row-wrap');
+          if (rowWrap) {
+            rowWrap.querySelector('.slider-btn-left').classList.toggle('visible', clamped < 0);
+            rowWrap.querySelector('.slider-btn-right').classList.toggle('visible', clamped > maxX);
+          }
+          return clamped;
+        }
+
+        function runMomentum() {
+          if (Math.abs(velocity) < 0.3) {
+            velocity = 0;
+            return;
+          }
+          velocity *= 0.93;
+          const newX = setX(getCurrentX() + velocity);
+          const maxX = getMaxX();
+          if (newX === 0 || newX === maxX) {
+            velocity = 0;
+            return;
+          }
+          rafId = requestAnimationFrame(runMomentum);
+        }
+
+        grid.addEventListener('touchstart', e => {
+          cancelAnimationFrame(rafId);
+          isDragging = true;
           startX   = e.touches[0].clientX;
-          startVal = parseFloat(grid.dataset.x || 0);
+          lastX    = startX;
+          lastTime = Date.now();
+          startVal = getCurrentX();
+          velocity = 0;
+          grid.style.transition = 'none';
         }, { passive: true });
 
         grid.addEventListener('touchmove', e => {
-          const dx   = e.touches[0].clientX - startX;
-          const newX = Math.max(maxX(), Math.min(0, startVal + dx));
-          grid.style.transform = `translateX(${newX}px)`;
+          if (!isDragging) return;
+          const now    = Date.now();
+          const touch  = e.touches[0].clientX;
+          const dt     = now - lastTime || 1;
+          velocity     = (touch - lastX) / dt * 16;
+          lastX        = touch;
+          lastTime     = now;
+          const dx     = touch - startX;
+          setX(startVal + dx);
         }, { passive: true });
 
-        grid.addEventListener('touchend', e => {
-          const dx      = e.changedTouches[0].clientX - startX;
-          const cardW   = (grid.querySelector('.card')?.offsetWidth || 185) + 14;
-          const raw     = startVal + dx;
-          const snapped = Math.round(raw / cardW) * cardW;
-          const newX    = Math.max(maxX(), Math.min(0, snapped));
-          grid.dataset.x = newX;
-          grid.style.transform = `translateX(${newX}px)`;
-          const rowWrap = grid.closest('.slider-row-wrap');
-          if (rowWrap) {
-            rowWrap.querySelector('.slider-btn-left').classList.toggle('visible',  newX < 0);
-            rowWrap.querySelector('.slider-btn-right').classList.toggle('visible', newX > maxX());
-          }
+        grid.addEventListener('touchend', () => {
+          isDragging = false;
+          cancelAnimationFrame(rafId);
+          rafId = requestAnimationFrame(runMomentum);
+        }, { passive: true });
+
+        grid.addEventListener('touchcancel', () => {
+          isDragging = false;
+          velocity   = 0;
         }, { passive: true });
       });
     });
