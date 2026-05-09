@@ -419,16 +419,17 @@
     }
     .slider-btn {
       position: absolute;
-      top: 50%; transform: translateY(-50%);
+      top: 45%; transform: translateY(-50%);
       width: 44px; height: 44px;
       border-radius: 50%;
       background: rgba(255,255,255,0.18);
       border: 1px solid var(--border);
       backdrop-filter: blur(10px);
       cursor: pointer;
-      display: grid; place-items: center;
+      display: flex; align-items: center; justify-content: center;
       z-index: 10;
-      font-size: 1.6rem; line-height: 1;
+      font-size: 1.1rem; line-height: 1;
+      padding: 0;
       color: var(--text);
       transition: all 0.25s ease;
       opacity: 0; pointer-events: none;
@@ -1765,7 +1766,7 @@
       const cardW    = card.offsetWidth + 14;
       const visible  = viewport.offsetWidth;
       const maxX     = -(grid.scrollWidth - visible);
-      const step     = Math.floor(visible / cardW) * cardW;
+      const step     = cardW * 2.5;
       const currentX = parseFloat(grid.dataset.x || 0);
       let   newX     = currentX - (dir * step);
       newX = Math.max(maxX, Math.min(0, newX));
