@@ -395,10 +395,11 @@
 
     /* ── SLIDER ── */
     .slider-wrapper {
-      margin: 0 20px;
+      margin: 0 28px;
       display: flex;
       flex-direction: column;
       gap: 14px;
+      overflow: hidden;
     }
     .slider-row-wrap {
       position: relative;
@@ -1767,7 +1768,7 @@
       if (!card) return;
       const cardW    = card.offsetWidth + 14;
       const visible  = viewport.offsetWidth;
-      const maxX     = -(grid.scrollWidth - visible);
+      const maxX     = -(grid.scrollWidth - visible + 2);
       const step     = cardW * 2;
       const currentX = parseFloat(grid.dataset.x || 0);
       let   newX     = currentX - (dir * step);
@@ -1782,7 +1783,7 @@
     document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('.slider-grid').forEach(grid => {
         const getViewport = () => grid.closest('.slider-viewport');
-        const getMaxX     = () => -(grid.scrollWidth - getViewport().offsetWidth);
+        const getMaxX     = () => -(grid.scrollWidth - getViewport().offsetWidth + 2);
 
         let startX     = 0;
         let startVal   = 0;
