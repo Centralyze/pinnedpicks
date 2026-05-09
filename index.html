@@ -2,44 +2,64 @@
 <html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PinnedPicks</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="images/favicon.png" />
   <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* ============================================================
+       RESET & ROOT
+    ============================================================ */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
     :root {
-      --bg: #faf8f5;
-      --bg2: #f2ede6;
-      --card: #ffffff;
-      --text: #1a1612;
-      --muted: #7a6f65;
-      --accent: #c8521a;
-      --accent2: #e8855a;
-      --border: rgba(0,0,0,0.09);
-      --shadow: 0 2px 24px rgba(0,0,0,0.07);
-      --tag-amazon: #ff9900;
+      --bg:         #faf8f5;
+      --bg2:        #f2ede6;
+      --card:       #ffffff;
+      --text:       #1a1612;
+      --muted:      #7a6f65;
+      --accent:     #c8521a;
+      --accent2:    #e8855a;
+      --border:     rgba(0, 0, 0, 0.09);
+      --shadow:     0 2px 24px rgba(0, 0, 0, 0.07);
       --tag-shopee: #f05a28;
-      --tag-shein: #000000;
-    }
-    [data-theme="dark"] {
-      --bg: #130f0b;
-      --bg2: #1d1710;
-      --card: #1f1a14;
-      --text: #f0ebe3;
-      --muted: #9a8e82;
-      --accent: #e06b30;
-      --accent2: #f09060;
-      --border: rgba(255,255,255,0.07);
-      --shadow: 0 2px 24px rgba(0,0,0,0.4);
+      --tag-amazon: #ff9900;
+      --tag-shein:  #000000;
     }
 
-    html { scroll-behavior: smooth; }
-    * { scrollbar-width: none; -ms-overflow-style: none; }
-    *::-webkit-scrollbar { display: none; }
-    
+    [data-theme="dark"] {
+      --bg:      #130f0b;
+      --bg2:     #1d1710;
+      --card:    #1f1a14;
+      --text:    #f0ebe3;
+      --muted:   #9a8e82;
+      --accent:  #e06b30;
+      --accent2: #f09060;
+      --border:  rgba(255, 255, 255, 0.07);
+      --shadow:  0 2px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    /* ============================================================
+       BASE
+    ============================================================ */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    * {
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    *::-webkit-scrollbar {
+      display: none;
+    }
+
     body {
       background: var(--bg);
       color: var(--text);
@@ -50,357 +70,212 @@
       transition: background 0.35s, color 0.35s;
     }
 
-    /* ── HEADER ── */
+    /* ============================================================
+       HEADER
+    ============================================================ */
     header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 40px;
       background: var(--card);
       border-bottom: 1px solid var(--border);
-      padding: 18px 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky; top: 0; z-index: 100;
       backdrop-filter: blur(8px);
     }
-    .logo {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.4rem;
-      color: var(--accent);
-      letter-spacing: -0.01em;
-    }
-    .logo span { color: var(--text); }
-    .header-right { display: flex; align-items: center; gap: 16px; }
-    .theme-btn {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      color: var(--muted);
-      font-size: 1rem;
-      width: 36px; height: 36px;
-      border-radius: 50%;
-      cursor: pointer;
-      display: grid; place-items: center;
-      transition: all 0.2s;
-    }
-    .theme-btn:hover { border-color: var(--accent); color: var(--accent); }
-
-    /* ── HERO STRIP ── */
-    .hero-strip {
-      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
-      color: #fff;
-      text-align: center;
-      padding: 56px 24px 48px;
-    }
-    .hero-strip h1 {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(2rem, 5vw, 3.2rem);
-      line-height: 1.15;
-      margin-bottom: 12px;
-    }
-    .hero-strip h1 em { font-style: italic; }
-    .hero-strip p {
-      font-size: 0.9rem;
-      opacity: 0.88;
-      max-width: 480px;
-      margin: 0 auto;
-      font-weight: 300;
-    }
-
-    /* ── DISCLOSURE BANNER ── */
-    .disclosure {
-      background: var(--bg2);
-      border-bottom: 1px solid var(--border);
-      padding: 11px 40px;
-      font-size: 0.72rem;
-      color: var(--muted);
-      text-align: center;
-      letter-spacing: 0.01em;
-    }
-    .disclosure strong { color: var(--accent); }
-
-    /* ── MAIN LAYOUT ── */
-    main { max-width: 1280px; margin: 0 auto; padding: 48px 24px 80px; }
-
-    /* ── SECTION ── */
-    .shop-section { margin-bottom: 20px; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; background: var(--card); box-shadow: var(--shadow); }
-
-    .section-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 18px 28px;
-      cursor: pointer;
-      user-select: none;
-      transition: background 0.2s;
-      border-bottom: 1px solid var(--border);
-    }
-    .section-header:hover { background: var(--bg2); }
-
-    .section-header-left { display: flex; align-items: center; gap: 14px; }
-    .shop-badge {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.62rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      padding: 4px 12px;
-      border-radius: 4px;
-      color: #fff;
-    }
-    .badge-amazon { background: #ff9900; }
-    .badge-shopee { background: #f05a28; }
-    .badge-shein   { background: #1a1a1a; }
-
-    .section-title-text {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.25rem;
-      color: var(--text);
-    }
-    .item-count {
-      font-size: 0.78rem;
-      color: var(--muted);
-      font-weight: 400;
-    }
-    .chevron {
-      font-size: 1rem; color: var(--muted);
-      transition: transform 0.3s ease;
-      line-height: 1;
-    }
-    .shop-section.open .chevron { transform: rotate(180deg); }
-
-    /* ── GRID ── */
-    .cards-wrap {
-      max-height: 0;
-      overflow: hidden;
-      padding: 0 24px;
-      transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1),
-                  padding 0.35s ease,
-                  opacity 0.35s ease;
-      opacity: 0;
-    }
-    .shop-section.open .cards-wrap {
-      max-height: 4000px;
-      padding: 24px;
-      opacity: 1;
-    }
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 18px;
-    }
-
-    /* ── PRODUCT CARD ── */
-    /*
-    ╔══════════════════════════════════╗
-    ║  HOW TO ADD A NEW PRODUCT CARD   ║
-    ╠══════════════════════════════════╣
-    ║ 1. Copy the <a class="card">     ║
-    ║    block below.                  ║
-    ║ 2. Change href="" to your link.  ║
-    ║ 3. Change src="" to your image.  ║
-    ║    (e.g. /.jpg)         ║
-    ║ 4. Change the <h3> title text.   ║
-    ║ 5. Paste inside .cards-grid      ║
-    ║    of the right section.         ║
-    ╚══════════════════════════════════╝
-    */
-    .card {
-      display: flex;
-      flex-direction: column;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      overflow: hidden;
-      text-decoration: none;
-      color: var(--text);
-      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s;
-      height: 100%;
-      align-self: stretch;
-    }
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.13);
-      border-color: var(--accent);
-    }
-    .card-img {
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      object-fit: cover;
-      display: block;
-      background: var(--bg2);
-    }
-    .card-body {
-      padding: 14px 14px 16px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    /*
-    ── CARD TITLE ──
-    To change a title: edit the <h3> text inside .card-body
-    Keep it punchy — short titles perform better visually.
-    */
-    .card h3 {
-      font-family: 'DM Serif Display', serif;
-      font-size: 0.97rem;
-      line-height: 1.35;
-      color: var(--text);
-      font-weight: 400;
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      min-height: 3.93rem;
-    }
-    .card-cta {
-      margin-top: auto;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--accent);
-    }
-    .card:hover .card-cta { gap: 10px; }
-    .card-cta-arrow { transition: margin 0.2s; }
-
-    /* ── SHOPEE / SHEIN EMPTY STATES ── */
-    .empty-notice {
-      padding: 40px 24px;
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.85rem;
-    }
-    .empty-notice strong { display: block; font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: var(--text); margin-bottom: 8px; }
 
     .logo {
       display: flex;
       align-items: center;
       gap: 0;
+      font-family: 'DM Serif Display', serif;
       font-size: 1.5rem;
       font-weight: bold;
+      color: var(--accent);
+      letter-spacing: -0.01em;
     }
-    
-    .site-logo {
+
+    .logo span {
+      color: var(--text);
+    }
+
+    .logo-img {
       width: 40px;
       height: 40px;
       object-fit: contain;
     }
 
-    /* ── HOW TO ADD SECTION COMMENT (visible as code comment only) ── */
-    /*
-    ╔══════════════════════════════════════════════╗
-    ║  HOW TO ADD A NEW PLATFORM SECTION           ║
-    ╠══════════════════════════════════════════════╣
-    ║ 1. Copy an existing <section class="shop-    ║
-    ║    section"> ... </section> block.           ║
-    ║ 2. Change data-section="amazon" to a new     ║
-    ║    unique id (e.g. data-section="lazada").   ║
-    ║ 3. Change .shop-badge class and color.       ║
-    ║ 4. Update .section-title-text text.          ║
-    ║ 5. Add your product cards inside .cards-grid ║
-    ╚══════════════════════════════════════════════╝
-    */
-
-    /* ── FOOTER ── */
-    footer {
-      text-align: center;
-      padding: 40px 24px;
-      border-top: 1px solid var(--border);
-      background: var(--card);
-      font-size: 0.75rem;
+    .theme-btn {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 50%;
       color: var(--muted);
-      line-height: 1.9;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
     }
-    footer strong { color: var(--accent); }
 
+    .theme-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    .hero {
+      padding: 56px 24px 48px;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+      color: #fff;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+    }
+
+    .hero p {
+      max-width: 480px;
+      margin: 0 auto;
+      font-size: 0.9rem;
+      font-weight: 300;
+      opacity: 0.88;
+    }
+
+    /* ============================================================
+       DISCLOSURE
+    ============================================================ */
+    .disclosure {
+      padding: 11px 40px;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      font-size: 0.72rem;
+      color: var(--muted);
+      text-align: center;
+      letter-spacing: 0.01em;
+    }
+
+    .disclosure strong {
+      color: var(--accent);
+    }
+
+    /* ============================================================
+       MAIN LAYOUT
+    ============================================================ */
+    main {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    /* ============================================================
+       SHOP SECTION
+    ============================================================ */
+    .shop-section {
+      margin-bottom: 20px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    /* Section Header */
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 28px;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.2s;
+    }
+
+    .section-header:hover {
+      background: var(--bg2);
+    }
+
+    .section-header-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .shop-badge {
+      padding: 4px 12px;
+      border-radius: 4px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #fff;
+    }
+
+    .badge-shopee { background: #f05a28; }
+    .badge-amazon { background: #ff9900; }
+    .badge-shein  { background: #1a1a1a; }
+
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.25rem;
+      color: var(--text);
+    }
+
+    .chevron {
+      font-size: 1rem;
+      line-height: 1;
+      color: var(--muted);
+      transition: transform 0.3s ease;
+    }
+
+    .shop-section.open .chevron {
+      transform: rotate(180deg);
+    }
+
+    /* Cards Wrap (collapsible) */
+    .cards-wrap {
+      max-height: 0;
+      overflow: hidden;
+      padding: 0 24px;
+      opacity: 0;
+      transition:
+        max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+        padding    0.35s ease,
+        opacity    0.35s ease;
+    }
+
+    .shop-section.open .cards-wrap {
+      max-height: 4000px;
+      padding: 24px;
+      opacity: 1;
+    }
+
+    /* Section subheading */
     .section-subheading {
       font-family: 'DM Serif Display', serif;
       font-size: 1.1rem;
       color: var(--text);
       margin-bottom: 18px;
     }
-    .category-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 24px;
-      padding-top: 20px;
-      border-top: 1px solid var(--border);
-      justify-content: center;
-    }
-    .cat-tag {
-      padding: 8px 22px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      color: var(--text);
-      background: var(--bg2);
-      cursor: pointer;
-      transition: all 0.2s ease;
-      user-select: none;
-    }
-    .cat-tag:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-    .cat-tag.active {
-      background: var(--accent);
-      color: #fff;
-      border-color: var(--accent);
-    }
-    .category-cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 18px;
-      overflow: hidden;
-      opacity: 0;
-      visibility: hidden;
-      height: 0;
-      margin-top: 0;
-      transition: opacity 0.35s ease, visibility 0.35s ease;
-    }
-    .category-cards.active {
-      opacity: 1;
-      visibility: visible;
-      height: auto;
-      margin-top: 20px;
-    }
 
-    .category-panel {
-      overflow: hidden;
-      max-height: 0;
-      transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1),
-                  margin-top 0.35s ease;
-      margin-top: 0;
-    }
-    .category-panel.open {
-      max-height: 4000px;
-      margin-top: 0;
-    }
-    .blank-card {
-      background: var(--bg2);
-      border: 2px dashed var(--border);
-      border-radius: 10px;
-      aspect-ratio: 3/4;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      color: var(--muted);
-      font-size: 0.75rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      text-align: center;
-      padding: 20px;
-    }
-    .blank-card svg { opacity: 0.3; }
-
-    /* ── SLIDER ── */
+    /* ============================================================
+       SLIDER
+    ============================================================ */
     .slider-wrapper {
       margin: 0 28px;
       display: flex;
@@ -408,14 +283,17 @@
       gap: 14px;
       overflow: visible;
     }
-    .slider-row-wrap {
+
+    .slider-row {
       position: relative;
       overflow: visible;
     }
+
     .slider-viewport {
       overflow: hidden;
       width: 100%;
     }
+
     .slider-grid {
       display: inline-grid !important;
       grid-template-rows: 1fr;
@@ -425,86 +303,357 @@
       gap: 14px;
       width: max-content;
       max-width: max-content;
+      align-items: stretch;
+      padding: 4px 2px;
       transform: translateX(0);
       transition: transform 0.42s cubic-bezier(0.4, 0, 0.2, 1);
-      padding: 4px 2px;
-      align-items: stretch;
     }
+
     .slider-btn {
       position: absolute;
-      top: 45%; transform: translateY(-50%);
-      width: 44px; height: 44px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.18);
-      border: 1px solid var(--border);
-      backdrop-filter: blur(10px);
-      cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
+      top: 45%;
+      transform: translateY(-50%);
       z-index: 10;
-      font-size: 1.1rem; line-height: 1;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       padding: 0;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(10px);
       color: var(--text);
-      transition: all 0.25s ease;
-      opacity: 0; pointer-events: none;
+      font-size: 1.1rem;
+      line-height: 1;
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      transition: background 0.25s, color 0.25s, border-color 0.25s, opacity 0.25s;
     }
-    [data-theme="dark"] .slider-btn { background: rgba(0,0,0,0.35); }
-    .slider-btn.visible { opacity: 1; pointer-events: all; }
-    .slider-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+    [data-theme="dark"] .slider-btn {
+      background: rgba(0, 0, 0, 0.35);
+    }
+
+    .slider-btn.visible {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .slider-btn:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
     .slider-btn-left  { left:  -22px; }
     .slider-btn-right { right: -22px; }
-    
-    /* ── MOBILE ── */
-    /* ── MOBILE ── */
+
+    /* ============================================================
+       PRODUCT CARD
+    ============================================================ */
+    .card {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      align-self: stretch;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      text-decoration: none;
+      color: var(--text);
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.13);
+      border-color: var(--accent);
+    }
+
+    .card-img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      display: block;
+      background: var(--bg2);
+    }
+
+    .card-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 14px 14px 16px;
+    }
+
+    .card h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 0.97rem;
+      font-weight: 400;
+      line-height: 1.35;
+      color: var(--text);
+      min-height: 3.93rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .card-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: auto;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .card:hover .card-cta {
+      gap: 10px;
+    }
+
+    /* ============================================================
+       CATEGORY FILTER
+    ============================================================ */
+    .category-tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    .cat-tag {
+      padding: 8px 22px;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: var(--text);
+      cursor: pointer;
+      user-select: none;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+
+    .cat-tag:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .cat-tag.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    /* Category Panel (animated container) */
+    .category-panel {
+      max-height: 0;
+      overflow: hidden;
+      transition:
+        max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+        margin-top 0.35s ease;
+    }
+
+    .category-panel.open {
+      max-height: 4000px;
+    }
+
+    /* Category Grid */
+    .category-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 18px;
+      height: 0;
+      overflow: hidden;
+      opacity: 0;
+      visibility: hidden;
+      margin-top: 0;
+      transition: opacity 0.35s ease, visibility 0.35s ease;
+    }
+
+    .category-cards.active {
+      height: auto;
+      opacity: 1;
+      visibility: visible;
+      margin-top: 20px;
+    }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    footer {
+      padding: 40px 24px;
+      background: var(--card);
+      border-top: 1px solid var(--border);
+      font-size: 0.75rem;
+      color: var(--muted);
+      line-height: 1.9;
+      text-align: center;
+    }
+
+    footer strong {
+      color: var(--accent);
+    }
+
+    .footer-meta {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 32px;
+      margin-top: 20px;
+    }
+
+    .footer-meta span {
+      font-weight: 600;
+    }
+
+    .footer-meta a {
+      font-weight: 600;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    /* ============================================================
+       RESPONSIVE — MOBILE (≤600px)
+    ============================================================ */
     @media (max-width: 600px) {
-      header { padding: 16px 18px; }
-      .logo { font-size: 1.25rem; }
-      .site-logo { width: 34px; height: 34px; }
-      .theme-btn { width: 40px; height: 40px; font-size: 1.1rem; }
+      /* Header */
+      header {
+        padding: 16px 18px;
+      }
 
-      .hero-strip { padding: 40px 20px 36px; }
-      .hero-strip h1 { font-size: 1.9rem; }
-      .hero-strip p { font-size: 0.92rem; }
+      .logo {
+        font-size: 1.25rem;
+      }
 
-      .disclosure { padding: 10px 16px; font-size: 0.75rem; }
+      .logo-img {
+        width: 34px;
+        height: 34px;
+      }
 
-      main { padding: 16px 0 60px; }
+      .theme-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
+      }
 
-      /* Section fills full screen width */
-      .shop-section { border-radius: 0; border-left: none; border-right: none; margin-bottom: 12px; }
-      .section-header { padding: 16px 20px; }
-      .section-title-text { font-size: 1.35rem; }
-      .shop-badge { font-size: 0.68rem; padding: 5px 13px; }
-      .chevron { font-size: 1.2rem; }
+      /* Hero */
+      .hero {
+        padding: 40px 20px 36px;
+      }
 
-      .cards-wrap { padding: 0 !important; }
+      .hero h1 {
+        font-size: 1.9rem;
+      }
 
-      .section-subheading { font-size: 1.05rem; padding: 18px 20px 10px; margin-bottom: 0; }
+      .hero p {
+        font-size: 0.92rem;
+      }
+
+      /* Disclosure */
+      .disclosure {
+        padding: 10px 16px;
+        font-size: 0.75rem;
+      }
+
+      /* Main */
+      main {
+        padding: 16px 0 60px;
+      }
+
+      /* Section fills full width */
+      .shop-section {
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+        margin-bottom: 12px;
+      }
+
+      .section-header {
+        padding: 16px 20px;
+      }
+
+      .section-title {
+        font-size: 1.35rem;
+      }
+
+      .shop-badge {
+        font-size: 0.68rem;
+        padding: 5px 13px;
+      }
+
+      .chevron {
+        font-size: 1.2rem;
+      }
+
+      /* Cards wrap override for mobile */
+      .cards-wrap {
+        padding: 0 !important;
+      }
+
+      .section-subheading {
+        font-size: 1.05rem;
+        padding: 18px 20px 10px;
+        margin-bottom: 0;
+      }
 
       /* Slider: show ~2.4 cards so third is partially visible */
-      .slider-wrapper { margin: 0; gap: 10px; padding: 0 0 4px; overflow: visible; }
-      .slider-row-wrap { overflow: visible; }
-      .slider-viewport { overflow: hidden; }
+      .slider-wrapper {
+        margin: 0;
+        gap: 10px;
+        padding: 0 0 4px;
+        overflow: visible;
+      }
+
+      .slider-row {
+        overflow: visible;
+      }
+
       .slider-grid {
         grid-auto-columns: calc((100vw - 56px) / 2.4) !important;
         gap: 10px !important;
-        padding: 4px 20px 4px 20px !important;
+        padding: 4px 20px !important;
         align-items: stretch !important;
       }
 
-      /* Card body text scaling */
-      .card h3 { font-size: 0.9rem; line-height: 1.3; }
-      .card-body { padding: 10px 12px 12px; gap: 8px; }
-      .card-cta { font-size: 0.7rem; }
+      /* Card text */
+      .card h3 {
+        font-size: 0.9rem;
+        line-height: 1.3;
+      }
 
-      /* Category tags */
+      .card-body {
+        padding: 10px 12px 12px;
+        gap: 8px;
+      }
+
+      .card-cta {
+        font-size: 0.7rem;
+      }
+
+      /* Category tags: 2-column grid */
       .category-tags {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 10px;
         justify-items: center;
+        gap: 10px;
         padding: 16px 20px 4px;
         margin-top: 16px;
       }
+
       .cat-tag {
         width: 100%;
         text-align: center;
@@ -512,7 +661,7 @@
         padding: 10px 8px;
       }
 
-      /* Category grid inside panels */
+      /* Category grid on mobile */
       .category-cards.active {
         grid-template-columns: repeat(2, 1fr);
         gap: 10px;
@@ -520,235 +669,248 @@
         margin-top: 14px;
       }
 
-      .slider-btn { display: none !important; }
+      /* Hide slider arrow buttons on mobile (swipe only) */
+      .slider-btn {
+        display: none !important;
+      }
 
-      footer { padding: 32px 20px; font-size: 0.78rem; }
+      /* Footer */
+      footer {
+        padding: 32px 20px;
+        font-size: 0.78rem;
+      }
     }
+
   </style>
 </head>
 <body>
 
-  <!-- ── HEADER ── -->
+  <!-- ============================================================
+       HEADER
+  ============================================================ -->
   <header>
-  <div class="logo">
-    <img src="images/favicon.png" alt="PinnedPicks Logo" class="site-logo">
-    Pinned<span>Picks</span>
-</div>
+    <div class="logo">
+      <img src="images/favicon.png" alt="PinnedPicks Logo" class="logo-img" />
+      Pinned<span>Picks</span>
+    </div>
+    <button class="theme-btn" id="themeBtn" title="Toggle theme">☽</button>
+  </header>
 
-  <div class="header-right">
-    <button class="theme-btn" id="themeBtn" title="Toggle Light">☽</button>
-  </div>
-</header>
-
-  <!-- ── HERO ── -->
-  <div class="hero-strip">
+  <!-- ============================================================
+       HERO
+  ============================================================ -->
+  <div class="hero">
     <h1>Curated picks.<br><em>Real deals.</em></h1>
     <p>Hand-picked products from Shopee, SHEIN, Amazon, and other partner platforms. Things I actually recommend!</p>
   </div>
 
-  <!-- ── MAIN ── -->
+  <!-- ============================================================
+       MAIN
+  ============================================================ -->
   <main>
 
-    <!--
-    ╔══════════════════════════════════════════════════════════╗
-    ║  ★ AMAZON SECTION                                        ║
-    ║  To add a product:                                       ║
-    ║   1. Copy any <a class="card"> block inside .cards-grid  ║
-    ║   2. Set href to your Amazon affiliate link              ║
-    ║   3. Set <img src> to your image path (e.g. images/.jpg) ║
-    ║   4. Update the <h3> title                               ║
-    ╚══════════════════════════════════════════════════════════╝
-    -->
-
+    <!-- ===========================================================
+         SHOPEE SECTION
+    =========================================================== -->
     <section class="shop-section" data-section="shopee">
       <div class="section-header" onclick="toggleSection(this)">
         <div class="section-header-left">
           <span class="shop-badge badge-shopee">Shopee</span>
-          <span class="section-title-text">Shopee Picks</span>
+          <span class="section-title">Shopee Picks</span>
         </div>
         <span class="chevron">▾</span>
       </div>
+
       <div class="cards-wrap">
         <p class="section-subheading">20 Best Selling Products</p>
+
         <div class="slider-wrapper">
-          <div class="slider-row-wrap">
-            <button class="slider-btn slider-btn-left" onclick="slide(this,-1)">&#8249;</button>
-            <button class="slider-btn slider-btn-right visible" onclick="slide(this,1)">&#8250;</button>
+
+          <!-- Row 1: Products 1–10 -->
+          <div class="slider-row">
+            <button class="slider-btn slider-btn-left"         onclick="slide(this, -1)">&#8249;</button>
+            <button class="slider-btn slider-btn-right visible" onclick="slide(this,  1)">&#8250;</button>
             <div class="slider-viewport">
-              <div class="cards-grid slider-grid">
-          <a class="card" href="https://s.shopee.ph/6AheA263W5" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/s1.png" alt="Stainless Stove Rack" loading="lazy" />
-            <div class="card-body">
-              <h3>Stainless Stove Rack Keeps Small Pots Stable</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+              <div class="slider-grid">
 
-          <a class="card" href="https://s.shopee.ph/BQR1iQB9P" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/s2.png" alt="Waterproof School Backpack" loading="lazy" />
-            <div class="card-body">
-              <h3>Waterproof School Backpack Fits Laptop & Books</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://s.shopee.ph/6AheA263W5" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/s1.png" alt="Stainless Stove Rack" loading="lazy" />
+                  <div class="card-body">
+                    <h3>Stainless Stove Rack Keeps Small Pots Stable</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <a class="card" href="https://s.shopee.ph/1BIyE0rTfD" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/s3.png" alt="Gel Pens" loading="lazy" />
-            <div class="card-body">
-              <h3>10pcs Gel Pens Write Smooth & Dry Fast</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://s.shopee.ph/BQR1iQB9P" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/s2.png" alt="Waterproof School Backpack" loading="lazy" />
+                  <div class="card-body">
+                    <h3>Waterproof School Backpack Fits Laptop & Books</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
-            <div class="card-body">
-              <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://s.shopee.ph/1BIyE0rTfD" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/s3.png" alt="Gel Pens" loading="lazy" />
+                  <div class="card-body">
+                    <h3>10pcs Gel Pens Write Smooth & Dry Fast</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <a class="card" href="https://s.shopee.ph/9KefxdOypl" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/s5.png" alt="Mini USB Humidifier" loading="lazy" />
-            <div class="card-body">
-              <h3>Mini USB Humidifier Adds Calm to Any Space</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://s.shopee.ph/6L14Nlvw9h" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/s4.png" alt="Cotton Mid-Cut Socks" loading="lazy" />
+                  <div class="card-body">
+                    <h3>Cotton Mid-Cut Socks Keep Feet Fresh All Day</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <a class="card" href="https://s.shopee.ph/9ALFlbIsw1" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/s6.png" alt="7-in-1 Stationery Set" loading="lazy" />
-            <div class="card-body">
-              <h3>7-in-1 Stationery Set Has 7 Tools in One Pack</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://s.shopee.ph/9KefxdOypl" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/s5.png" alt="Mini USB Humidifier" loading="lazy" />
+                  <div class="card-body">
+                    <h3>Mini USB Humidifier Adds Calm to Any Space</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <a class="card" href="https://s.shopee.ph/3LNSpBbohd" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/s7.png" alt="10 Pairs Cotton Socks" loading="lazy" />
-            <div class="card-body">
-              <h3>10 Pairs Cotton Socks Keep Feet Cool & Comfy</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://s.shopee.ph/9ALFlbIsw1" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/s6.png" alt="7-in-1 Stationery Set" loading="lazy" />
+                  <div class="card-body">
+                    <h3>7-in-1 Stationery Set Has 7 Tools in One Pack</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <a class="card" href="https://s.shopee.ph/4fsqPnstSW" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/s8.png" alt="A5 Spiral Notebook Set" loading="lazy" />
-            <div class="card-body">
-              <h3>A5 Spiral Notebook Set Smooth Writing & Thick Pages</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://s.shopee.ph/3LNSpBbohd" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/s7.png" alt="10 Pairs Cotton Socks" loading="lazy" />
+                  <div class="card-body">
+                    <h3>10 Pairs Cotton Socks Keep Feet Cool & Comfy</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <a class="card" href="https://s.shopee.ph/5Ap70t5VnV" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/s9.png" alt="VeryMall Crew Socks" loading="lazy" />
-            <div class="card-body">
-              <h3>VeryMall Crew Socks 5–10 Pairs for Daily Comfort</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://s.shopee.ph/4fsqPnstSW" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/s8.png" alt="A5 Spiral Notebook Set" loading="lazy" />
+                  <div class="card-body">
+                    <h3>A5 Spiral Notebook Set Smooth Writing & Thick Pages</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <a class="card" href="https://s.shopee.ph/2VoLqECUYS" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/s10.png" alt="EVO GT-PRO Helmet" loading="lazy" />
-            <div class="card-body">
-              <h3>EVO GT-PRO Helmet with Dual Visor Protection</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://s.shopee.ph/5Ap70t5VnV" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/s9.png" alt="VeryMall Crew Socks" loading="lazy" />
+                  <div class="card-body">
+                    <h3>VeryMall Crew Socks 5–10 Pairs for Daily Comfort</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
+                <a class="card" href="https://s.shopee.ph/2VoLqECUYS" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/s10.png" alt="EVO GT-PRO Helmet" loading="lazy" />
+                  <div class="card-body">
+                    <h3>EVO GT-PRO Helmet with Dual Visor Protection</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
+
+              </div>
+            </div>
           </div>
-            </div>
-          </div>
-          <div class="slider-row-wrap">
-            <button class="slider-btn slider-btn-left" onclick="slide(this,-1)">&#8249;</button>
-            <button class="slider-btn slider-btn-right visible" onclick="slide(this,1)">&#8250;</button>
+
+          <!-- Row 2: Products 11–20 -->
+          <div class="slider-row">
+            <button class="slider-btn slider-btn-left"         onclick="slide(this, -1)">&#8249;</button>
+            <button class="slider-btn slider-btn-right visible" onclick="slide(this,  1)">&#8250;</button>
             <div class="slider-viewport">
-              <div class="cards-grid slider-grid">
+              <div class="slider-grid">
 
-          <a class="card" href="https://s.shopee.ph/5q4noX9JWo" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/s11.png" alt="Korean Nylon Backpack" loading="lazy" />
-            <div class="card-body">
-              <h3>Korean Nylon Backpack Is Waterproof & Stylish</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://s.shopee.ph/5q4noX9JWo" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/s11.png" alt="Korean Nylon Backpack" loading="lazy" />
+                  <div class="card-body">
+                    <h3>Korean Nylon Backpack Is Waterproof & Stylish</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <a class="card" href="https://s.shopee.ph/50Vgp9wU9O" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/s12.png" alt="MPMG Oversized Tees" loading="lazy" />
-            <div class="card-body">
-              <h3>MPMG Oversized Tees Buy 1 Get 3 Deal</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://s.shopee.ph/50Vgp9wU9O" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/s12.png" alt="MPMG Oversized Tees" loading="lazy" />
+                  <div class="card-body">
+                    <h3>MPMG Oversized Tees Buy 1 Get 3 Deal</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <a class="card" href="https://s.shopee.ph/5flNcYRVmX" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/s13.png" alt="Korean Running Shoes" loading="lazy" />
-            <div class="card-body">
-              <h3>Korean Running Shoes Feel Light & Comfortable</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://s.shopee.ph/5flNcYRVmX" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/s13.png" alt="Korean Running Shoes" loading="lazy" />
+                  <div class="card-body">
+                    <h3>Korean Running Shoes Feel Light & Comfortable</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <a class="card" href="https://s.shopee.ph/6AheDcUlvm" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/s14.png" alt="Korean Sneakers" loading="lazy" />
-            <div class="card-body">
-              <h3>Korean Sneakers Are Breathable & Comfortable</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://s.shopee.ph/6AheDcUlvm" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/s14.png" alt="Korean Sneakers" loading="lazy" />
+                  <div class="card-body">
+                    <h3>Korean Sneakers Are Breathable & Comfortable</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <a class="card" href="https://s.shopee.ph/6AheDt1q0S" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/s15.png" alt="E88 Pro Drone" loading="lazy" />
-            <div class="card-body">
-              <h3>E88 Pro Drone Has 4K Camera & 150m Range</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://s.shopee.ph/6AheDt1q0S" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/s15.png" alt="E88 Pro Drone" loading="lazy" />
+                  <div class="card-body">
+                    <h3>E88 Pro Drone Has 4K Camera & 150m Range</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <a class="card" href="https://s.shopee.ph/10zZge7Gtf" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/s16.png" alt="Light Sole Sports Shoes" loading="lazy" />
-            <div class="card-body">
-              <h3>Light Sole Sports Shoes Feel Comfortable All Day</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://s.shopee.ph/10zZge7Gtf" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/s16.png" alt="Light Sole Sports Shoes" loading="lazy" />
+                  <div class="card-body">
+                    <h3>Light Sole Sports Shoes Feel Comfortable All Day</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <a class="card" href="https://s.shopee.ph/1LcQ5QvmhV" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/s17.png" alt="Naviforce NF9117 Watch" loading="lazy" />
-            <div class="card-body">
-              <h3>Naviforce NF9117 Watch Looks Premium & Sporty</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://s.shopee.ph/1LcQ5QvmhV" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/s17.png" alt="Naviforce NF9117 Watch" loading="lazy" />
+                  <div class="card-body">
+                    <h3>Naviforce NF9117 Watch Looks Premium & Sporty</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <a class="card" href="https://s.shopee.ph/7VD3QwU0Di" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/s18.png" alt="Casual Leather Shoes" loading="lazy" />
-            <div class="card-body">
-              <h3>Casual Leather Shoes Match Any Everyday Outfit</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://s.shopee.ph/7VD3QwU0Di" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/s18.png" alt="Casual Leather Shoes" loading="lazy" />
+                  <div class="card-body">
+                    <h3>Casual Leather Shoes Match Any Everyday Outfit</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <a class="card" href="https://s.shopee.ph/6VKWFGuvOx" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/s19.png" alt="Lovito Striped Jumpsuit" loading="lazy" />
-            <div class="card-body">
-              <h3>Lovito Striped Jumpsuit Is Perfect for Warm Days</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://s.shopee.ph/6VKWFGuvOx" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/s19.png" alt="Lovito Striped Jumpsuit" loading="lazy" />
+                  <div class="card-body">
+                    <h3>Lovito Striped Jumpsuit Is Perfect for Warm Days</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <a class="card" href="https://s.shopee.ph/2g7ngMRWqC" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/s20.png" alt="Retro Striped Tee" loading="lazy" />
-            <div class="card-body">
-              <h3>Retro Striped Tee Gives Effortless Streetwear Style</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://s.shopee.ph/2g7ngMRWqC" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/s20.png" alt="Retro Striped Tee" loading="lazy" />
+                  <div class="card-body">
+                    <h3>Retro Striped Tee Gives Effortless Streetwear Style</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-       </div>
+              </div>
             </div>
           </div>
-        </div>
+
+        </div><!-- /.slider-wrapper -->
+
+        <!-- Category Filter Tags -->
         <div class="category-tags">
           <span class="cat-tag" onclick="filterCategory(this, 'fashion')">Fashion & Apparel</span>
           <span class="cat-tag" onclick="filterCategory(this, 'electronics')">Electronics & Technology</span>
@@ -756,409 +918,309 @@
           <span class="cat-tag" onclick="filterCategory(this, 'groceries')">Groceries & Consumables</span>
         </div>
 
-        <!-- ══ FASHION & APPAREL CARDS ══
-             Add your fashion product cards below.
-             Copy a .blank-card and replace with a real .card block.
-             Keep data-category="fashion" on the parent .category-cards div.
-        ══════════════════════════════════ -->
+        <!-- Category Panels -->
         <div class="category-panel" id="panel-shopee">
-        <div class="category-cards" data-category="fashion">
-          <!-- ADD FASHION CARDS HERE ↓ -->
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
 
-        </div>
+          <div class="category-cards" data-category="fashion">
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+          </div>
 
-        <!-- ══ ELECTRONICS & TECHNOLOGY CARDS ══
-             Add your electronics product cards below.
-             Keep data-category="electronics" on the parent .category-cards div.
-        ══════════════════════════════════ -->
-        <div class="category-cards" data-category="electronics">
-          <!-- ADD ELECTRONICS CARDS HERE ↓ -->
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+          <div class="category-cards" data-category="electronics">
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+          </div>
 
-        </div>
+          <div class="category-cards" data-category="health">
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+          </div>
 
-        <!-- ══ HEALTH & BEAUTY CARDS ══
-             Add your health and beauty product cards below.
-             Keep data-category="health" on the parent .category-cards div.
-        ══════════════════════════════════ -->
-        <div class="category-cards" data-category="health">
-          <!-- ADD HEALTH & BEAUTY CARDS HERE ↓ -->
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+          <div class="category-cards" data-category="groceries">
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+          </div>
 
-        </div>
+        </div><!-- /#panel-shopee -->
 
-        <!-- ══ GROCERIES & CONSUMABLES CARDS ══
-             Add your grocery and consumable product cards below.
-             Keep data-category="groceries" on the parent .category-cards div.
-        ══════════════════════════════════ -->
-        <div class="category-cards" data-category="groceries">
-          <!-- ADD GROCERIES CARDS HERE ↓ -->
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
-
-        </div>
-        </div>
-      </div>
+      </div><!-- /.cards-wrap -->
     </section>
 
 
-
-
-    <!--
-    ╔══════════════════════════════════════════════════════════╗
-    ║  ★ SHOPEE SECTION                                        ║
-    ║  To add a product: same steps as Amazon above.           ║
-    ║  Use your Shopee affiliate link in href="".              ║
-    ╚══════════════════════════════════════════════════════════╝
-    -->
-    
-
-    <!--
-    ╔══════════════════════════════════════════════════════════╗
-    ║  ★ SHEIN SECTION                                         ║
-    ║  To add a product: same steps as Amazon above.           ║
-    ║  Use your Shein affiliate link in href="".               ║
-    ╚══════════════════════════════════════════════════════════╝
-    -->
-    
+    <!-- ===========================================================
+         SHEIN SECTION
+    =========================================================== -->
     <section class="shop-section" data-section="shein">
       <div class="section-header" onclick="toggleSection(this)">
         <div class="section-header-left">
           <span class="shop-badge badge-shein">Shein</span>
-          <span class="section-title-text">Shein Picks</span>
+          <span class="section-title">Shein Picks</span>
         </div>
         <span class="chevron">▾</span>
       </div>
+
       <div class="cards-wrap">
         <p class="section-subheading">20 Best Selling Products</p>
-       <div class="slider-wrapper">
-          <div class="slider-row-wrap">
-            <button class="slider-btn slider-btn-left" onclick="slide(this,-1)">&#8249;</button>
-            <button class="slider-btn slider-btn-right visible" onclick="slide(this,1)">&#8250;</button>
+
+        <div class="slider-wrapper">
+
+          <!-- Row 1: Products 1–10 -->
+          <div class="slider-row">
+            <button class="slider-btn slider-btn-left"         onclick="slide(this, -1)">&#8249;</button>
+            <button class="slider-btn slider-btn-right visible" onclick="slide(this,  1)">&#8250;</button>
             <div class="slider-viewport">
-              <div class="cards-grid slider-grid">
+              <div class="slider-grid">
 
-          <!--
-          ADD YOUR SHEIN CARDS HERE — same format as Amazon cards above.
-          Example:
-          <a class="card" href="YOUR_SHEIN_LINK" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/shein1.jpg" alt="Product Name" loading="lazy" />
-            <div class="card-body">
-              <h3>Your Title Here</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
-          -->
+                <a class="card" href="https://onelink.shein.com/6/5oro8c2supf6" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/sh1.jpg" alt="Shimmery Knit Shawl" loading="lazy" />
+                  <div class="card-body">
+                    <h3>Shimmery Knit Shawl Adds Effortless Summer Style</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <a class="card" href="https://onelink.shein.com/6/5oro8c2supf6" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/sh1.jpg" alt="Shimmery Knit Shawl" loading="lazy" />
-            <div class="card-body">
-              <h3>Shimmery Knit Shawl Adds Effortless Summer Style</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://onelink.shein.com/6/5oroptho5jxz" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/sh2.jpg" alt="Off-Shoulder Knit Mini Dress" loading="lazy" />
+                  <div class="card-body">
+                    <h3>Off-Shoulder Knit Mini Dress Turns Heads Instantly</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <a class="card" href="https://onelink.shein.com/6/5oroptho5jxz" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/sh2.jpg" alt="Off-Shoulder Knit Mini Dress" loading="lazy" />
-            <div class="card-body">
-              <h3>Off-Shoulder Knit Mini Dress Turns Heads Instantly</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://onelink.shein.com/6/5orp5tmp1kqw" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/sh3.jpg" alt="Minimalist Knit Cardigan" loading="lazy" />
+                  <div class="card-body">
+                    <h3>Minimalist Knit Cardigan Perfect for Everyday Layers</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <a class="card" href="https://onelink.shein.com/6/5orp5tmp1kqw" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/sh3.jpg" alt="Minimalist Knit Cardigan" loading="lazy" />
-            <div class="card-body">
-              <h3>Minimalist Knit Cardigan Perfect for Everyday Layers</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://onelink.shein.com/6/5orpbcwtfthv" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/sh4.jpg" alt="V-Neck Knit Top" loading="lazy" />
+                  <div class="card-body">
+                    <h3>V-Neck Knit Top Gives Effortless Elegant Style</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <a class="card" href="https://onelink.shein.com/6/5orpbcwtfthv" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/sh4.jpg" alt="V-Neck Knit Top" loading="lazy" />
-            <div class="card-body">
-              <h3>V-Neck Knit Top Gives Effortless Elegant Style</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://onelink.shein.com/6/5orpf13vlg63" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/sh5.jpg" alt="Sequin Knit Cover Up" loading="lazy" />
+                  <div class="card-body">
+                    <h3>Sequin Knit Cover Up Elevates Beach Outfits</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <a class="card" href="https://onelink.shein.com/6/5orpf13vlg63" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/sh5.jpg" alt="Sequin Knit Cover Up" loading="lazy" />
-            <div class="card-body">
-              <h3>Sequin Knit Cover Up Elevates Beach Outfits</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://onelink.shein.com/6/5orpjyoo4fmf" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/sh6.jpg" alt="Backless Halter Dress" loading="lazy" />
+                  <div class="card-body">
+                    <h3>Backless Halter Dress Made for Summer Vacations</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <a class="card" href="https://onelink.shein.com/6/5orpjyoo4fmf" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/sh6.jpg" alt="Backless Halter Dress" loading="lazy" />
-            <div class="card-body">
-              <h3>Backless Halter Dress Made for Summer Vacations</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://onelink.shein.com/6/5orpnouruz45" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/sh7.jpg" alt="Hollow-Out Knit Tee" loading="lazy" />
+                  <div class="card-body">
+                    <h3>Hollow-Out Knit Tee Elevates Everyday Outfits</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <a class="card" href="https://onelink.shein.com/6/5orpnouruz45" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/sh7.jpg" alt="Hollow-Out Knit Tee" loading="lazy" />
-            <div class="card-body">
-              <h3>Hollow-Out Knit Tee Elevates Everyday Outfits</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://onelink.shein.com/6/5orpriyxnaz0" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/sh8.jpg" alt="Retro Knit Polo Shirt" loading="lazy" />
+                  <div class="card-body">
+                    <h3>Retro Knit Polo Shirt Gives Effortless Summer Style</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <a class="card" href="https://onelink.shein.com/6/5orpriyxnaz0" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/sh8.jpg" alt="Retro Knit Polo Shirt" loading="lazy" />
-            <div class="card-body">
-              <h3>Retro Knit Polo Shirt Gives Effortless Summer Style</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://onelink.shein.com/6/5orpudkjiux0" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/sh9.jpg" alt="Lace Patchwork Bodysuit" loading="lazy" />
+                  <div class="card-body">
+                    <h3>Lace Patchwork Bodysuit Gives Bold Y2K Vibes</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <a class="card" href="https://onelink.shein.com/6/5orpudkjiux0" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/sh9.jpg" alt="Lace Patchwork Bodysuit" loading="lazy" />
-            <div class="card-body">
-              <h3>Lace Patchwork Bodysuit Gives Bold Y2K Vibes</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://onelink.shein.com/6/5orpyxc3y82" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/sh10.jpg" alt="V-Neck Printed Dress" loading="lazy" />
+                  <div class="card-body">
+                    <h3>V-Neck Printed Dress Flatters for Summer Days</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <a class="card" href="https://onelink.shein.com/6/5orpyxc3y82" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/sh10.jpg" alt="V-Neck Printed Dress" loading="lazy" />
-            <div class="card-body">
-              <h3>V-Neck Printed Dress Flatters for Summer Days</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
-
-          </div>
+              </div>
             </div>
           </div>
-          <div class="slider-row-wrap">
-            <button class="slider-btn slider-btn-left" onclick="slide(this,-1)">&#8249;</button>
-            <button class="slider-btn slider-btn-right visible" onclick="slide(this,1)">&#8250;</button>
+
+          <!-- Row 2: Products 11–20 -->
+          <div class="slider-row">
+            <button class="slider-btn slider-btn-left"         onclick="slide(this, -1)">&#8249;</button>
+            <button class="slider-btn slider-btn-right visible" onclick="slide(this,  1)">&#8250;</button>
             <div class="slider-viewport">
-              <div class="cards-grid slider-grid">
+              <div class="slider-grid">
 
-          <a class="card" href="https://onelink.shein.com/6/5otjx38x09cs" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/sh11.jpg" alt="Striped Colorblock Shirt" loading="lazy" />
-            <div class="card-body">
-              <h3>Striped Colorblock Shirt Perfect for Summer Fits</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://onelink.shein.com/6/5otjx38x09cs" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/sh11.jpg" alt="Striped Colorblock Shirt" loading="lazy" />
+                  <div class="card-body">
+                    <h3>Striped Colorblock Shirt Perfect for Summer Fits</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <a class="card" href="https://onelink.shein.com/6/5otk1qyj6voy" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/sh12.jpg" alt="Striped Button Shirt" loading="lazy" />
-            <div class="card-body">
-              <h3>Striped Button Shirt Gives Clean Old Money Style</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://onelink.shein.com/6/5otk1qyj6voy" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/sh12.jpg" alt="Striped Button Shirt" loading="lazy" />
+                  <div class="card-body">
+                    <h3>Striped Button Shirt Gives Clean Old Money Style</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <a class="card" href="https://onelink.shein.com/6/5otk64t0km2k" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/sh13.jpg" alt="Textured Knit Polo" loading="lazy" />
-            <div class="card-body">
-              <h3>Textured Knit Polo Gives Effortless Old Money Style</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://onelink.shein.com/6/5otk64t0km2k" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/sh13.jpg" alt="Textured Knit Polo" loading="lazy" />
+                  <div class="card-body">
+                    <h3>Textured Knit Polo Gives Effortless Old Money Style</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <a class="card" href="https://onelink.shein.com/6/5otkauhocu8f" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/sh14.jpg" alt="Elegant White Dress Shirt" loading="lazy" />
-            <div class="card-body">
-              <h3>Elegant White Dress Shirt for Office & Formal Wear</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://onelink.shein.com/6/5otkauhocu8f" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/sh14.jpg" alt="Elegant White Dress Shirt" loading="lazy" />
+                  <div class="card-body">
+                    <h3>Elegant White Dress Shirt for Office & Formal Wear</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <a class="card" href="https://onelink.shein.com/6/5otkdd932iah" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/sh15.jpg" alt="Colorblock Polo Shirt" loading="lazy" />
-            <div class="card-body">
-              <h3>Colorblock Polo Shirt Gives Classic Summer Style</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://onelink.shein.com/6/5otkdd932iah" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/sh15.jpg" alt="Colorblock Polo Shirt" loading="lazy" />
+                  <div class="card-body">
+                    <h3>Colorblock Polo Shirt Gives Classic Summer Style</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <a class="card" href="https://onelink.shein.com/6/5otkghpuuzbi" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/sh16.jpg" alt="Textured Knit Polo" loading="lazy" />
-            <div class="card-body">
-              <h3>Textured Knit Polo Gives Effortless Vacation Style</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://onelink.shein.com/6/5otkghpuuzbi" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/sh16.jpg" alt="Textured Knit Polo" loading="lazy" />
+                  <div class="card-body">
+                    <h3>Textured Knit Polo Gives Effortless Vacation Style</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <a class="card" href="https://onelink.shein.com/6/5otkphaxfhr9" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/sh17.jpg" alt="Vintage Bowling Shirt" loading="lazy" />
-            <div class="card-body">
-              <h3>Vintage Bowling Shirt Gives Relaxed Summer Style</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://onelink.shein.com/6/5otkphaxfhr9" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/sh17.jpg" alt="Vintage Bowling Shirt" loading="lazy" />
+                  <div class="card-body">
+                    <h3>Vintage Bowling Shirt Gives Relaxed Summer Style</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <a class="card" href="https://onelink.shein.com/6/5otkt3iyrlln" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/sh18.jpg" alt="Striped Polo & Shorts" loading="lazy" />
-            <div class="card-body">
-              <h3>Striped Polo & Shorts Set Makes Summer Easy</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://onelink.shein.com/6/5otkt3iyrlln" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/sh18.jpg" alt="Striped Polo & Shorts" loading="lazy" />
+                  <div class="card-body">
+                    <h3>Striped Polo & Shorts Set Makes Summer Easy</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <a class="card" href="https://onelink.shein.com/6/5otkwvo3k37v" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/sh19.jpg" alt="Acid Wash Tee" loading="lazy" />
-            <div class="card-body">
-              <h3>Acid Wash Tee Gives Effortless Streetwear Style</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://onelink.shein.com/6/5otkwvo3k37v" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/sh19.jpg" alt="Acid Wash Tee" loading="lazy" />
+                  <div class="card-body">
+                    <h3>Acid Wash Tee Gives Effortless Streetwear Style</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <a class="card" href="https://onelink.shein.com/6/5otl214zr787" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/sh20.jpg" alt="Japanese Crane Tee" loading="lazy" />
-            <div class="card-body">
-              <h3>Japanese Crane Tee Gives Clean Minimalist Style</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://onelink.shein.com/6/5otl214zr787" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/sh20.jpg" alt="Japanese Crane Tee" loading="lazy" />
+                  <div class="card-body">
+                    <h3>Japanese Crane Tee Gives Clean Minimalist Style</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-       </div>
+              </div>
             </div>
           </div>
-        </div>
+
+        </div><!-- /.slider-wrapper -->
+
+        <!-- Category Filter Tags -->
         <div class="category-tags">
           <span class="cat-tag" onclick="filterCategory(this, 'fashion')">Fashion & Apparel</span>
           <span class="cat-tag" onclick="filterCategory(this, 'electronics')">Electronics & Technology</span>
@@ -1166,416 +1228,309 @@
           <span class="cat-tag" onclick="filterCategory(this, 'groceries')">Groceries & Consumables</span>
         </div>
 
-        <!-- ══ FASHION & APPAREL CARDS ══
-             Add your fashion product cards below.
-             Copy a .blank-card and replace with a real .card block.
-             Keep data-category="fashion" on the parent .category-cards div.
-        ══════════════════════════════════ -->
+        <!-- Category Panels -->
         <div class="category-panel" id="panel-shein">
-        <div class="category-cards" data-category="fashion">
-          <!-- ADD FASHION CARDS HERE ↓ -->
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
 
-        </div>
+          <div class="category-cards" data-category="fashion">
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+          </div>
 
-        <!-- ══ ELECTRONICS & TECHNOLOGY CARDS ══
-             Add your electronics product cards below.
-             Keep data-category="electronics" on the parent .category-cards div.
-        ══════════════════════════════════ -->
-        <div class="category-cards" data-category="electronics">
-          <!-- ADD ELECTRONICS CARDS HERE ↓ -->
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+          <div class="category-cards" data-category="electronics">
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+          </div>
 
-        </div>
+          <div class="category-cards" data-category="health">
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+          </div>
 
-        <!-- ══ HEALTH & BEAUTY CARDS ══
-             Add your health and beauty product cards below.
-             Keep data-category="health" on the parent .category-cards div.
-        ══════════════════════════════════ -->
-        <div class="category-cards" data-category="health">
-          <!-- ADD HEALTH & BEAUTY CARDS HERE ↓ -->
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+          <div class="category-cards" data-category="groceries">
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+          </div>
 
-        </div>
+        </div><!-- /#panel-shein -->
 
-        <!-- ══ GROCERIES & CONSUMABLES CARDS ══
-             Add your grocery and consumable product cards below.
-             Keep data-category="groceries" on the parent .category-cards div.
-        ══════════════════════════════════ -->
-        <div class="category-cards" data-category="groceries">
-          <!-- ADD GROCERIES CARDS HERE ↓ -->
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
-          
-        </div>
-      </div>
-    </div>
-  </section>
+      </div><!-- /.cards-wrap -->
+    </section>
 
 
-
-        
+    <!-- ===========================================================
+         AMAZON SECTION
+    =========================================================== -->
     <section class="shop-section" data-section="amazon">
       <div class="section-header" onclick="toggleSection(this)">
         <div class="section-header-left">
           <span class="shop-badge badge-amazon">Amazon</span>
-          <span class="section-title-text">Amazon Picks</span>
+          <span class="section-title">Amazon Picks</span>
         </div>
         <span class="chevron">▾</span>
       </div>
+
       <div class="cards-wrap">
         <p class="section-subheading">20 Best Selling Products</p>
-       <div class="slider-wrapper">
-          <div class="slider-row-wrap">
-            <button class="slider-btn slider-btn-left" onclick="slide(this,-1)">&#8249;</button>
-            <button class="slider-btn slider-btn-right visible" onclick="slide(this,1)">&#8250;</button>
+
+        <div class="slider-wrapper">
+
+          <!-- Row 1: Products 1–10 -->
+          <div class="slider-row">
+            <button class="slider-btn slider-btn-left"         onclick="slide(this, -1)">&#8249;</button>
+            <button class="slider-btn slider-btn-right visible" onclick="slide(this,  1)">&#8250;</button>
             <div class="slider-viewport">
-              <div class="cards-grid slider-grid">
+              <div class="slider-grid">
 
-          <!-- CARD: images/1.jpg | Title: Why Everyone Is Buying This Owala Water Bottle | Link: https://amzn.to/48FxKfk -->
-          <a class="card" href="https://amzn.to/48FxKfk" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/1.jpg" alt="Owala Water Bottle" loading="lazy" />
-            <div class="card-body">
-              <h3>Why Everyone Is Buying This Owala Water Bottle</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://amzn.to/48FxKfk" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/1.jpg" alt="Owala Water Bottle" loading="lazy" />
+                  <div class="card-body">
+                    <h3>Why Everyone Is Buying This Owala Water Bottle</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <!-- CARD: images/2.jpg | Title: This Stanley Tumbler Has 91,000+ Reviews — And It's 38% Off | Link: https://amzn.to/4ul4JOf -->
-          <a class="card" href="https://amzn.to/4ul4JOf" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/2.jpg" alt="Stanley Tumbler" loading="lazy" />
-            <div class="card-body">
-              <h3>This Stanley Tumbler Has 91,000+ Reviews — And It's 38% Off Right Now</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://amzn.to/4ul4JOf" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/2.jpg" alt="Stanley Tumbler" loading="lazy" />
+                  <div class="card-body">
+                    <h3>This Stanley Tumbler Has 91,000+ Reviews — And It's 38% Off Right Now</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <!-- CARD: images/3.jpg | Title: Etekcity Kitchen Scale Is a Meal Prep Bestseller | Link: https://amzn.to/4waDUxW -->
-          <a class="card" href="https://amzn.to/4waDUxW" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/3.jpg" alt="Etekcity Kitchen Scale" loading="lazy" />
-            <div class="card-body">
-              <h3>Etekcity Kitchen Scale Is a Meal Prep Bestseller</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://amzn.to/4waDUxW" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/3.jpg" alt="Etekcity Kitchen Scale" loading="lazy" />
+                  <div class="card-body">
+                    <h3>Etekcity Kitchen Scale Is a Meal Prep Bestseller</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <!-- CARD: images/4.jpg | Title: HydroJug Traveler Tumbler Is 32oz On-the-Go Must | Link: https://amzn.to/4d2fbDv -->
-          <a class="card" href="https://amzn.to/4d2fbDv" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/4.jpg" alt="HydroJug Traveler Tumbler" loading="lazy" />
-            <div class="card-body">
-              <h3>HydroJug Traveler Tumbler Is 32oz On-the-Go Must</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://amzn.to/4d2fbDv" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/4.jpg" alt="HydroJug Traveler Tumbler" loading="lazy" />
+                  <div class="card-body">
+                    <h3>HydroJug Traveler Tumbler Is 32oz On-the-Go Must</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <!-- CARD: images/5.jpg | Title: Bella Slim Toaster Fits Anywhere — 6 Shade Settings | Link: https://amzn.to/4urOS0m -->
-          <a class="card" href="https://amzn.to/4urOS0m" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/5.jpg" alt="Bella Slim Toaster" loading="lazy" />
-            <div class="card-body">
-              <h3>Bella Slim Toaster Fits Anywhere — 6 Shade Settings</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://amzn.to/4urOS0m" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/5.jpg" alt="Bella Slim Toaster" loading="lazy" />
+                  <div class="card-body">
+                    <h3>Bella Slim Toaster Fits Anywhere — 6 Shade Settings</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <!-- CARD: images/6.jpg | Title: 2-in-1 Olive Oil Sprayer Controls Every Pour | Link: https://amzn.to/4d2Cehd -->
-          <a class="card" href="https://amzn.to/4d2Cehd" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/6.jpg" alt="Olive Oil Sprayer" loading="lazy" />
-            <div class="card-body">
-              <h3>2-in-1 Olive Oil Sprayer Controls Every Pour</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://amzn.to/4d2Cehd" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/6.jpg" alt="Olive Oil Sprayer" loading="lazy" />
+                  <div class="card-body">
+                    <h3>2-in-1 Olive Oil Sprayer Controls Every Pour</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <!-- CARD: images/7.jpg | Title: Instant Read Meat Thermometer in 2 Seconds | Link: https://amzn.to/4w4X9Jz -->
-          <a class="card" href="https://amzn.to/4w4X9Jz" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/7.jpg" alt="Meat Thermometer" loading="lazy" />
-            <div class="card-body">
-              <h3>Instant Read Meat Thermometer in 2 Seconds</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://amzn.to/4w4X9Jz" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/7.jpg" alt="Meat Thermometer" loading="lazy" />
+                  <div class="card-body">
+                    <h3>Instant Read Meat Thermometer in 2 Seconds</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <!-- CARD: images/8.jpg | Title: Hanes Boxer Briefs Keep You Cool All Day | Link: https://amzn.to/3P05TzS -->
-          <a class="card" href="https://amzn.to/3P05TzS" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/8.jpg" alt="Hanes Boxer Briefs" loading="lazy" />
-            <div class="card-body">
-              <h3>Hanes Boxer Briefs Keep You Cool All Day</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://amzn.to/3P05TzS" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/8.jpg" alt="Hanes Boxer Briefs" loading="lazy" />
+                  <div class="card-body">
+                    <h3>Hanes Boxer Briefs Keep You Cool All Day</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <!-- CARD: images/9.jpg | Title: OEAK Deep V Wireless Bra Shapes & Lifts Comfortably | Link: https://amzn.to/3P6mtOz -->
-          <a class="card" href="https://amzn.to/3P6mtOz" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/9.jpg" alt="OEAK Deep V Wireless Bra" loading="lazy" />
-            <div class="card-body">
-              <h3>OEAK Deep V Wireless Bra Shapes & Lifts Comfortably</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://amzn.to/3P6mtOz" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/9.jpg" alt="OEAK Deep V Wireless Bra" loading="lazy" />
+                  <div class="card-body">
+                    <h3>OEAK Deep V Wireless Bra Shapes & Lifts Comfortably</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <!-- CARD: images/10.jpg | Title: Crocs Classic Clogs Everyone Loves for Comfort | Link: https://amzn.to/4nb7385 -->
-          <a class="card" href="https://amzn.to/4nb7385" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/10.jpg" alt="Crocs Classic Clogs" loading="lazy" />
-            <div class="card-body">
-              <h3>Crocs Classic Clogs Everyone Loves for Comfort</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://amzn.to/4nb7385" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/10.jpg" alt="Crocs Classic Clogs" loading="lazy" />
+                  <div class="card-body">
+                    <h3>Crocs Classic Clogs Everyone Loves for Comfort</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          </div>
+              </div>
             </div>
           </div>
-          <div class="slider-row-wrap">
-            <button class="slider-btn slider-btn-left" onclick="slide(this,-1)">&#8249;</button>
-            <button class="slider-btn slider-btn-right visible" onclick="slide(this,1)">&#8250;</button>
+
+          <!-- Row 2: Products 11–20 -->
+          <div class="slider-row">
+            <button class="slider-btn slider-btn-left"         onclick="slide(this, -1)">&#8249;</button>
+            <button class="slider-btn slider-btn-right visible" onclick="slide(this,  1)">&#8250;</button>
             <div class="slider-viewport">
-              <div class="cards-grid slider-grid">
+              <div class="slider-grid">
 
-          <!-- CARD: images/11.jpg | Title: OFEEFAN V Neck Blouse Is a Casual Style Favorite | Link: https://amzn.to/49cOrik -->
-          <a class="card" href="https://amzn.to/49cOrik" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/11.jpg" alt="OFEEFAN V Neck Blouse" loading="lazy" />
-            <div class="card-body">
-              <h3>OFEEFAN V Neck Blouse Is a Casual Style Favorite</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://amzn.to/49cOrik" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/11.jpg" alt="OFEEFAN V Neck Blouse" loading="lazy" />
+                  <div class="card-body">
+                    <h3>OFEEFAN V Neck Blouse Is a Casual Style Favorite</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <!-- CARD: images/12.jpg | Title: Hanes Undershirts Stay Tucked All Day Comfort | Link: https://amzn.to/4cWiX0U -->
-          <a class="card" href="https://amzn.to/4cWiX0U" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/12.jpg" alt="Hanes Undershirts" loading="lazy" />
-            <div class="card-body">
-              <h3>Hanes Undershirts Stay Tucked All Day Comfort</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://amzn.to/4cWiX0U" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/12.jpg" alt="Hanes Undershirts" loading="lazy" />
+                  <div class="card-body">
+                    <h3>Hanes Undershirts Stay Tucked All Day Comfort</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <!-- CARD: images/13.jpg | Title: LetsJoli Wireless Bra Offers Full Support & Comfort | Link: https://amzn.to/4d6ZNpu -->
-          <a class="card" href="https://amzn.to/4d6ZNpu" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/13.jpg" alt="LetsJoli Wireless Bra" loading="lazy" />
-            <div class="card-body">
-              <h3>LetsJoli Wireless Bra Offers Full Support & Comfort</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://amzn.to/4d6ZNpu" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/13.jpg" alt="LetsJoli Wireless Bra" loading="lazy" />
+                  <div class="card-body">
+                    <h3>LetsJoli Wireless Bra Offers Full Support & Comfort</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <!-- CARD: images/14.jpg | Title: COCOMARTS Jelly Bra Feels Like Wearing Nothing | Link: https://amzn.to/4tgG0d0 -->
-          <a class="card" href="https://amzn.to/4tgG0d0" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/14.jpg" alt="COCOMARTS Jelly Bra" loading="lazy" />
-            <div class="card-body">
-              <h3>COCOMARTS Jelly Bra Feels Like Wearing Nothing</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://amzn.to/4tgG0d0" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/14.jpg" alt="COCOMARTS Jelly Bra" loading="lazy" />
+                  <div class="card-body">
+                    <h3>COCOMARTS Jelly Bra Feels Like Wearing Nothing</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <!-- CARD: images/15.jpg | Title: OEAK Jelly Bra Gives Full Support Without Wires | Link: https://amzn.to/4tOkk9d -->
-          <a class="card" href="https://amzn.to/4tOkk9d" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/15.jpg" alt="OEAK Jelly Bra" loading="lazy" />
-            <div class="card-body">
-              <h3>OEAK Jelly Bra Gives Full Support Without Wires</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://amzn.to/4tOkk9d" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/15.jpg" alt="OEAK Jelly Bra" loading="lazy" />
+                  <div class="card-body">
+                    <h3>OEAK Jelly Bra Gives Full Support Without Wires</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <!-- CARD: images/16.jpg | Title: Owala SmoothSip Tumbler Keeps Drinks Hot 6 Hrs | Link: https://amzn.to/3QPXbVo -->
-          <a class="card" href="https://amzn.to/3QPXbVo" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/16.jpg" alt="Owala SmoothSip Tumbler" loading="lazy" />
-            <div class="card-body">
-              <h3>Owala SmoothSip Tumbler Keeps Drinks Hot 6 Hrs</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://amzn.to/3QPXbVo" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/16.jpg" alt="Owala SmoothSip Tumbler" loading="lazy" />
+                  <div class="card-body">
+                    <h3>Owala SmoothSip Tumbler Keeps Drinks Hot 6 Hrs</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <!-- CARD: images/17.jpg | Title: Fullstar Pro Chopper Dices Veggies in 30 Sec | Link: https://amzn.to/3RlLIwR -->
-          <a class="card" href="https://amzn.to/3RlLIwR" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/17.jpg" alt="Fullstar Pro Chopper" loading="lazy" />
-            <div class="card-body">
-              <h3>Fullstar Pro Chopper Dices Veggies in 30 Sec</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://amzn.to/3RlLIwR" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/17.jpg" alt="Fullstar Pro Chopper" loading="lazy" />
+                  <div class="card-body">
+                    <h3>Fullstar Pro Chopper Dices Veggies in 30 Sec</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <!-- CARD: images/18.jpg | Title: Socomi Gauze Table Runner Elevates Any Table | Link: https://amzn.to/4tRA6Ad -->
-          <a class="card" href="https://amzn.to/4tRA6Ad" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/18.jpg" alt="Socomi Gauze Table Runner" loading="lazy" />
-            <div class="card-body">
-              <h3>Socomi Gauze Table Runner Elevates Any Table</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://amzn.to/4tRA6Ad" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/18.jpg" alt="Socomi Gauze Table Runner" loading="lazy" />
+                  <div class="card-body">
+                    <h3>Socomi Gauze Table Runner Elevates Any Table</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <a class="card" href="https://amzn.to/4newOVj" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/19.jpg" alt="Old Money V Neck Tee" loading="lazy" />
-            <div class="card-body">
-              <h3>Old Money V Neck Tee Is a Go-To for Casual Outfits</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://amzn.to/4newOVj" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/19.jpg" alt="Old Money V Neck Tee" loading="lazy" />
+                  <div class="card-body">
+                    <h3>Old Money V Neck Tee Is a Go-To for Casual Outfits</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <a class="card" href="https://amzn.to/4neBJp1" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/20.jpg" alt="WIHOLL Mock Neck Blouse" loading="lazy" />
-            <div class="card-body">
-              <h3>WIHOLL Mock Neck Blouse Elevates Any Outfit</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+                <a class="card" href="https://amzn.to/4neBJp1" target="_blank" rel="noopener nofollow">
+                  <img class="card-img" src="images/20.jpg" alt="WIHOLL Mock Neck Blouse" loading="lazy" />
+                  <div class="card-body">
+                    <h3>WIHOLL Mock Neck Blouse Elevates Any Outfit</h3>
+                    <span class="card-cta">Shop Now <span>→</span></span>
+                  </div>
+                </a>
 
-          <!--
-          ╔══════════════════════════════════════════════════╗
-          ║  ADD A NEW AMAZON CARD HERE — copy block below   ║
-          ║                                                  ║
-          ║  <a class="card" href="YOUR_AFFILIATE_LINK"      ║
-          ║     target="_blank" rel="noopener nofollow">     ║
-          ║    <img class="card-img" src="images/19.jpg"    ║
-          ║         alt="Product Name" loading="lazy" />     ║
-          ║    <div class="card-body">                       ║
-          ║      <h3>Your Eye-Catching Title Here</h3>       ║
-          ║      <span class="card-cta">Shop Now            ║
-          ║        <span class="card-cta-arrow">→</span>    ║
-          ║      </span>                                     ║
-          ║    </div>                                        ║
-          ║  </a>                                            ║
-          ╚══════════════════════════════════════════════════╝
-          -->
-
-        </div>
+              </div>
             </div>
           </div>
-        </div>
+
+        </div><!-- /.slider-wrapper -->
+
+        <!-- Category Filter Tags -->
         <div class="category-tags">
           <span class="cat-tag" onclick="filterCategory(this, 'fashion')">Fashion & Apparel</span>
           <span class="cat-tag" onclick="filterCategory(this, 'electronics')">Electronics & Technology</span>
@@ -1583,362 +1538,302 @@
           <span class="cat-tag" onclick="filterCategory(this, 'groceries')">Groceries & Consumables</span>
         </div>
 
-        <!-- ══ FASHION & APPAREL CARDS ══
-             Add your fashion product cards below.
-             Copy a .blank-card and replace with a real .card block.
-             Keep data-category="fashion" on the parent .category-cards div.
-        ══════════════════════════════════ -->
+        <!-- Category Panels -->
         <div class="category-panel" id="panel-amazon">
-        <div class="category-cards" data-category="fashion">
-          <!-- ADD FASHION CARDS HERE ↓ -->
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
 
-        </div>
+          <div class="category-cards" data-category="fashion">
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+          </div>
 
-        <!-- ══ ELECTRONICS & TECHNOLOGY CARDS ══
-             Add your electronics product cards below.
-             Keep data-category="electronics" on the parent .category-cards div.
-        ══════════════════════════════════ -->
-        <div class="category-cards" data-category="electronics">
-          <!-- ADD ELECTRONICS CARDS HERE ↓ -->
-<a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+          <div class="category-cards" data-category="electronics">
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+          </div>
 
-        </div>
+          <div class="category-cards" data-category="health">
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+          </div>
 
-        <!-- ══ HEALTH & BEAUTY CARDS ══
-             Add your health and beauty product cards below.
-             Keep data-category="health" on the parent .category-cards div.
-        ══════════════════════════════════ -->
-        <div class="category-cards" data-category="health">
-          <!-- ADD HEALTH & BEAUTY CARDS HERE ↓ -->
-         <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
+          <div class="category-cards" data-category="groceries">
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+            <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
+              <img class="card-img" src="images/maintenance.png" alt="" loading="lazy" />
+              <div class="card-body"><h3>Pin in development</h3><span class="card-cta">Shop Now <span>→</span></span></div>
+            </a>
+          </div>
 
-        </div>
+        </div><!-- /#panel-amazon -->
 
-        <!-- ══ GROCERIES & CONSUMABLES CARDS ══
-             Add your grocery and consumable product cards below.
-             Keep data-category="groceries" on the parent .category-cards div.
-        ══════════════════════════════════ -->
-        <div class="category-cards" data-category="groceries">
-          <!-- ADD GROCERIES CARDS HERE ↓ -->
-        <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
-          <a class="card" href="Under_maintenance_ngani" target="_blank" rel="noopener nofollow">
-            <img class="card-img" src="images/maintenance.png" alt="No Alt" loading="lazy" />
-            <div class="card-body">
-              <h3>Pin in development</h3>
-              <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
-            </div>
-          </a>
-          
-        </div>
-      </div>
-    </div>
-  </section>
-
-
+      </div><!-- /.cards-wrap -->
+    </section>
 
   </main>
 
-  <!-- ── FOOTER — DISCLOSURE REQUIRED ── -->
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
   <footer>
     <p>
       <strong>Affiliate Disclosure:</strong>
       This page contains affiliate links. We may earn commissions from qualifying purchases made through partner platforms at no extra cost to you.
     </p>
-
-    <div style="margin-top:20px; display:flex; justify-content:center; align-items:center; gap:32px; flex-wrap:wrap;">
-      <span style="font-weight:600;">PinnedPicks™</span>
+    <div class="footer-meta">
+      <span>PinnedPicks™</span>
       <span>© 2026. All rights reserved.</span>
-      <a href="https://ph.pinterest.com/centralyze_pinnedpicks/"
-         target="_blank"
-         rel="noopener noreferrer"
-         style="color:var(--accent); text-decoration:none; font-weight:600;">
+      <a href="https://ph.pinterest.com/centralyze_pinnedpicks/" target="_blank" rel="noopener noreferrer">
         Follow on Pinterest →
       </a>
     </div>
   </footer>
 
+
+  <!-- ============================================================
+       JAVASCRIPT
+  ============================================================ -->
   <script>
 
-    // ── FIX: force closed state on page load ──
+    // ── INIT: force closed state on all sections at page load ──
     document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('.shop-section:not(.open) .cards-wrap').forEach(wrap => {
         wrap.style.transition = 'none';
-        wrap.style.maxHeight = '0';
-        wrap.style.opacity = '0';
-        wrap.style.padding = '0 24px';
-        wrap.style.overflow = 'hidden';
-        requestAnimationFrame(() => {
-          wrap.style.transition = '';
-        });
+        wrap.style.maxHeight  = '0';
+        wrap.style.opacity    = '0';
+        wrap.style.padding    = '0 24px';
+        wrap.style.overflow   = 'hidden';
+        requestAnimationFrame(() => { wrap.style.transition = ''; });
       });
+
+      initTouchSwipe();
     });
-    
+
+
     // ── THEME TOGGLE ──
-    const html = document.documentElement;
-    const btn  = document.getElementById('themeBtn');
-    const saved = localStorage.getItem('pp-theme') || 'light';
-    html.setAttribute('data-theme', saved);
-    btn.textContent = saved === 'dark' ? '☀' : '☽';
+    (function initTheme() {
+      const html  = document.documentElement;
+      const btn   = document.getElementById('themeBtn');
+      const saved = localStorage.getItem('pp-theme') || 'light';
 
-    btn.addEventListener('click', () => {
-      const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-      html.setAttribute('data-theme', next);
-      localStorage.setItem('pp-theme', next);
-      btn.textContent = next === 'dark' ? '☀' : '☽';
-    });
+      html.setAttribute('data-theme', saved);
+      btn.textContent = saved === 'dark' ? '☀' : '☽';
 
-    // ── SLIDER NAVIGATION ──
-    function slide(btn, dir) {
-      const wrapper  = btn.closest('.slider-row-wrap');
-      const grid     = wrapper.querySelector('.slider-grid');
-      const viewport = wrapper.querySelector('.slider-viewport');
-      const card     = grid.querySelector('.card');
-      if (!card) return;
-      const cardW    = card.offsetWidth + 14;
-      const visible  = viewport.offsetWidth;
-      const maxX     = -(grid.scrollWidth - visible + 2);
-      const step     = cardW * 2;
-      const currentX = parseFloat(grid.dataset.x || 0);
-      let   newX     = currentX - (dir * step);
-      newX = Math.max(maxX, Math.min(0, newX));
-      grid.dataset.x = newX;
-      grid.style.transform = `translateX(${newX}px)`;
-      wrapper.querySelector('.slider-btn-left').classList.toggle('visible',  newX < 0);
-      wrapper.querySelector('.slider-btn-right').classList.toggle('visible', newX > maxX);
+      btn.addEventListener('click', () => {
+        const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        html.setAttribute('data-theme', next);
+        localStorage.setItem('pp-theme', next);
+        btn.textContent = next === 'dark' ? '☀' : '☽';
+      });
+    })();
+
+
+    // ── COLLAPSIBLE SECTIONS ──
+    function toggleSection(header) {
+      const section = header.closest('.shop-section');
+      const wrap    = section.querySelector('.cards-wrap');
+      const isOpen  = section.classList.contains('open');
+
+      if (isOpen) {
+        wrap.style.maxHeight = wrap.scrollHeight + 'px';
+        requestAnimationFrame(() => {
+          wrap.style.maxHeight = '0';
+          wrap.style.opacity   = '0';
+          wrap.style.padding   = '0 24px';
+        });
+        section.classList.remove('open');
+      } else {
+        section.classList.add('open');
+        wrap.style.opacity   = '1';
+        wrap.style.padding   = '24px';
+        wrap.style.maxHeight = wrap.scrollHeight + 'px';
+        setTimeout(() => { wrap.style.maxHeight = '4000px'; }, 450);
+      }
     }
 
-    // ── TOUCH SWIPE — MOMENTUM SCROLLING ──
-    document.addEventListener('DOMContentLoaded', () => {
+
+    // ── SLIDER: arrow navigation ──
+    function slide(btn, dir) {
+      const row      = btn.closest('.slider-row');
+      const grid     = row.querySelector('.slider-grid');
+      const viewport = row.querySelector('.slider-viewport');
+      const card     = grid.querySelector('.card');
+      if (!card) return;
+
+      const cardW  = card.offsetWidth + 14;
+      const maxX   = -(grid.scrollWidth - viewport.offsetWidth + 2);
+      const step   = cardW * 2;
+      const currX  = parseFloat(grid.dataset.x || 0);
+      const newX   = Math.max(maxX, Math.min(0, currX - dir * step));
+
+      grid.dataset.x       = newX;
+      grid.style.transform = `translateX(${newX}px)`;
+
+      row.querySelector('.slider-btn-left').classList.toggle('visible',  newX < 0);
+      row.querySelector('.slider-btn-right').classList.toggle('visible', newX > maxX);
+    }
+
+
+    // ── SLIDER: touch/swipe with momentum ──
+    function initTouchSwipe() {
       document.querySelectorAll('.slider-grid').forEach(grid => {
-        const getViewport = () => grid.closest('.slider-viewport');
-        const getMaxX     = () => -(grid.scrollWidth - getViewport().offsetWidth + 2);
+        const viewport = () => grid.closest('.slider-viewport');
+        const maxX     = () => -(grid.scrollWidth - viewport().offsetWidth + 2);
+        const currX    = () => parseFloat(grid.dataset.x || 0);
 
-        let startX     = 0;
-        let startVal   = 0;
-        let lastX      = 0;
-        let lastTime   = 0;
-        let velocity   = 0;
-        let rafId      = null;
-        let isDragging = false;
-
-        function getCurrentX() {
-          return parseFloat(grid.dataset.x || 0);
-        }
+        let startX   = 0;
+        let startVal = 0;
+        let lastX    = 0;
+        let lastTime = 0;
+        let velocity = 0;
+        let rafId    = null;
+        let dragging = false;
 
         function setX(x) {
-          const maxX = getMaxX();
-          const clamped = Math.max(maxX, Math.min(0, x));
-          grid.dataset.x = clamped;
+          const clamped = Math.max(maxX(), Math.min(0, x));
+          grid.dataset.x       = clamped;
           grid.style.transition = 'none';
-          grid.style.transform = `translateX(${clamped}px)`;
-          const rowWrap = grid.closest('.slider-row-wrap');
-          if (rowWrap) {
-            rowWrap.querySelector('.slider-btn-left').classList.toggle('visible', clamped < 0);
-            rowWrap.querySelector('.slider-btn-right').classList.toggle('visible', clamped > maxX);
+          grid.style.transform  = `translateX(${clamped}px)`;
+
+          const row = grid.closest('.slider-row');
+          if (row) {
+            row.querySelector('.slider-btn-left').classList.toggle('visible',  clamped < 0);
+            row.querySelector('.slider-btn-right').classList.toggle('visible', clamped > maxX());
           }
           return clamped;
         }
 
-        function runMomentum() {
-          if (Math.abs(velocity) < 0.3) {
-            velocity = 0;
-            return;
-          }
+        function momentum() {
+          if (Math.abs(velocity) < 0.3) { velocity = 0; return; }
           velocity *= 0.93;
-          const newX = setX(getCurrentX() + velocity);
-          const maxX = getMaxX();
-          if (newX === 0 || newX === maxX) {
-            velocity = 0;
-            return;
-          }
-          rafId = requestAnimationFrame(runMomentum);
+          const clamped = setX(currX() + velocity);
+          if (clamped === 0 || clamped === maxX()) { velocity = 0; return; }
+          rafId = requestAnimationFrame(momentum);
         }
 
         grid.addEventListener('touchstart', e => {
           cancelAnimationFrame(rafId);
-          isDragging = true;
-          startX   = e.touches[0].clientX;
-          lastX    = startX;
-          lastTime = Date.now();
-          startVal = getCurrentX();
-          velocity = 0;
+          dragging  = true;
+          startX    = e.touches[0].clientX;
+          lastX     = startX;
+          lastTime  = Date.now();
+          startVal  = currX();
+          velocity  = 0;
           grid.style.transition = 'none';
         }, { passive: true });
 
         grid.addEventListener('touchmove', e => {
-          if (!isDragging) return;
-          const now    = Date.now();
-          const touch  = e.touches[0].clientX;
-          const dt     = now - lastTime || 1;
-          velocity     = (touch - lastX) / dt * 16;
-          lastX        = touch;
-          lastTime     = now;
-          const dx     = touch - startX;
-          setX(startVal + dx);
+          if (!dragging) return;
+          const now   = Date.now();
+          const touch = e.touches[0].clientX;
+          const dt    = now - lastTime || 1;
+          velocity    = (touch - lastX) / dt * 16;
+          lastX       = touch;
+          lastTime    = now;
+          setX(startVal + (touch - startX));
         }, { passive: true });
 
         grid.addEventListener('touchend', () => {
-          isDragging = false;
+          dragging = false;
           cancelAnimationFrame(rafId);
-          rafId = requestAnimationFrame(runMomentum);
+          rafId = requestAnimationFrame(momentum);
         }, { passive: true });
 
         grid.addEventListener('touchcancel', () => {
-          isDragging = false;
-          velocity   = 0;
+          dragging = false;
+          velocity = 0;
         }, { passive: true });
       });
-    });
+    }
+
 
     // ── CATEGORY FILTER ──
     function filterCategory(tag, category) {
-      const section = tag.closest('.shop-section');
-      const allTags = section.querySelectorAll('.cat-tag');
-      const allGrids = section.querySelectorAll('.category-cards');
-      const panel = section.querySelector('.category-panel');
-      const isActive = tag.classList.contains('active');
+      const section   = tag.closest('.shop-section');
+      const allTags   = section.querySelectorAll('.cat-tag');
+      const allGrids  = section.querySelectorAll('.category-cards');
+      const panel     = section.querySelector('.category-panel');
+      const isActive  = tag.classList.contains('active');
 
+      // Deactivate all tags & grids
+      allTags.forEach(t  => t.classList.remove('active'));
+      allGrids.forEach(g => g.classList.remove('active'));
+
+      // Toggle off if same tag re-clicked
       if (isActive) {
-        allTags.forEach(t => t.classList.remove('active'));
-        allGrids.forEach(g => g.classList.remove('active'));
-
-        const h = panel.scrollHeight;
-
         const anim = panel.animate(
-          [{ maxHeight: h + 'px' }, { maxHeight: '0px' }],
+          [{ maxHeight: panel.scrollHeight + 'px' }, { maxHeight: '0px' }],
           { duration: 450, easing: 'cubic-bezier(0.4, 0, 0.2, 1)', fill: 'forwards' }
         );
-
         anim.onfinish = () => {
           panel.classList.remove('open');
           panel.style.maxHeight = '';
@@ -1947,44 +1842,20 @@
         return;
       }
 
-      allTags.forEach(t => t.classList.remove('active'));
+      // Activate selected tag and grid
       tag.classList.add('active');
-      allGrids.forEach(g => g.classList.remove('active'));
-
       const target = section.querySelector(`.category-cards[data-category="${category}"]`);
       if (target) target.classList.add('active');
 
       if (!panel.classList.contains('open')) {
         panel.classList.add('open');
-        const h = panel.scrollHeight;
         panel.animate(
-          [{ maxHeight: '0px' }, { maxHeight: h + 'px' }],
+          [{ maxHeight: '0px' }, { maxHeight: panel.scrollHeight + 'px' }],
           { duration: 450, easing: 'cubic-bezier(0.4, 0, 0.2, 1)' }
         ).onfinish = () => { panel.style.maxHeight = '4000px'; };
       }
     }
-    // ── COLLAPSIBLE SECTIONS ──
-    function toggleSection(header) {
-      const section = header.closest('.shop-section');
-      const wrap = section.querySelector('.cards-wrap');
-      const isOpen = section.classList.contains('open');
 
-      if (isOpen) {
-        wrap.style.maxHeight = wrap.scrollHeight + 'px';
-        requestAnimationFrame(() => {
-          wrap.style.maxHeight = '0';
-          wrap.style.opacity = '0';
-          wrap.style.padding = '0 24px';
-        });
-        section.classList.remove('open');
-      } else {
-        section.classList.add('open');
-        wrap.style.opacity = '1';
-        wrap.style.padding = '24px';
-        wrap.style.maxHeight = wrap.scrollHeight + 'px';
-        setTimeout(() => { wrap.style.maxHeight = '4000px'; }, 450);
-      }
-    }
   </script>
 
 </body>
