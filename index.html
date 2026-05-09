@@ -395,15 +395,20 @@
 
     /* ── SLIDER ── */
     .slider-wrapper {
-      position: relative;
       margin: 0 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .slider-row-wrap {
+      position: relative;
     }
     .slider-viewport {
       overflow: hidden;
     }
     .slider-grid {
       display: grid !important;
-      grid-template-rows: repeat(2, auto);
+      grid-template-rows: 1fr;
       grid-auto-flow: column;
       grid-auto-columns: 185px;
       gap: 14px;
@@ -455,7 +460,7 @@
         text-align: center;
       }
       .slider-btn { display: none !important; }
-      .slider-wrapper { margin: 0; }
+      .slider-wrapper { margin: 0; gap: 12px; }
     }
   </style>
 </head>
@@ -504,11 +509,11 @@
       <div class="cards-wrap">
         <p class="section-subheading">20 Best Selling Products</p>
         <div class="slider-wrapper">
-          <button class="slider-btn slider-btn-left" onclick="slide(this,-1)">&#8249;</button>
-          <button class="slider-btn slider-btn-right visible" onclick="slide(this,1)">&#8250;</button>
-          <div class="slider-viewport">
-            <div class="cards-grid slider-grid">
-
+          <div class="slider-row-wrap">
+            <button class="slider-btn slider-btn-left" onclick="slide(this,-1)">&#8249;</button>
+            <button class="slider-btn slider-btn-right visible" onclick="slide(this,1)">&#8250;</button>
+            <div class="slider-viewport">
+              <div class="cards-grid slider-grid">
           <a class="card" href="https://s.shopee.ph/6AheA263W5" target="_blank" rel="noopener nofollow">
             <img class="card-img" src="images/s1.png" alt="Stainless Stove Rack" loading="lazy" />
             <div class="card-body">
@@ -588,6 +593,15 @@
               <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
             </div>
           </a>
+
+          </div>
+            </div>
+          </div>
+          <div class="slider-row-wrap">
+            <button class="slider-btn slider-btn-left" onclick="slide(this,-1)">&#8249;</button>
+            <button class="slider-btn slider-btn-right visible" onclick="slide(this,1)">&#8250;</button>
+            <div class="slider-viewport">
+              <div class="cards-grid slider-grid">
 
           <a class="card" href="https://s.shopee.ph/5q4noX9JWo" target="_blank" rel="noopener nofollow">
             <img class="card-img" src="images/s11.png" alt="Korean Nylon Backpack" loading="lazy" />
@@ -669,7 +683,8 @@
             </div>
           </a>
 
-        </div>
+       </div>
+            </div>
           </div>
         </div>
         <div class="category-tags">
@@ -890,11 +905,12 @@
       </div>
       <div class="cards-wrap">
         <p class="section-subheading">20 Best Selling Products</p>
-        <div class="slider-wrapper">
-          <button class="slider-btn slider-btn-left" onclick="slide(this,-1)">&#8249;</button>
-          <button class="slider-btn slider-btn-right visible" onclick="slide(this,1)">&#8250;</button>
-          <div class="slider-viewport">
-            <div class="cards-grid slider-grid">
+       <div class="slider-wrapper">
+          <div class="slider-row-wrap">
+            <button class="slider-btn slider-btn-left" onclick="slide(this,-1)">&#8249;</button>
+            <button class="slider-btn slider-btn-right visible" onclick="slide(this,1)">&#8250;</button>
+            <div class="slider-viewport">
+              <div class="cards-grid slider-grid">
 
           <!--
           ADD YOUR SHEIN CARDS HERE — same format as Amazon cards above.
@@ -988,6 +1004,15 @@
             </div>
           </a>
 
+          </div>
+            </div>
+          </div>
+          <div class="slider-row-wrap">
+            <button class="slider-btn slider-btn-left" onclick="slide(this,-1)">&#8249;</button>
+            <button class="slider-btn slider-btn-right visible" onclick="slide(this,1)">&#8250;</button>
+            <div class="slider-viewport">
+              <div class="cards-grid slider-grid">
+
           <a class="card" href="https://onelink.shein.com/6/5otjx38x09cs" target="_blank" rel="noopener nofollow">
             <img class="card-img" src="images/sh11.jpg" alt="Striped Colorblock Shirt" loading="lazy" />
             <div class="card-body">
@@ -1068,7 +1093,8 @@
             </div>
           </a>
 
-        </div>
+       </div>
+            </div>
           </div>
         </div>
         <div class="category-tags">
@@ -1272,11 +1298,12 @@
       </div>
       <div class="cards-wrap">
         <p class="section-subheading">20 Best Selling Products</p>
-        <div class="slider-wrapper">
-          <button class="slider-btn slider-btn-left" onclick="slide(this,-1)">&#8249;</button>
-          <button class="slider-btn slider-btn-right visible" onclick="slide(this,1)">&#8250;</button>
-          <div class="slider-viewport">
-            <div class="cards-grid slider-grid">
+       <div class="slider-wrapper">
+          <div class="slider-row-wrap">
+            <button class="slider-btn slider-btn-left" onclick="slide(this,-1)">&#8249;</button>
+            <button class="slider-btn slider-btn-right visible" onclick="slide(this,1)">&#8250;</button>
+            <div class="slider-viewport">
+              <div class="cards-grid slider-grid">
 
           <!-- CARD: images/1.jpg | Title: Why Everyone Is Buying This Owala Water Bottle | Link: https://amzn.to/48FxKfk -->
           <a class="card" href="https://amzn.to/48FxKfk" target="_blank" rel="noopener nofollow">
@@ -1367,6 +1394,15 @@
               <span class="card-cta">Shop Now <span class="card-cta-arrow">→</span></span>
             </div>
           </a>
+
+          </div>
+            </div>
+          </div>
+          <div class="slider-row-wrap">
+            <button class="slider-btn slider-btn-left" onclick="slide(this,-1)">&#8249;</button>
+            <button class="slider-btn slider-btn-right visible" onclick="slide(this,1)">&#8250;</button>
+            <div class="slider-viewport">
+              <div class="cards-grid slider-grid">
 
           <!-- CARD: images/11.jpg | Title: OFEEFAN V Neck Blouse Is a Casual Style Favorite | Link: https://amzn.to/49cOrik -->
           <a class="card" href="https://amzn.to/49cOrik" target="_blank" rel="noopener nofollow">
@@ -1475,6 +1511,7 @@
           -->
 
         </div>
+            </div>
           </div>
         </div>
         <div class="category-tags">
@@ -1720,7 +1757,7 @@
 
     // ── SLIDER NAVIGATION ──
     function slide(btn, dir) {
-      const wrapper  = btn.closest('.slider-wrapper');
+      const wrapper  = btn.closest('.slider-row-wrap');
       const grid     = wrapper.querySelector('.slider-grid');
       const viewport = wrapper.querySelector('.slider-viewport');
       const card     = grid.querySelector('.card');
@@ -1745,7 +1782,7 @@
         const maxX     = () => -(grid.scrollWidth - viewport().offsetWidth);
         let startX = 0, startVal = 0;
 
-        grid.addEventListener('touchstart', e => {
+       grid.addEventListener('touchstart', e => {
           startX   = e.touches[0].clientX;
           startVal = parseFloat(grid.dataset.x || 0);
         }, { passive: true });
@@ -1764,10 +1801,10 @@
           const newX    = Math.max(maxX(), Math.min(0, snapped));
           grid.dataset.x = newX;
           grid.style.transform = `translateX(${newX}px)`;
-          const wrapper = grid.closest('.slider-wrapper');
-          if (wrapper) {
-            wrapper.querySelector('.slider-btn-left').classList.toggle('visible',  newX < 0);
-            wrapper.querySelector('.slider-btn-right').classList.toggle('visible', newX > maxX());
+          const rowWrap = grid.closest('.slider-row-wrap');
+          if (rowWrap) {
+            rowWrap.querySelector('.slider-btn-left').classList.toggle('visible',  newX < 0);
+            rowWrap.querySelector('.slider-btn-right').classList.toggle('visible', newX > maxX());
           }
         }, { passive: true });
       });
