@@ -393,6 +393,47 @@
     }
     .blank-card svg { opacity: 0.3; }
 
+    /* ── SLIDER ── */
+    .slider-wrapper {
+      position: relative;
+      margin: 0 20px;
+    }
+    .slider-viewport {
+      overflow: hidden;
+    }
+    .slider-grid {
+      display: grid !important;
+      grid-template-rows: repeat(2, auto);
+      grid-auto-flow: column;
+      grid-auto-columns: 185px;
+      gap: 14px;
+      width: max-content;
+      transform: translateX(0);
+      transition: transform 0.42s cubic-bezier(0.4, 0, 0.2, 1);
+      padding: 4px 2px;
+    }
+    .slider-btn {
+      position: absolute;
+      top: 50%; transform: translateY(-50%);
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.18);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(10px);
+      cursor: pointer;
+      display: grid; place-items: center;
+      z-index: 10;
+      font-size: 1.6rem; line-height: 1;
+      color: var(--text);
+      transition: all 0.25s ease;
+      opacity: 0; pointer-events: none;
+    }
+    [data-theme="dark"] .slider-btn { background: rgba(0,0,0,0.35); }
+    .slider-btn.visible { opacity: 1; pointer-events: all; }
+    .slider-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .slider-btn-left  { left:  -22px; }
+    .slider-btn-right { right: -22px; }
+    
     /* ── MOBILE ── */
     @media (max-width: 600px) {
       header { padding: 14px 18px; }
@@ -413,6 +454,8 @@
         width: 100%;
         text-align: center;
       }
+      .slider-btn { display: none !important; }
+      .slider-wrapper { margin: 0; }
     }
   </style>
 </head>
@@ -460,7 +503,11 @@
       </div>
       <div class="cards-wrap">
         <p class="section-subheading">20 Best Selling Products</p>
-        <div class="cards-grid">
+        <div class="slider-wrapper">
+          <button class="slider-btn slider-btn-left" onclick="slide(this,-1)">&#8249;</button>
+          <button class="slider-btn slider-btn-right visible" onclick="slide(this,1)">&#8250;</button>
+          <div class="slider-viewport">
+            <div class="cards-grid slider-grid">
 
           <a class="card" href="https://s.shopee.ph/6AheA263W5" target="_blank" rel="noopener nofollow">
             <img class="card-img" src="images/s1.png" alt="Stainless Stove Rack" loading="lazy" />
@@ -622,6 +669,8 @@
             </div>
           </a>
 
+        </div>
+          </div>
         </div>
         <div class="category-tags">
           <span class="cat-tag" onclick="filterCategory(this, 'fashion')">Fashion & Apparel</span>
@@ -841,7 +890,11 @@
       </div>
       <div class="cards-wrap">
         <p class="section-subheading">20 Best Selling Products</p>
-        <div class="cards-grid">
+        <div class="slider-wrapper">
+          <button class="slider-btn slider-btn-left" onclick="slide(this,-1)">&#8249;</button>
+          <button class="slider-btn slider-btn-right visible" onclick="slide(this,1)">&#8250;</button>
+          <div class="slider-viewport">
+            <div class="cards-grid slider-grid">
 
           <!--
           ADD YOUR SHEIN CARDS HERE — same format as Amazon cards above.
@@ -1015,6 +1068,8 @@
             </div>
           </a>
 
+        </div>
+          </div>
         </div>
         <div class="category-tags">
           <span class="cat-tag" onclick="filterCategory(this, 'fashion')">Fashion & Apparel</span>
@@ -1217,7 +1272,11 @@
       </div>
       <div class="cards-wrap">
         <p class="section-subheading">20 Best Selling Products</p>
-        <div class="cards-grid">
+        <div class="slider-wrapper">
+          <button class="slider-btn slider-btn-left" onclick="slide(this,-1)">&#8249;</button>
+          <button class="slider-btn slider-btn-right visible" onclick="slide(this,1)">&#8250;</button>
+          <div class="slider-viewport">
+            <div class="cards-grid slider-grid">
 
           <!-- CARD: images/1.jpg | Title: Why Everyone Is Buying This Owala Water Bottle | Link: https://amzn.to/48FxKfk -->
           <a class="card" href="https://amzn.to/48FxKfk" target="_blank" rel="noopener nofollow">
@@ -1415,6 +1474,8 @@
           ╚══════════════════════════════════════════════════╝
           -->
 
+        </div>
+          </div>
         </div>
         <div class="category-tags">
           <span class="cat-tag" onclick="filterCategory(this, 'fashion')">Fashion & Apparel</span>
@@ -1655,6 +1716,61 @@
       html.setAttribute('data-theme', next);
       localStorage.setItem('pp-theme', next);
       btn.textContent = next === 'dark' ? '☀' : '☽';
+    });
+
+    // ── SLIDER NAVIGATION ──
+    function slide(btn, dir) {
+      const wrapper  = btn.closest('.slider-wrapper');
+      const grid     = wrapper.querySelector('.slider-grid');
+      const viewport = wrapper.querySelector('.slider-viewport');
+      const card     = grid.querySelector('.card');
+      if (!card) return;
+      const cardW    = card.offsetWidth + 14;
+      const visible  = viewport.offsetWidth;
+      const maxX     = -(grid.scrollWidth - visible);
+      const step     = Math.floor(visible / cardW) * cardW;
+      const currentX = parseFloat(grid.dataset.x || 0);
+      let   newX     = currentX - (dir * step);
+      newX = Math.max(maxX, Math.min(0, newX));
+      grid.dataset.x = newX;
+      grid.style.transform = `translateX(${newX}px)`;
+      wrapper.querySelector('.slider-btn-left').classList.toggle('visible',  newX < 0);
+      wrapper.querySelector('.slider-btn-right').classList.toggle('visible', newX > maxX);
+    }
+
+    // ── TOUCH SWIPE ──
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.slider-grid').forEach(grid => {
+        const viewport = () => grid.closest('.slider-viewport');
+        const maxX     = () => -(grid.scrollWidth - viewport().offsetWidth);
+        let startX = 0, startVal = 0;
+
+        grid.addEventListener('touchstart', e => {
+          startX   = e.touches[0].clientX;
+          startVal = parseFloat(grid.dataset.x || 0);
+        }, { passive: true });
+
+        grid.addEventListener('touchmove', e => {
+          const dx   = e.touches[0].clientX - startX;
+          const newX = Math.max(maxX(), Math.min(0, startVal + dx));
+          grid.style.transform = `translateX(${newX}px)`;
+        }, { passive: true });
+
+        grid.addEventListener('touchend', e => {
+          const dx      = e.changedTouches[0].clientX - startX;
+          const cardW   = (grid.querySelector('.card')?.offsetWidth || 185) + 14;
+          const raw     = startVal + dx;
+          const snapped = Math.round(raw / cardW) * cardW;
+          const newX    = Math.max(maxX(), Math.min(0, snapped));
+          grid.dataset.x = newX;
+          grid.style.transform = `translateX(${newX}px)`;
+          const wrapper = grid.closest('.slider-wrapper');
+          if (wrapper) {
+            wrapper.querySelector('.slider-btn-left').classList.toggle('visible',  newX < 0);
+            wrapper.querySelector('.slider-btn-right').classList.toggle('visible', newX > maxX());
+          }
+        }, { passive: true });
+      });
     });
 
     // ── CATEGORY FILTER ──
