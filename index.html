@@ -1766,7 +1766,7 @@
       const cardW    = card.offsetWidth + 14;
       const visible  = viewport.offsetWidth;
       const maxX     = -(grid.scrollWidth - visible);
-      const step     = cardW * 2.5;
+      const step     = cardW * 2;
       const currentX = parseFloat(grid.dataset.x || 0);
       let   newX     = currentX - (dir * step);
       newX = Math.max(maxX, Math.min(0, newX));
