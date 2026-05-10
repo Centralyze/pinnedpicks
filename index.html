@@ -298,7 +298,7 @@
       display: inline-grid !important;
       grid-template-rows: 1fr;
       grid-auto-flow: column;
-      grid-auto-columns: 185px;
+      grid-auto-columns: calc((100vw - 130px) / 5.2);
       grid-auto-rows: 1fr;
       gap: 14px;
       width: max-content;
@@ -623,7 +623,7 @@
       }
 
       .slider-grid {
-        grid-auto-columns: calc((100vw - 56px) / 2.4) !important;
+        grid-auto-columns: calc((100vw - 48px) / 2.2) !important;
         gap: 10px !important;
         padding: 4px 20px !important;
         align-items: stretch !important;
