@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — PinnedPicks™</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="webimages/favicon.png" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg:      #faf8f5;
+      --bg2:     #f2ede6;
+      --card:    #ffffff;
+      --text:    #1a1612;
+      --muted:   #7a6f65;
+      --accent:  #c8521a;
+      --accent2: #e8855a;
+      --border:  rgba(0,0,0,0.09);
+    }
+    [data-theme="dark"] {
+      --bg:      #130f0b;
+      --bg2:     #1d1710;
+      --card:    #1f1a14;
+      --text:    #f0ebe3;
+      --muted:   #9a8e82;
+      --accent:  #e06b30;
+      --accent2: #f09060;
+      --border:  rgba(255,255,255,0.07);
+    }
+
+    html { scroll-behavior: smooth; }
+    * { scrollbar-width: none; -ms-overflow-style: none; }
+    *::-webkit-scrollbar { display: none; }
+
+    body {
+      background: var(--bg); color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400; line-height: 1.7; min-height: 100vh;
+      transition: background 0.35s, color 0.35s;
+    }
+
+    header {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 18px 40px; background: var(--card);
+      border-bottom: 1px solid var(--border); backdrop-filter: blur(8px);
+    }
+    .logo {
+      display: flex; align-items: center; gap: 0;
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.5rem; font-weight: bold;
+      color: var(--accent); letter-spacing: -0.01em; text-decoration: none;
+    }
+    .logo span { color: var(--text); }
+    .logo-img { width: 40px; height: 40px; object-fit: contain; }
+    .theme-btn {
+      width: 36px; height: 36px; display: grid; place-items: center;
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 50%; color: var(--muted); font-size: 1rem;
+      cursor: pointer; transition: border-color 0.2s, color 0.2s;
+    }
+    .theme-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+    .page-hero {
+      padding: 64px 24px 56px;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+      color: #fff; text-align: center;
+    }
+    .page-hero img { width: 52px; height: 52px; object-fit: contain; margin-bottom: 16px; opacity: 0.95; }
+    .page-hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem); line-height: 1.15; margin-bottom: 10px;
+    }
+    .page-hero p { font-size: 0.85rem; font-weight: 300; opacity: 0.82; }
+
+    .page-content { max-width: 780px; margin: 0 auto; padding: 64px 24px 100px; }
+
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px; margin-bottom: 40px;
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--accent); text-decoration: none; transition: gap 0.2s;
+    }
+    .back-link:hover { gap: 10px; }
+
+    .legal-meta {
+      font-size: 0.75rem; color: var(--muted);
+      margin-bottom: 48px; padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .legal-section { margin-bottom: 44px; }
+
+    .legal-section h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.3rem; font-weight: 400; color: var(--text);
+      margin-bottom: 14px; padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .legal-section p {
+      font-size: 0.88rem; color: var(--muted);
+      line-height: 1.9; margin-bottom: 12px;
+    }
+
+    .legal-section ul {
+      list-style: none; margin: 8px 0 12px;
+    }
+    .legal-section ul li {
+      font-size: 0.88rem; color: var(--muted);
+      padding: 5px 0 5px 18px; position: relative; line-height: 1.7;
+    }
+    .legal-section ul li::before {
+      content: '·'; position: absolute; left: 0;
+      color: var(--accent); font-weight: 700; font-size: 1.1rem;
+    }
+
+    .highlight-box {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-left: 3px solid var(--accent); border-radius: 8px;
+      padding: 18px 22px; margin: 16px 0;
+    }
+    .highlight-box p { margin-bottom: 0; font-size: 0.84rem; }
+
+    footer {
+      background: var(--card); border-top: 1px solid var(--border);
+      padding: 32px 24px; text-align: center;
+      font-size: 0.72rem; color: var(--muted);
+    }
+    footer a { color: var(--accent); text-decoration: none; font-weight: 600; }
+
+    @media (max-width: 600px) {
+      header { padding: 16px 18px; }
+      .logo { font-size: 1.25rem; }
+      .logo-img { width: 34px; height: 34px; }
+      .page-hero { padding: 48px 20px 40px; }
+      .page-content { padding: 40px 20px 72px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="logo">
+      <img src="webimages/favicon.png" alt="PinnedPicks Logo" class="logo-img" />
+      Pinned<span>Picks</span>
+    </a>
+    <button class="theme-btn" id="themeBtn" title="Toggle theme">☽</button>
+  </header>
+
+  <div class="page-hero">
+    <img src="webimages/favicon.png" alt="PinnedPicks Logo" />
+    <h1>Privacy Policy</h1>
+    <p>PinnedPicks™ — Effective Date: January 1, 2026</p>
+  </div>
+
+  <div class="page-content">
+
+    <a href="index.html" class="back-link">← Back to Home</a>
+
+    <p class="legal-meta">Last updated: January 1, 2026 &nbsp;·&nbsp; PinnedPicks™</p>
+
+    <div class="legal-section">
+      <h2>1. Introduction</h2>
+      <p>Welcome to PinnedPicks™ ("we," "our," or "us"). This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website. Please read this policy carefully. If you disagree with its terms, please discontinue use of the site.</p>
+      <p>We reserve the right to make changes to this Privacy Policy at any time and for any reason. We will alert you about any changes by updating the "Last updated" date. You are encouraged to periodically review this Privacy Policy to stay informed of updates.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>2. Information We Collect</h2>
+      <p>We may collect information about you in a variety of ways. The information we may collect includes:</p>
+      <ul>
+        <li><strong>Log and Usage Data:</strong> Our servers may automatically log standard data provided by your web browser when you visit our site, such as your IP address, browser type and version, the pages you visit, the time and date of your visit, and other statistics.</li>
+        <li><strong>Device Data:</strong> We may collect data about the device you use to access our website, such as the hardware model, operating system and version, unique device identifiers, and mobile network information.</li>
+        <li><strong>Cookies and Tracking Data:</strong> We use cookies and similar tracking technologies to track activity on our site and hold certain information, including your theme preference (light/dark mode).</li>
+      </ul>
+      <p>We do not collect personally identifiable information such as your name, email address, or payment information directly through this website. Purchases are completed through third-party platforms (Shopee, SHEIN, Amazon) which have their own privacy policies.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>3. How We Use Your Information</h2>
+      <p>Having accurate information permits us to provide you with a smooth, efficient, and customized experience. Specifically, we may use information collected about you to:</p>
+      <ul>
+        <li>Improve and optimize our website and user experience</li>
+        <li>Monitor and analyze usage and trends to improve your experience</li>
+        <li>Remember your theme preferences using browser local storage</li>
+        <li>Comply with legal obligations</li>
+        <li>Resolve disputes and troubleshoot problems</li>
+      </ul>
+    </div>
+
+    <div class="legal-section">
+      <h2>4. Affiliate Links and Third-Party Websites</h2>
+      <div class="highlight-box">
+        <p>Our website contains affiliate links to third-party websites including Shopee, SHEIN, and Amazon. When you click these links and make purchases, we may earn a small commission at no additional cost to you. These third-party sites have their own privacy policies, and we do not accept responsibility or liability for their content or privacy practices.</p>
+      </div>
+      <p>We encourage you to read the privacy policy of every website you visit. Clicking affiliate links means you are leaving PinnedPicks™ and entering a third-party platform subject to that platform's own terms and conditions.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>5. Cookies</h2>
+      <p>We use local storage (a browser-based technology similar to cookies) to remember your theme preference (light or dark mode). This data stays on your device and is not transmitted to our servers.</p>
+      <p>You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent. However, if you do not accept cookies or local storage, some portions of our site may not function properly.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>6. Third-Party Analytics</h2>
+      <p>We may use third-party service providers to monitor and analyze the use of our website. These services may use cookies and similar technologies to collect and track information and to improve and analyze our service. You can opt out of these services through your browser settings or by using opt-out tools provided by those services.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>7. Children's Privacy</h2>
+      <p>Our website is not directed to individuals under the age of 13. We do not knowingly collect personally identifiable information from children under 13. If we become aware that a child under 13 has provided us with personal information, we will take steps to delete such information.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>8. Changes to This Privacy Policy</h2>
+      <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last updated" date at the top of this policy. You are advised to review this Privacy Policy periodically for any changes.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>9. Contact Us</h2>
+      <p>If you have any questions about this Privacy Policy, please contact us at:</p>
+      <div class="highlight-box">
+        <p>Email: <a href="mailto:avbjrbusiness247@gmail.com" style="color: var(--accent); font-weight: 600;">avbjrbusiness247@gmail.com</a></p>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>© 2026 PinnedPicks™. All rights reserved. &nbsp;·&nbsp; <a href="about.html">About</a> &nbsp;·&nbsp; <a href="termsandconditions.html">Terms &amp; Conditions</a> &nbsp;·&nbsp; <a href="index.html">← Home</a></p>
+  </footer>
+
+  <script>
+    (function() {
+      const html = document.documentElement;
+      const btn  = document.getElementById('themeBtn');
+      const saved = localStorage.getItem('pp-theme') || 'light';
+      html.setAttribute('data-theme', saved);
+      btn.textContent = saved === 'dark' ? '☀' : '☽';
+      btn.addEventListener('click', () => {
+        const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        html.setAttribute('data-theme', next);
+        localStorage.setItem('pp-theme', next);
+        btn.textContent = next === 'dark' ? '☀' : '☽';
+      });
+    })();
+  </script>
+
+</body>
+</html>

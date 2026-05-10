@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms &amp; Conditions — PinnedPicks™</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="webimages/favicon.png" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg:      #faf8f5;
+      --bg2:     #f2ede6;
+      --card:    #ffffff;
+      --text:    #1a1612;
+      --muted:   #7a6f65;
+      --accent:  #c8521a;
+      --accent2: #e8855a;
+      --border:  rgba(0,0,0,0.09);
+    }
+    [data-theme="dark"] {
+      --bg:      #130f0b;
+      --bg2:     #1d1710;
+      --card:    #1f1a14;
+      --text:    #f0ebe3;
+      --muted:   #9a8e82;
+      --accent:  #e06b30;
+      --accent2: #f09060;
+      --border:  rgba(255,255,255,0.07);
+    }
+
+    html { scroll-behavior: smooth; }
+    * { scrollbar-width: none; -ms-overflow-style: none; }
+    *::-webkit-scrollbar { display: none; }
+
+    body {
+      background: var(--bg); color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400; line-height: 1.7; min-height: 100vh;
+      transition: background 0.35s, color 0.35s;
+    }
+
+    header {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 18px 40px; background: var(--card);
+      border-bottom: 1px solid var(--border); backdrop-filter: blur(8px);
+    }
+    .logo {
+      display: flex; align-items: center; gap: 0;
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.5rem; font-weight: bold;
+      color: var(--accent); letter-spacing: -0.01em; text-decoration: none;
+    }
+    .logo span { color: var(--text); }
+    .logo-img { width: 40px; height: 40px; object-fit: contain; }
+    .theme-btn {
+      width: 36px; height: 36px; display: grid; place-items: center;
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 50%; color: var(--muted); font-size: 1rem;
+      cursor: pointer; transition: border-color 0.2s, color 0.2s;
+    }
+    .theme-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+    .page-hero {
+      padding: 64px 24px 56px;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+      color: #fff; text-align: center;
+    }
+    .page-hero img { width: 52px; height: 52px; object-fit: contain; margin-bottom: 16px; opacity: 0.95; }
+    .page-hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem); line-height: 1.15; margin-bottom: 10px;
+    }
+    .page-hero p { font-size: 0.85rem; font-weight: 300; opacity: 0.82; }
+
+    .page-content { max-width: 780px; margin: 0 auto; padding: 64px 24px 100px; }
+
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px; margin-bottom: 40px;
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--accent); text-decoration: none; transition: gap 0.2s;
+    }
+    .back-link:hover { gap: 10px; }
+
+    .legal-meta {
+      font-size: 0.75rem; color: var(--muted);
+      margin-bottom: 48px; padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .legal-section { margin-bottom: 44px; }
+
+    .legal-section h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.3rem; font-weight: 400; color: var(--text);
+      margin-bottom: 14px; padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .legal-section p {
+      font-size: 0.88rem; color: var(--muted);
+      line-height: 1.9; margin-bottom: 12px;
+    }
+
+    .legal-section ul {
+      list-style: none; margin: 8px 0 12px;
+    }
+    .legal-section ul li {
+      font-size: 0.88rem; color: var(--muted);
+      padding: 5px 0 5px 18px; position: relative; line-height: 1.7;
+    }
+    .legal-section ul li::before {
+      content: '·'; position: absolute; left: 0;
+      color: var(--accent); font-weight: 700; font-size: 1.1rem;
+    }
+
+    .highlight-box {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-left: 3px solid var(--accent); border-radius: 8px;
+      padding: 18px 22px; margin: 16px 0;
+    }
+    .highlight-box p { margin-bottom: 0; font-size: 0.84rem; }
+
+    footer {
+      background: var(--card); border-top: 1px solid var(--border);
+      padding: 32px 24px; text-align: center;
+      font-size: 0.72rem; color: var(--muted);
+    }
+    footer a { color: var(--accent); text-decoration: none; font-weight: 600; }
+
+    @media (max-width: 600px) {
+      header { padding: 16px 18px; }
+      .logo { font-size: 1.25rem; }
+      .logo-img { width: 34px; height: 34px; }
+      .page-hero { padding: 48px 20px 40px; }
+      .page-content { padding: 40px 20px 72px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="logo">
+      <img src="webimages/favicon.png" alt="PinnedPicks Logo" class="logo-img" />
+      Pinned<span>Picks</span>
+    </a>
+    <button class="theme-btn" id="themeBtn" title="Toggle theme">☽</button>
+  </header>
+
+  <div class="page-hero">
+    <img src="webimages/favicon.png" alt="PinnedPicks Logo" />
+    <h1>Terms &amp; Conditions</h1>
+    <p>PinnedPicks™ — Effective Date: January 1, 2026</p>
+  </div>
+
+  <div class="page-content">
+
+    <a href="index.html" class="back-link">← Back to Home</a>
+
+    <p class="legal-meta">Last updated: January 1, 2026 &nbsp;·&nbsp; PinnedPicks™</p>
+
+    <div class="legal-section">
+      <h2>1. Agreement to Terms</h2>
+      <p>By accessing and using PinnedPicks™ ("we," "our," or "us"), you agree to be bound by these Terms and Conditions. If you do not agree to these terms, please do not use this website. We reserve the right to change these terms at any time, and your continued use of the website following any changes constitutes acceptance of those changes.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>2. Use of the Website</h2>
+      <p>PinnedPicks™ is an affiliate-based product discovery platform. You agree to use this website only for lawful purposes and in a way that does not infringe the rights of others or restrict or inhibit their use and enjoyment of the website.</p>
+      <ul>
+        <li>You must not misuse this website by introducing viruses, trojans, or other malicious material</li>
+        <li>You must not attempt to gain unauthorized access to this website or any server connected to it</li>
+        <li>You must not use this website in any way that could damage, disable, overburden, or impair it</li>
+        <li>You must not use automated tools to scrape, crawl, or extract content without written permission</li>
+      </ul>
+    </div>
+
+    <div class="legal-section">
+      <h2>3. Affiliate Disclosure</h2>
+      <div class="highlight-box">
+        <p>PinnedPicks™ participates in affiliate marketing programs with Shopee, SHEIN, Amazon, and other partner platforms. This means we may earn a commission from qualifying purchases made through links on our website at no additional cost to you. All affiliate relationships are disclosed in accordance with applicable guidelines and regulations.</p>
+      </div>
+      <p>Affiliate commissions do not influence the products we feature or our editorial decisions. We aim to recommend products that we genuinely believe offer value to our users.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>4. Product Information and Pricing</h2>
+      <p>Product details, descriptions, availability, and pricing displayed on PinnedPicks™ are sourced from third-party platforms and are subject to change without notice. We make no warranties or representations that:</p>
+      <ul>
+        <li>Product descriptions or other content on this site are accurate, complete, or current</li>
+        <li>Prices displayed on this site are accurate or current</li>
+        <li>Products shown are available for purchase at the time of visiting</li>
+      </ul>
+      <p>All purchases are completed directly on the respective third-party platform (Shopee, SHEIN, Amazon, etc.). PinnedPicks™ is not a party to any transaction between you and those platforms.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>5. Intellectual Property</h2>
+      <p>All content on PinnedPicks™, including but not limited to text, graphics, logos, images, and software, is the property of PinnedPicks™ or its content suppliers and is protected by applicable intellectual property laws. You may not reproduce, distribute, modify, or create derivative works of any content without prior written permission.</p>
+      <p>Product images displayed on this website are sourced from respective third-party platforms and remain the property of their respective owners.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>6. Third-Party Links</h2>
+      <p>Our website contains links to third-party websites including affiliate partner platforms. These links are provided for your convenience and do not signify our endorsement of the linked websites. We have no control over the nature, content, and availability of those sites. We accept no responsibility for them or for any loss or damage that may arise from your use of them.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>7. Disclaimer of Warranties</h2>
+      <p>This website is provided on an "as is" and "as available" basis without any warranties of any kind, either express or implied, including but not limited to implied warranties of merchantability, fitness for a particular purpose, or non-infringement.</p>
+      <p>PinnedPicks™ does not warrant that the website will be uninterrupted or error-free, that defects will be corrected, or that this website or the server that makes it available are free of viruses or other harmful components.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>8. Limitation of Liability</h2>
+      <p>To the fullest extent permitted by applicable law, PinnedPicks™ shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to loss of profits, data, use, goodwill, or other intangible losses, resulting from:</p>
+      <ul>
+        <li>Your access to or use of (or inability to access or use) this website</li>
+        <li>Any conduct or content of any third party on this website</li>
+        <li>Any content obtained from this website</li>
+        <li>Unauthorized access, use, or alteration of your transmissions or content</li>
+      </ul>
+    </div>
+
+    <div class="legal-section">
+      <h2>9. Governing Law</h2>
+      <p>These Terms and Conditions are governed by and construed in accordance with the laws of the Philippines. Any disputes relating to these terms and conditions will be subject to the exclusive jurisdiction of the courts of the Philippines.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>10. Changes to Terms</h2>
+      <p>We reserve the right to revise these Terms and Conditions at any time. By using this website, you agree to be bound by the then-current version of these Terms and Conditions. We will update the "Last updated" date at the top of this page whenever changes are made.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>11. Contact Us</h2>
+      <p>If you have any questions about these Terms and Conditions, please contact us at:</p>
+      <div class="highlight-box">
+        <p>Email: <a href="mailto:avbjrbusiness247@gmail.com" style="color: var(--accent); font-weight: 600;">avbjrbusiness247@gmail.com</a></p>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>© 2026 PinnedPicks™. All rights reserved. &nbsp;·&nbsp; <a href="about.html">About</a> &nbsp;·&nbsp; <a href="privacypolicy.html">Privacy Policy</a> &nbsp;·&nbsp; <a href="index.html">← Home</a></p>
+  </footer>
+
+  <script>
+    (function() {
+      const html = document.documentElement;
+      const btn  = document.getElementById('themeBtn');
+      const saved = localStorage.getItem('pp-theme') || 'light';
+      html.setAttribute('data-theme', saved);
+      btn.textContent = saved === 'dark' ? '☀' : '☽';
+      btn.addEventListener('click', () => {
+        const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        html.setAttribute('data-theme', next);
+        localStorage.setItem('pp-theme', next);
+        btn.textContent = next === 'dark' ? '☀' : '☽';
+      });
+    })();
+  </script>
+
+</body>
+</html>
