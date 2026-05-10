@@ -2160,9 +2160,39 @@
       });
 
       initTouchSwipe();
+      shuffleAllCards();
     });
 
+    // ── CARD RANDOMIZATION ──
+    function shuffle(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
 
+    function shuffleContainer(container) {
+      if (!container) return;
+      const cards = Array.from(container.children);
+      if (cards.length < 2) return;
+      const fragment = document.createDocumentFragment();
+      shuffle(cards).forEach(card => fragment.appendChild(card));
+      container.appendChild(fragment);
+    }
+
+    function shuffleAllCards() {
+      // Shuffle each slider row independently (20 Best Selling)
+      document.querySelectorAll('.slider-grid').forEach(grid => {
+        shuffleContainer(grid);
+      });
+
+      // Shuffle each category grid independently
+      document.querySelectorAll('.category-cards').forEach(grid => {
+        shuffleContainer(grid);
+      });
+    }
+    
     // ── THEME TOGGLE ──
     (function initTheme() {
       const html  = document.documentElement;
