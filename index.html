@@ -1788,19 +1788,40 @@
           lastTime  = Date.now();
           startVal  = currX();
           velocity  = 0;
+          grid._startY   = e.touches[0].clientY;
+          grid._lockAxis = undefined; // reset axis lock on new gesture
           grid.style.transition = 'none';
         }, { passive: true });
 
         grid.addEventListener('touchmove', e => {
           if (!dragging) return;
-          const now   = Date.now();
-          const touch = e.touches[0].clientX;
-          const dt    = now - lastTime || 1;
-          velocity    = (touch - lastX) / dt * 16;
-          lastX       = touch;
-          lastTime    = now;
-          setX(startVal + (touch - startX));
-        }, { passive: true });
+
+          const now    = Date.now();
+          const touchX = e.touches[0].clientX;
+          const touchY = e.touches[0].clientY;
+
+          // On first move, detect dominant direction and lock
+          if (typeof grid._lockAxis === 'undefined') {
+            const dx = Math.abs(touchX - startX);
+            const dy = Math.abs(touchY - (grid._startY || touchY));
+            if (dx > dy) {
+              grid._lockAxis = 'x'; // horizontal — take over
+            } else {
+              grid._lockAxis = 'y'; // vertical — let page scroll
+            }
+          }
+
+          if (grid._lockAxis === 'y') return; // vertical swipe: do nothing
+
+          // Horizontal swipe: block page scroll and move slider
+          e.preventDefault();
+
+          const dt = now - lastTime || 1;
+          velocity  = (touchX - lastX) / dt * 16;
+          lastX     = touchX;
+          lastTime  = now;
+          setX(startVal + (touchX - startX));
+        }, { passive: false });
 
         grid.addEventListener('touchend', () => {
           dragging = false;
