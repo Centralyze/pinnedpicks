@@ -1961,13 +1961,13 @@
     }
 
 
-    // ── SLIDER: touch/swipe with momentum ──
+// ── SLIDER: touch/swipe with momentum ──
     function initTouchSwipe() {
       document.querySelectorAll('.slider-grid').forEach(grid => {
         const viewport = () => grid.closest('.slider-viewport');
         const maxX     = () => -(grid.scrollWidth - viewport().offsetWidth + 2);
         const currX    = () => parseFloat(grid.dataset.x || 0);
-
+    
         let startX   = 0;
         let startVal = 0;
         let lastX    = 0;
@@ -1975,13 +1975,13 @@
         let velocity = 0;
         let rafId    = null;
         let dragging = false;
-
+    
         function setX(x) {
           const clamped = Math.max(maxX(), Math.min(0, x));
-          grid.dataset.x       = clamped;
+          grid.dataset.x        = clamped;
           grid.style.transition = 'none';
           grid.style.transform  = `translateX(${clamped}px)`;
-
+    
           const row = grid.closest('.slider-row');
           if (row) {
             row.querySelector('.slider-btn-left').classList.toggle('visible',  clamped < 0);
@@ -1989,15 +1989,15 @@
           }
           return clamped;
         }
-
+    
         function momentum() {
-          if (Math.abs(velocity) < 0.3) { velocity = 0; return; }
-          velocity *= 0.93;
+          if (Math.abs(velocity) < 0.15) { velocity = 0; return; }  // lower stop threshold = longer glide
+          velocity *= 0.96;                                           // was 0.93 — slower decay = more momentum
           const clamped = setX(currX() + velocity);
           if (clamped === 0 || clamped === maxX()) { velocity = 0; return; }
           rafId = requestAnimationFrame(momentum);
         }
-
+    
         grid.addEventListener('touchstart', e => {
           cancelAnimationFrame(rafId);
           dragging  = true;
@@ -2007,46 +2007,69 @@
           startVal  = currX();
           velocity  = 0;
           grid._startY   = e.touches[0].clientY;
-          grid._lockAxis = undefined; // reset axis lock on new gesture
+          grid._lockAxis = undefined;
           grid.style.transition = 'none';
         }, { passive: true });
-
+    
         grid.addEventListener('touchmove', e => {
           if (!dragging) return;
-
+    
           const now    = Date.now();
           const touchX = e.touches[0].clientX;
           const touchY = e.touches[0].clientY;
-
-          // On first move, detect dominant direction and lock
+    
           if (typeof grid._lockAxis === 'undefined') {
             const dx = Math.abs(touchX - startX);
             const dy = Math.abs(touchY - (grid._startY || touchY));
-            if (dx > dy) {
-              grid._lockAxis = 'x'; // horizontal — take over
+    
+            // Lower threshold: lock axis sooner after just 4px of movement
+            if (dx > 4 || dy > 4) {
+              grid._lockAxis = dx >= dy ? 'x' : 'y';
             } else {
-              grid._lockAxis = 'y'; // vertical — let page scroll
+              return; // not enough movement yet to decide
             }
           }
-
-          if (grid._lockAxis === 'y') return; // vertical swipe: do nothing
-
-          // Horizontal swipe: block page scroll and move slider
+    
+          if (grid._lockAxis === 'y') return;
+    
           e.preventDefault();
-
-          const dt = now - lastTime || 1;
-          velocity  = (touchX - lastX) / dt * 16;
+    
+          const dt  = Math.max(now - lastTime, 1);
+          velocity  = (touchX - lastX) / dt * 14;  // was * 16, slight reduction for control
           lastX     = touchX;
           lastTime  = now;
-          setX(startVal + (touchX - startX));
+    
+          // Apply 1:1 direct tracking with slight resistance at edges
+          const rawX    = startVal + (touchX - startX);
+          const mx      = maxX();
+          const bounded = rawX > 0
+            ? rawX * 0.18                    // rubber-band resistance at left edge
+            : rawX < mx
+              ? mx + (rawX - mx) * 0.18     // rubber-band resistance at right edge
+              : rawX;                        // free movement within bounds
+    
+          setX(bounded);
         }, { passive: false });
-
-        grid.addEventListener('touchend', () => {
+    
+        grid.addEventListener('touchend', e => {
           dragging = false;
           cancelAnimationFrame(rafId);
+    
+          // Snap back if overscrolled past edges
+          const mx   = maxX();
+          const curr = currX();
+          if (curr > 0 || curr < mx) {
+            const target = curr > 0 ? 0 : mx;
+            grid.style.transition = 'transform 0.32s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            grid.style.transform  = `translateX(${target}px)`;
+            grid.dataset.x        = target;
+            velocity = 0;
+            return;
+          }
+    
           rafId = requestAnimationFrame(momentum);
         }, { passive: true });
-
+    
         grid.addEventListener('touchcancel', () => {
           dragging = false;
           velocity = 0;
