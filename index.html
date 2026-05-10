@@ -491,6 +491,54 @@
     }
 
     /* ============================================================
+       CATEGORY SECTION LABEL
+    ============================================================ */
+    .category-section {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    .category-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 14px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      cursor: default;
+    }
+
+    .category-label svg {
+      flex-shrink: 0;
+      transition: transform 0.2s ease;
+    }
+
+    /* Remove old top border/margin from .category-tags since .category-section now owns it */
+    .category-tags {
+      margin-top: 0;
+      padding-top: 0;
+      border-top: none;
+    }
+
+    /* Stronger visual affordance on the tags — shadow + cursor pointer clarity */
+    .cat-tag {
+      box-shadow: 0 1px 3px rgba(0,0,0,0.07);
+      cursor: pointer;
+    }
+    .cat-tag:hover {
+      box-shadow: 0 2px 8px rgba(200,82,26,0.15);
+      transform: translateY(-1px);
+    }
+    .cat-tag.active {
+      box-shadow: 0 2px 10px rgba(200,82,26,0.25);
+      transform: translateY(-1px);
+    }
+
+    /* ============================================================
        FOOTER
     ============================================================ */
     footer {
@@ -665,8 +713,12 @@
       .category-cards.active {
         grid-template-columns: repeat(2, 1fr);
         gap: 10px;
-        padding: 0 20px;
+        padding: 0 20px 24px;
         margin-top: 14px;
+      }
+
+      .category-section {
+        padding-bottom: 8px;
       }
 
       /* Hide slider arrow buttons on mobile (swipe only) */
@@ -911,11 +963,18 @@
         </div><!-- /.slider-wrapper -->
 
         <!-- Category Filter Tags -->
-        <div class="category-tags">
-          <span class="cat-tag" onclick="filterCategory(this, 'fashion')">Fashion & Apparel</span>
-          <span class="cat-tag" onclick="filterCategory(this, 'electronics')">Electronics & Technology</span>
-          <span class="cat-tag" onclick="filterCategory(this, 'health')">Health & Beauty</span>
-          <span class="cat-tag" onclick="filterCategory(this, 'groceries')">Groceries & Consumables</span>
+        <!-- Category Filter Tags -->
+        <div class="category-section">
+          <p class="category-label">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            Browse by Category
+          </p>
+          <div class="category-tags">
+            <span class="cat-tag" onclick="filterCategory(this, 'fashion')">Fashion & Apparel</span>
+            <span class="cat-tag" onclick="filterCategory(this, 'electronics')">Electronics & Technology</span>
+            <span class="cat-tag" onclick="filterCategory(this, 'health')">Health & Beauty</span>
+            <span class="cat-tag" onclick="filterCategory(this, 'groceries')">Groceries & Consumables</span>
+          </div>
         </div>
 
         <!-- Category Panels -->
@@ -1221,11 +1280,18 @@
         </div><!-- /.slider-wrapper -->
 
         <!-- Category Filter Tags -->
-        <div class="category-tags">
-          <span class="cat-tag" onclick="filterCategory(this, 'fashion')">Fashion & Apparel</span>
-          <span class="cat-tag" onclick="filterCategory(this, 'electronics')">Electronics & Technology</span>
-          <span class="cat-tag" onclick="filterCategory(this, 'health')">Health & Beauty</span>
-          <span class="cat-tag" onclick="filterCategory(this, 'groceries')">Groceries & Consumables</span>
+        <!-- Category Filter Tags -->
+        <div class="category-section">
+          <p class="category-label">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            Browse by Category
+          </p>
+          <div class="category-tags">
+            <span class="cat-tag" onclick="filterCategory(this, 'fashion')">Fashion & Apparel</span>
+            <span class="cat-tag" onclick="filterCategory(this, 'electronics')">Electronics & Technology</span>
+            <span class="cat-tag" onclick="filterCategory(this, 'health')">Health & Beauty</span>
+            <span class="cat-tag" onclick="filterCategory(this, 'groceries')">Groceries & Consumables</span>
+          </div>
         </div>
 
         <!-- Category Panels -->
@@ -1531,11 +1597,18 @@
         </div><!-- /.slider-wrapper -->
 
         <!-- Category Filter Tags -->
-        <div class="category-tags">
-          <span class="cat-tag" onclick="filterCategory(this, 'fashion')">Fashion & Apparel</span>
-          <span class="cat-tag" onclick="filterCategory(this, 'electronics')">Electronics & Technology</span>
-          <span class="cat-tag" onclick="filterCategory(this, 'health')">Health & Beauty</span>
-          <span class="cat-tag" onclick="filterCategory(this, 'groceries')">Groceries & Consumables</span>
+        <!-- Category Filter Tags -->
+        <div class="category-section">
+          <p class="category-label">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            Browse by Category
+          </p>
+          <div class="category-tags">
+            <span class="cat-tag" onclick="filterCategory(this, 'fashion')">Fashion & Apparel</span>
+            <span class="cat-tag" onclick="filterCategory(this, 'electronics')">Electronics & Technology</span>
+            <span class="cat-tag" onclick="filterCategory(this, 'health')">Health & Beauty</span>
+            <span class="cat-tag" onclick="filterCategory(this, 'groceries')">Groceries & Consumables</span>
+          </div>
         </div>
 
         <!-- Category Panels -->
