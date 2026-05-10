@@ -557,78 +557,103 @@
        FOOTER
     ============================================================ */
     footer {
-      padding: 40px 24px;
       background: var(--card);
       border-top: 1px solid var(--border);
       font-size: 0.75rem;
       color: var(--muted);
-      line-height: 1.9;
-      text-align: center;
+      line-height: 1.8;
     }
-
-    footer strong {
-      color: var(--accent);
+    
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 56px 40px 40px;
     }
-
-    .footer-meta {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 32px;
-      margin-top: 20px;
-    }
-
-    .footer-meta span {
-      font-weight: 600;
-    }
-
-    .footer-meta a {
-      font-weight: 600;
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    /* ============================================================
-       FOOTER ENHANCEMENTS
-    ============================================================ */
+    
+    /* Brand Block */
     .footer-brand {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      gap: 8px;
-      margin-bottom: 4px;
+      gap: 6px;
+      margin-bottom: 10px;
+      text-align: center;
     }
     
     .footer-brand-logo {
-      width: 22px;
-      height: 22px;
+      width: 32px;
+      height: 32px;
       object-fit: contain;
-      opacity: 0.85;
-      vertical-align: middle;
+      opacity: 0.9;
     }
     
-    .footer-brand-text {
-      font-weight: 600;
-      font-size: 0.82rem;
+    .footer-brand-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.15rem;
+      font-weight: 400;
       color: var(--text);
-      letter-spacing: 0.02em;
+      letter-spacing: -0.01em;
     }
     
-    .footer-divider {
-      width: 40px;
-      height: 1px;
-      background: var(--border);
-      margin: 18px auto;
+    .footer-brand-name strong {
+      color: var(--accent);
     }
     
-    .footer-shop-label {
+    .footer-brand-tagline {
+      font-size: 0.75rem;
+      color: var(--muted);
+      font-weight: 300;
+      max-width: 320px;
+    }
+    
+    /* Full-width divider */
+    .footer-rule {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 36px 0;
+    }
+    
+    /* Nav grid */
+    .footer-nav {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+      text-align: left;
+      margin-bottom: 40px;
+    }
+    
+    .footer-col-title {
       font-size: 0.68rem;
-      font-weight: 600;
+      font-weight: 700;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--muted);
+      color: var(--text);
       margin-bottom: 14px;
+    }
+    
+    .footer-col a {
+      display: block;
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 3px 0;
+      transition: color 0.2s, transform 0.15s;
+    }
+    
+    .footer-col a:hover {
+      color: var(--accent);
+      transform: translateX(3px);
+    }
+    
+    /* Marketplace buttons */
+    .footer-shop-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 14px;
+      text-align: center;
     }
     
     .footer-platforms {
@@ -637,13 +662,14 @@
       justify-content: center;
       flex-wrap: wrap;
       gap: 10px;
+      margin-bottom: 36px;
     }
     
     .footer-platform-link {
       display: inline-flex;
       align-items: center;
-      gap: 7px;
-      padding: 7px 16px;
+      gap: 8px;
+      padding: 9px 20px;
       background: var(--bg2);
       border: 1px solid var(--border);
       border-radius: 999px;
@@ -652,19 +678,20 @@
       font-weight: 600;
       color: var(--muted);
       letter-spacing: 0.03em;
-      transition: border-color 0.2s, color 0.2s, background 0.2s, transform 0.15s, box-shadow 0.2s;
+      transition: border-color 0.2s, color 0.2s, background 0.2s,
+                  transform 0.15s, box-shadow 0.2s;
     }
     
     .footer-platform-link:hover {
       border-color: var(--accent);
       color: var(--accent);
       background: var(--card);
-      box-shadow: 0 2px 10px rgba(200, 82, 26, 0.15);
-      transform: translateY(-1px);
+      box-shadow: 0 3px 12px rgba(200, 82, 26, 0.18);
+      transform: translateY(-2px);
     }
     
     .footer-platform-link:active {
-      transform: translateY(0px) scale(0.97);
+      transform: translateY(0) scale(0.97);
     }
     
     .footer-platform-dot {
@@ -674,12 +701,80 @@
       flex-shrink: 0;
     }
     
-    .dot-shopee  { background: #f05a28; }
-    .dot-amazon  { background: #ff9900; }
-    .dot-shein   { background: #1a1a1a; }
+    .dot-shopee { background: #f05a28; }
+    .dot-amazon { background: #ff9900; }
+    .dot-shein  { background: #1a1a1a; }
     
     [data-theme="dark"] .dot-shein { background: #c8c8c8; }
-
+    
+    /* Bottom bar */
+    .footer-bottom {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+    
+    .footer-bottom a {
+      font-weight: 600;
+      color: var(--accent);
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    
+    .footer-bottom a:hover {
+      opacity: 0.75;
+    }
+    
+    /* Disclosure */
+    .footer-disclosure {
+      text-align: center;
+      font-size: 0.7rem;
+      color: var(--muted);
+      opacity: 0.75;
+      max-width: 640px;
+      margin: 0 auto 28px;
+      line-height: 1.7;
+    }
+    
+    .footer-disclosure strong {
+      color: var(--accent);
+      opacity: 1;
+    }
+    
+    /* ── FOOTER MOBILE ── */
+    @media (max-width: 600px) {
+      .footer-inner {
+        padding: 40px 20px 32px;
+      }
+    
+      .footer-nav {
+        grid-template-columns: 1fr 1fr;
+        gap: 28px 20px;
+      }
+    
+      .footer-platforms {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    
+      .footer-platform-link {
+        justify-content: center;
+        padding: 12px 20px;
+        min-height: 48px;
+      }
+    
+      .footer-bottom {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+      }
+    }
     /* ============================================================
        RESPONSIVE — MOBILE (≤600px)
     ============================================================ */
@@ -837,27 +932,6 @@
       /* Hide slider arrow buttons on mobile (swipe only) */
       .slider-btn {
         display: none !important;
-      }
-
-      /* Footer */
-      footer {
-        padding: 32px 20px;
-        font-size: 0.78rem;
-      }
-
-        .footer-platforms {
-        gap: 8px;
-      }
-    
-      .footer-platform-link {
-        padding: 9px 14px;
-        font-size: 0.8rem;
-        min-height: 40px;
-      }
-    
-      .footer-brand-logo {
-        width: 20px;
-        height: 20px;
       }
     }
 
@@ -1982,52 +2056,90 @@
        FOOTER
   ============================================================ -->
   <footer>
+    <div class="footer-inner">
   
-    <!-- Brand -->
-    <div class="footer-brand">
-      <img src="webimages/favicon.png" alt="PinnedPicks Logo" class="footer-brand-logo" />
-      <span class="footer-brand-text">PinnedPicks™ &nbsp;·&nbsp; Curated Product Recommendations</span>
+      <!-- Brand -->
+      <div class="footer-brand">
+        <img src="webimages/favicon.png" alt="PinnedPicks Logo" class="footer-brand-logo" />
+        <p class="footer-brand-name"><strong>Pinned</strong>Picks™</p>
+        <p class="footer-brand-tagline">Hand-picked products across trusted online marketplaces.</p>
+      </div>
+  
+      <hr class="footer-rule" />
+  
+      <!-- Nav Columns -->
+      <nav class="footer-nav" aria-label="Footer navigation">
+  
+        <div class="footer-col">
+          <p class="footer-col-title">Categories</p>
+          <a href="#" onclick="routeTo('shein-best'); return false;">Fashion &amp; Apparel</a>
+          <a href="#" onclick="routeTo('shopee-electronics'); return false;">Electronics &amp; Tech</a>
+          <a href="#" onclick="routeTo('shopee-health'); return false;">Health &amp; Beauty</a>
+          <a href="#" onclick="routeTo('shopee-groceries'); return false;">Groceries</a>
+          <a href="#" onclick="routeTo('shopee-best'); return false;">Trending Picks</a>
+        </div>
+  
+        <div class="footer-col">
+          <p class="footer-col-title">Platforms</p>
+          <a href="https://shopee.ph" target="_blank" rel="noopener nofollow">Shopee</a>
+          <a href="https://www.shein.com" target="_blank" rel="noopener nofollow">SHEIN</a>
+          <a href="https://www.amazon.com" target="_blank" rel="noopener nofollow">Amazon</a>
+          <a href="#">More Platforms Soon</a>
+        </div>
+  
+        <div class="footer-col">
+          <p class="footer-col-title">Company</p>
+            <a href="about.html">About PinnedPicks</a>
+            <a href="mailto:avbjrbusiness247@gmail.com">Contact</a>
+            <a href="privacypolicy.html">Privacy Policy</a>
+            <a href="termsandconditions.html">Terms &amp; Conditions</a>
+        </div>
+  
+        <div class="footer-col">
+          <p class="footer-col-title">Connect</p>
+          <a href="https://ph.pinterest.com/centralyze_pinnedpicks/" target="_blank" rel="noopener noreferrer">
+            Discover on Pinterest →
+          </a>
+        </div>
+  
+      </nav>
+  
+      <!-- Marketplace Buttons -->
+      <p class="footer-shop-label">Shop Trusted Platforms</p>
+      <div class="footer-platforms">
+  
+        <a class="footer-platform-link" href="https://shopee.ph" target="_blank" rel="noopener nofollow">
+          <span class="footer-platform-dot dot-shopee"></span>
+          Shop on Shopee
+        </a>
+  
+        <a class="footer-platform-link" href="https://www.shein.com" target="_blank" rel="noopener nofollow">
+          <span class="footer-platform-dot dot-shein"></span>
+          Shop on SHEIN
+        </a>
+  
+        <a class="footer-platform-link" href="https://www.amazon.com" target="_blank" rel="noopener nofollow">
+          <span class="footer-platform-dot dot-amazon"></span>
+          Shop on Amazon
+        </a>
+  
+      </div>
+  
+      <!-- Disclosure -->
+      <p class="footer-disclosure">
+        <strong>Affiliate Disclosure:</strong>
+        This page contains affiliate links. We may earn commissions from qualifying purchases made through partner platforms at no extra cost to you.
+      </p>
+  
+      <!-- Bottom Bar -->
+      <div class="footer-bottom">
+        <span>© 2026 PinnedPicks™. All rights reserved.</span>
+        <a href="https://ph.pinterest.com/centralyze_pinnedpicks/" target="_blank" rel="noopener noreferrer">
+          Discover Daily Finds on Pinterest →
+        </a>
+      </div>
+  
     </div>
-  
-    <!-- Disclosure -->
-    <p>
-      <strong>Affiliate Disclosure:</strong>
-      This page contains affiliate links. We may earn commissions from qualifying purchases made through partner platforms at no extra cost to you.
-    </p>
-  
-    <div class="footer-divider"></div>
-  
-    <!-- Shop Directly -->
-    <p class="footer-shop-label">Shop Directly!</p>
-    <div class="footer-platforms">
-  
-      <a class="footer-platform-link" href="https://shopee.com" target="_blank" rel="noopener nofollow">
-        <span class="footer-platform-dot dot-shopee"></span>
-        Shopee
-      </a>
-  
-      <a class="footer-platform-link" href="https://www.shein.com" target="_blank" rel="noopener nofollow">
-        <span class="footer-platform-dot dot-shein"></span>
-        SHEIN
-      </a>
-  
-      <a class="footer-platform-link" href="https://www.amazon.com" target="_blank" rel="noopener nofollow">
-        <span class="footer-platform-dot dot-amazon"></span>
-        Amazon
-      </a>
-  
-    </div>
-  
-    <div class="footer-divider"></div>
-  
-    <!-- Meta -->
-    <div class="footer-meta">
-      <span>© 2026. All rights reserved.</span>
-      <a href="https://ph.pinterest.com/centralyze_pinnedpicks/" target="_blank" rel="noopener noreferrer">
-        Follow on Pinterest →
-      </a>
-    </div>
-  
   </footer>
 
 
@@ -2270,6 +2382,54 @@
           { duration: 450, easing: 'cubic-bezier(0.4, 0, 0.2, 1)' }
         ).onfinish = () => { panel.style.maxHeight = '4000px'; };
       }
+    }
+
+    // ── FOOTER NAVIGATION ROUTING ──
+    function routeTo(target) {
+      let sectionEl, categoryKey;
+    
+      if (target === 'shein-best') {
+        sectionEl = document.querySelector('.shop-section[data-section="shein"]');
+      } else if (target === 'shopee-best') {
+        sectionEl = document.querySelector('.shop-section[data-section="shopee"]');
+      } else if (target === 'shopee-electronics') {
+        sectionEl = document.querySelector('.shop-section[data-section="shopee"]');
+        categoryKey = 'electronics';
+      } else if (target === 'shopee-health') {
+        sectionEl = document.querySelector('.shop-section[data-section="shopee"]');
+        categoryKey = 'health';
+      } else if (target === 'shopee-groceries') {
+        sectionEl = document.querySelector('.shop-section[data-section="shopee"]');
+        categoryKey = 'groceries';
+      }
+    
+      if (!sectionEl) return;
+    
+      // Open section if collapsed
+      const wrap = sectionEl.querySelector('.cards-wrap');
+      const isOpen = sectionEl.classList.contains('open');
+      if (!isOpen) {
+        sectionEl.classList.add('open');
+        wrap.style.opacity   = '1';
+        wrap.style.padding   = '24px';
+        wrap.style.maxHeight = wrap.scrollHeight + 'px';
+        setTimeout(() => { wrap.style.maxHeight = '4000px'; }, 450);
+      }
+    
+      // Open category panel if needed
+      if (categoryKey) {
+        setTimeout(() => {
+          const tag = sectionEl.querySelector(`.cat-tag[onclick*="${categoryKey}"]`);
+          if (tag && !tag.classList.contains('active')) {
+            filterCategory(tag, categoryKey);
+          }
+        }, isOpen ? 0 : 460);
+      }
+    
+      // Smooth scroll
+      setTimeout(() => {
+        sectionEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, isOpen ? 50 : 500);
     }
 
   </script>
