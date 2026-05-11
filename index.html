@@ -307,6 +307,8 @@
       padding: 4px 2px;
       transform: translateX(0);
       transition: transform 0.42s cubic-bezier(0.4, 0, 0.2, 1);
+      will-change: transform;
+      -webkit-overflow-scrolling: touch;
     }
 
     .slider-btn {
@@ -2182,12 +2184,33 @@
     }
 
     function shuffleAllCards() {
-      // Shuffle each slider row independently (20 Best Selling)
-      document.querySelectorAll('.slider-grid').forEach(grid => {
-        shuffleContainer(grid);
+      // Shuffle all 20 Best Selling products freely within each platform section
+      document.querySelectorAll('.shop-section').forEach(section => {
+        const grids = section.querySelectorAll('.slider-grid');
+        if (grids.length < 1) return;
+
+        // Collect all cards from all rows of this section
+        const allCards = [];
+        grids.forEach(grid => {
+          Array.from(grid.children).forEach(card => allCards.push(card));
+        });
+
+        // Shuffle the full pool
+        shuffle(allCards);
+
+        // Redistribute back across rows in order
+        let idx = 0;
+        grids.forEach(grid => {
+          const count = grid.children.length;
+          const fragment = document.createDocumentFragment();
+          for (let i = 0; i < count && idx < allCards.length; i++, idx++) {
+            fragment.appendChild(allCards[idx]);
+          }
+          grid.appendChild(fragment);
+        });
       });
 
-      // Shuffle each category grid independently
+      // Shuffle each category grid independently (unchanged)
       document.querySelectorAll('.category-cards').forEach(grid => {
         shuffleContainer(grid);
       });
@@ -2287,8 +2310,8 @@
         }
     
         function momentum() {
-          if (Math.abs(velocity) < 0.15) { velocity = 0; return; }  // lower stop threshold = longer glide
-          velocity *= 0.96;                                           // was 0.93 — slower decay = more momentum
+          if (Math.abs(velocity) < 0.08) { velocity = 0; return; }
+          velocity *= 0.975;                                         // was 0.93 — slower decay = more momentum
           const clamped = setX(currX() + velocity);
           if (clamped === 0 || clamped === maxX()) { velocity = 0; return; }
           rafId = requestAnimationFrame(momentum);
@@ -2319,7 +2342,7 @@
             const dy = Math.abs(touchY - (grid._startY || touchY));
     
             // Lower threshold: lock axis sooner after just 4px of movement
-            if (dx > 4 || dy > 4) {
+            if (dx > 3 || dy > 3) {
               grid._lockAxis = dx >= dy ? 'x' : 'y';
             } else {
               return; // not enough movement yet to decide
@@ -2331,7 +2354,7 @@
           e.preventDefault();
     
           const dt  = Math.max(now - lastTime, 1);
-          velocity  = (touchX - lastX) / dt * 14;  // was * 16, slight reduction for control
+          velocity  = (touchX - lastX) / dt * 18;
           lastX     = touchX;
           lastTime  = now;
     
@@ -2339,9 +2362,9 @@
           const rawX    = startVal + (touchX - startX);
           const mx      = maxX();
           const bounded = rawX > 0
-            ? rawX * 0.18                    // rubber-band resistance at left edge
+            ? rawX * 0.22                    // rubber-band resistance at left edge
             : rawX < mx
-              ? mx + (rawX - mx) * 0.18     // rubber-band resistance at right edge
+              ? mx + (rawX - mx) * 0.22     // rubber-band resistance at right edge
               : rawX;                        // free movement within bounds
     
           setX(bounded);
