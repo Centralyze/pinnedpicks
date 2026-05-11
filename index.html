@@ -2311,7 +2311,7 @@
     
         function momentum() {
           if (Math.abs(velocity) < 0.08) { velocity = 0; return; }
-          velocity *= 0.975;                                         // was 0.93 — slower decay = more momentum
+          velocity *= 0.965;                                         // was 0.93 — slower decay = more momentum
           const clamped = setX(currX() + velocity);
           if (clamped === 0 || clamped === maxX()) { velocity = 0; return; }
           rafId = requestAnimationFrame(momentum);
@@ -2362,9 +2362,9 @@
           const rawX    = startVal + (touchX - startX);
           const mx      = maxX();
           const bounded = rawX > 0
-            ? rawX * 0.22                    // rubber-band resistance at left edge
+            ? rawX * 0.21                    // rubber-band resistance at left edge
             : rawX < mx
-              ? mx + (rawX - mx) * 0.22     // rubber-band resistance at right edge
+              ? mx + (rawX - mx) * 0.21     // rubber-band resistance at right edge
               : rawX;                        // free movement within bounds
     
           setX(bounded);
