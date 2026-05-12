@@ -116,6 +116,22 @@
       line-height: 1.85; margin-bottom: 14px;
     }
 
+    .feedback-link {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      transition: opacity 0.2s ease;
+    }
+    
+    .feedback-link:hover {
+      opacity: 0.8;
+    }
+    
+    .feedback-link:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
     .section-block ul {
       list-style: none; margin-top: 6px;
     }
@@ -168,41 +184,6 @@
       color: var(--muted);
     }
     footer a { color: var(--accent); text-decoration: none; font-weight: 600; }
-
-    .about-divider {
-      width: 100%;
-      height: 1px;
-      background: var(--border);
-      margin: 18px 0 22px;
-      opacity: 0.7;
-    }
-    
-    .about-feedback-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      margin-top: 8px;
-    
-      font-size: 0.95rem;
-      font-weight: 500;
-      text-decoration: none;
-    
-      color: var(--accent);
-    
-      transition:
-        opacity 0.2s ease,
-        transform 0.18s ease;
-    }
-    
-    .about-feedback-link:hover {
-      opacity: 0.82;
-      transform: translateX(2px);
-    }
-    
-    .about-feedback-link:focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 3px;
-    }
 
     @media (max-width: 600px) {
       header { padding: 16px 18px; }
@@ -257,43 +238,34 @@
       <p>Whether you're looking for room upgrades, fashion inspiration, everyday tech, beauty products, or lifestyle essentials, PinnedPicks™ helps simplify the search by bringing the best picks together in one place.</p>
     </div>
 
-    <div class="about-section">
-
-    <h2>Platform Development & Community Feedback</h2>
-  
-    <div class="about-divider"></div>
-  
-    <p>
-      PinnedPicks™ is currently in active early-stage development and is temporarily hosted using GitHub Pages infrastructure while the platform continues to evolve and improve.
-    </p>
-  
-    <p>
-      Our goal is to continuously refine the browsing experience, improve product discovery, optimize performance across devices, and expand platform features over time.
-    </p>
-  
-    <p>
-      We genuinely value community feedback, suggestions, and usability insights. If you encounter issues or have ideas that could improve the platform experience, we’d love to hear from you.
-    </p>
-  
-    <a
-      class="about-feedback-link"
-      href="https://forms.gle/m9ZJ9iqkeFS1zyig6"
-      target="_blank"
-      rel="noopener noreferrer nofollow"
-    >
-      Submit Feedback & Suggestions →
-    </a>
-  
-  </div>
-
     <div class="section-block">
-      <h2>Affiliate Disclosure</h2>
-      <div class="disclosure-box">
-        <p>PinnedPicks™ participates in affiliate programs including Shopee, SHEIN, Amazon, and other partner platforms. This means we may earn a small commission from qualifying purchases made through our links at no additional cost to you. Product pricing is displayed on the respective third-party marketplace and is not guaranteed to be real-time or accurate at the moment of viewing. Always verify the final price on the destination platform before purchasing. These commissions help support the platform and allow us to continue creating curated content and product recommendations.</p>
-      </div>
+    
+      <h2>Platform Development & Community Feedback</h2>
+    
+      <p>
+        PinnedPicks™ is currently in active early-stage development and is temporarily hosted using GitHub Pages infrastructure while the platform continues to evolve and improve.
+      </p>
+    
+      <p>
+        Our goal is to continuously refine the browsing experience, improve product discovery, optimize performance across devices, and expand platform features over time.
+      </p>
+    
+      <p>
+        We genuinely value community feedback, suggestions, and usability insights. If you encounter issues or have ideas that could improve the platform experience, we’d love to hear from you.
+      </p>
+    
+      <p>
+        <a
+          class="feedback-link"
+          href="https://forms.gle/m9ZJ9iqkeFS1zyig6"
+          target="_blank"
+          rel="noopener noreferrer nofollow"
+        >
+          Submit Feedback & Suggestions →
+        </a>
+      </p>
+    
     </div>
-
-  </div>
 
   <footer>
     <p>© 2026 PinnedPicks™. All rights reserved. &nbsp; <a href="privacypolicy.html">Privacy Policy</a> &nbsp; <a href="termsandconditions.html">Terms &amp; Conditions</a></p>
