@@ -169,6 +169,41 @@
     }
     footer a { color: var(--accent); text-decoration: none; font-weight: 600; }
 
+    .about-divider {
+      width: 100%;
+      height: 1px;
+      background: var(--border);
+      margin: 18px 0 22px;
+      opacity: 0.7;
+    }
+    
+    .about-feedback-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 8px;
+    
+      font-size: 0.95rem;
+      font-weight: 500;
+      text-decoration: none;
+    
+      color: var(--accent);
+    
+      transition:
+        opacity 0.2s ease,
+        transform 0.18s ease;
+    }
+    
+    .about-feedback-link:hover {
+      opacity: 0.82;
+      transform: translateX(2px);
+    }
+    
+    .about-feedback-link:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
     @media (max-width: 600px) {
       header { padding: 16px 18px; }
       .logo { font-size: 1.25rem; }
@@ -226,6 +261,8 @@
 
     <h2>Platform Development & Community Feedback</h2>
   
+    <div class="about-divider"></div>
+  
     <p>
       PinnedPicks™ is currently in active early-stage development and is temporarily hosted using GitHub Pages infrastructure while the platform continues to evolve and improve.
     </p>
@@ -238,15 +275,14 @@
       We genuinely value community feedback, suggestions, and usability insights. If you encounter issues or have ideas that could improve the platform experience, we’d love to hear from you.
     </p>
   
-    <p>
-      <a
-        href="https://forms.gle/m9ZJ9iqkeFS1zyig6"
-        target="_blank"
-        rel="noopener noreferrer nofollow"
-      >
-        Submit Feedback & Suggestions
-      </a>
-    </p>
+    <a
+      class="about-feedback-link"
+      href="https://forms.gle/m9ZJ9iqkeFS1zyig6"
+      target="_blank"
+      rel="noopener noreferrer nofollow"
+    >
+      Submit Feedback & Suggestions →
+    </a>
   
   </div>
 
