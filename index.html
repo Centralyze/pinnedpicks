@@ -2061,8 +2061,8 @@
         </div>
   
         <div class="footer-col">
-          <p class="footer-col-title">Platforms</p>
-          <a href="https://shopee.ph" target="_blank" rel="noopener nofollow">Shopee</a>
+          <p class="footer-col-title">Shop Trusted Platforms</p>
+          <a href="https://shopee.com" target="_blank" rel="noopener nofollow">Shopee</a>
           <a href="https://www.shein.com" target="_blank" rel="noopener nofollow">SHEIN</a>
           <a href="https://www.amazon.com" target="_blank" rel="noopener nofollow">Amazon</a>
           <a href="#">More Platforms Soon</a>
@@ -2091,27 +2091,6 @@
   
       </nav>
   
-      <!-- Marketplace Buttons -->
-      <p class="footer-shop-label">Shop Trusted Platforms</p>
-      <div class="footer-platforms">
-  
-        <a class="footer-platform-link" href="https://shopee.ph" target="_blank" rel="noopener nofollow">
-          <span class="footer-platform-dot dot-shopee"></span>
-          Shop on Shopee
-        </a>
-  
-        <a class="footer-platform-link" href="https://www.shein.com" target="_blank" rel="noopener nofollow">
-          <span class="footer-platform-dot dot-shein"></span>
-          Shop on SHEIN
-        </a>
-  
-        <a class="footer-platform-link" href="https://www.amazon.com" target="_blank" rel="noopener nofollow">
-          <span class="footer-platform-dot dot-amazon"></span>
-          Shop on Amazon
-        </a>
-  
-      </div>
-  
       <!-- Disclosure -->
       <p class="footer-disclosure">
         <strong>Affiliate Disclosure:</strong>
@@ -2138,60 +2117,79 @@
     // ── INIT: force closed state on all sections at page load ──
     document.addEventListener('DOMContentLoaded', () => {
 
+    initTouchSwipe();
+    shuffleAllCards();
+    initAutoSlider();
 
-      initTouchSwipe();
-      shuffleAllCards();
     });
 
     // ── CARD RANDOMIZATION ──
     function shuffle(arr) {
-      for (let i = arr.length - 1; i > 0; i--) {
+    const copy = [...arr];
+
+    for (let i = copy.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        [arr[i], arr[j]] = [arr[j], arr[i]];
-      }
-      return arr;
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+    }
+
+    return copy;
     }
 
     function shuffleContainer(container) {
-      if (!container) return;
-      const cards = Array.from(container.children);
-      if (cards.length < 2) return;
-      const fragment = document.createDocumentFragment();
-      shuffle(cards).forEach(card => fragment.appendChild(card));
-      container.appendChild(fragment);
+    if (!container) return;
+
+    const cards = Array.from(container.children);
+    if (cards.length < 2) return;
+
+    const shuffled = shuffle(cards);
+    const fragment = document.createDocumentFragment();
+
+    shuffled.forEach(card => fragment.appendChild(card));
+
+    container.innerHTML = '';
+    container.appendChild(fragment);
     }
 
     function shuffleAllCards() {
-      // Shuffle all 20 Best Selling freely within each platform section
-      document.querySelectorAll('.shop-section').forEach(section => {
+    // Shuffle all 20 Best Selling cards
+    document.querySelectorAll('.shop-section').forEach(section => {
         const grids = section.querySelectorAll('.slider-grid');
-        if (grids.length < 1) return;
 
-        // Collect all cards from all rows of this section
+        if (grids.length < 2) return;
+
+        // Collect ALL cards from all rows
         const allCards = [];
+
         grids.forEach(grid => {
-          Array.from(grid.children).forEach(card => allCards.push(card));
+        allCards.push(...Array.from(grid.children));
         });
 
-        // Shuffle the full pool
-        shuffle(allCards);
+        // Shuffle full pool
+        const shuffledCards = shuffle(allCards);
 
-        // Redistribute back across rows in order
-        let idx = 0;
+        // IMPORTANT:
+        // Clear ALL rows first so cards don't stack unevenly
         grids.forEach(grid => {
-          const count = grid.children.length;
-          const fragment = document.createDocumentFragment();
-          for (let i = 0; i < count && idx < allCards.length; i++, idx++) {
-            fragment.appendChild(allCards[idx]);
-          }
-          grid.appendChild(fragment);
+        grid.innerHTML = '';
         });
-      });
 
-      // Shuffle each category grid independently (unchanged)
-      document.querySelectorAll('.category-cards').forEach(grid => {
+        // Redistribute evenly
+        const maxPerRow = 10;
+
+        shuffledCards.forEach((card, index) => {
+        const rowIndex = Math.floor(index / maxPerRow);
+
+        // Prevent overflow if somehow more rows/cards exist
+        if (grids[rowIndex]) {
+            grids[rowIndex].appendChild(card);
+        }
+        });
+    });
+
+    // Shuffle category grids independently
+    document.querySelectorAll('.category-cards').forEach(grid => {
         shuffleContainer(grid);
-      });
+    });
     }
     
     // ── THEME TOGGLE ──
@@ -2262,6 +2260,151 @@
 
       row.querySelector('.slider-btn-left').classList.toggle('visible',  newX < 0);
       row.querySelector('.slider-btn-right').classList.toggle('visible', newX > maxX);
+    }
+
+    // ── AUTO SLIDE BEST SELLING ROWS ──
+    function initAutoSlider() {
+    const AUTO_INTERVAL = 5000;
+    let resumeTimeout = null;
+
+    document.querySelectorAll('.slider-row').forEach(row => {
+        const grid = row.querySelector('.slider-grid');
+        const viewport = row.querySelector('.slider-viewport');
+        const leftBtn = row.querySelector('.slider-btn-left');
+        const rightBtn = row.querySelector('.slider-btn-right');
+
+        leftBtn?.addEventListener('click', pauseAndResume);
+        rightBtn?.addEventListener('click', pauseAndResume);
+
+        if (!grid || !viewport) return;
+
+        let interval = null;
+        let isVisible = false;
+
+        function getCardWidth() {
+        const card = grid.querySelector('.card');
+        return card ? card.offsetWidth + 14 : 0;
+        }
+
+        function getMaxX() {
+        return -(grid.scrollWidth - viewport.offsetWidth);
+        }
+
+        function getCurrentX() {
+        return parseFloat(grid.dataset.x || 0);
+        }
+
+        function setX(x, smooth = true) {
+        const clamped = Math.max(getMaxX(), Math.min(0, x));
+
+        grid.dataset.x = clamped;
+
+        grid.style.transition = smooth
+            ? 'transform 1.15s cubic-bezier(0.22, 1, 0.36, 1)'
+            : 'none';
+
+        grid.style.transform = `translateX(${clamped}px)`;
+
+        row.querySelector('.slider-btn-left')
+            ?.classList.toggle('visible', clamped < 0);
+
+        row.querySelector('.slider-btn-right')
+            ?.classList.toggle('visible', clamped > getMaxX());
+        }
+
+        function autoMove() {
+        const currentX = getCurrentX();
+        const maxX = getMaxX();
+
+        // Smaller movement = smoother progression
+        const step = getCardWidth() * 1.35;
+
+        let nextX = currentX - step;
+
+        // Reached the very end
+        if (nextX <= maxX) {
+
+            // Smoothly move to exact end first
+            setX(maxX);
+
+            // Then smoothly glide back to start
+            setTimeout(() => {
+
+            grid.dataset.x = 0;
+
+            // Longer elegant return animation
+            grid.style.transition =
+                'transform 1.8s cubic-bezier(0.65, 0, 0.35, 1)';
+
+            grid.style.transform = `translateX(0px)`;
+
+            row.querySelector('.slider-btn-left')
+                ?.classList.remove('visible');
+
+            row.querySelector('.slider-btn-right')
+                ?.classList.add('visible');
+
+            }, 1300);
+
+        } else {
+            setX(nextX);
+        }
+        }
+
+        function startAuto() {
+        if (interval) return;
+
+        interval = setInterval(() => {
+            if (isVisible) autoMove();
+        }, AUTO_INTERVAL);
+        }
+
+        function stopAuto() {
+        clearInterval(interval);
+        interval = null;
+        }
+
+        function pauseAndResume() {
+        stopAuto();
+
+        clearTimeout(resumeTimeout);
+
+        resumeTimeout = setTimeout(() => {
+            if (isVisible) startAuto();
+        }, 10000); // 10 seconds
+        }
+
+        // Only run when visible
+        const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            isVisible = entry.isIntersecting;
+
+            if (isVisible) {
+            startAuto();
+            } else {
+            stopAuto();
+            }
+        });
+        }, {
+        threshold: 0.45
+        });
+
+        observer.observe(row);
+
+        // Pause during touch/swipe
+        grid.addEventListener('touchstart', pauseAndResume, { passive: true });
+
+        grid.addEventListener('touchend', () => {
+        pauseAndResume();
+        }, { passive: true });
+
+        // Pause on hover
+        row.addEventListener('mouseenter', stopAuto);
+
+        row.addEventListener('mouseleave', () => {
+        if (isVisible) startAuto();
+        });
+    });
     }
 
 
