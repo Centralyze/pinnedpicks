@@ -200,13 +200,6 @@
       justify-content: space-between;
       padding: 18px 28px;
       border-bottom: 1px solid var(--border);
-      cursor: pointer;
-      user-select: none;
-      transition: background 0.2s;
-    }
-
-    .section-header:hover {
-      background: var(--bg2);
     }
 
     .section-header-left {
@@ -236,33 +229,8 @@
       color: var(--text);
     }
 
-    .chevron {
-      font-size: 1rem;
-      line-height: 1;
-      color: var(--muted);
-      transition: transform 0.3s ease;
-    }
-
-    .shop-section.open .chevron {
-      transform: rotate(180deg);
-    }
-
-    /* Cards Wrap (collapsible) */
     .cards-wrap {
-      max-height: 0;
-      overflow: hidden;
-      padding: 0 24px;
-      opacity: 0;
-      transition:
-        max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1),
-        padding    0.35s ease,
-        opacity    0.35s ease;
-    }
-
-    .shop-section.open .cards-wrap {
-      max-height: 4000px;
       padding: 24px;
-      opacity: 1;
     }
 
     /* Section subheading */
@@ -507,7 +475,7 @@
     }
 
     .category-label {
-      display: inline-flex;
+      display: flex;
       align-items: center;
       gap: 6px;
       margin-bottom: 14px;
@@ -516,7 +484,20 @@
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--accent);
-      cursor: default;
+      cursor: pointer;
+      user-select: none;
+    }
+    
+    .cat-chevron {
+      margin-left: auto;
+      font-size: 0.9rem;
+      line-height: 1;
+      color: var(--muted);
+      transition: transform 0.3s ease;
+    }
+    
+    .category-section.cat-open .cat-chevron {
+      transform: rotate(180deg);
     }
 
     .category-label svg {
@@ -851,8 +832,9 @@
       }
 
       /* Cards wrap override for mobile */
+      /* WITH THIS */
       .cards-wrap {
-        padding: 0 !important;
+        padding: 12px 0;
       }
 
       .section-subheading {
@@ -969,16 +951,15 @@
          SHOPEE SECTION
     =========================================================== -->
     <section class="shop-section" data-section="shopee">
-      <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-header">
         <div class="section-header-left">
           <span class="shop-badge badge-shopee">Shopee</span>
           <span class="section-title">Shopee Picks</span>
         </div>
-        <span class="chevron">▾</span>
       </div>
 
       <div class="cards-wrap">
-        <p class="section-subheading">20 Best Selling Products</p>
+        <p class="section-subheading">20 Best Selling</p>
 
         <div class="slider-wrapper">
 
@@ -1169,10 +1150,11 @@
         <!-- Category Filter Tags -->
         <!-- Category Filter Tags -->
         <div class="category-section">
-          <p class="category-label">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-            Browse by Category
-          </p>
+            <p class="category-label" onclick="toggleCategoryPanel(this)">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+              Browse by Category
+              <span class="cat-chevron">▾</span>
+            </p>
           <div class="category-tags">
             <span class="cat-tag" onclick="filterCategory(this, 'fashion')">Fashion & Apparel</span>
             <span class="cat-tag" onclick="filterCategory(this, 'electronics')">Electronics & Technology</span>
@@ -1431,7 +1413,7 @@
       </div>
 
       <div class="cards-wrap">
-        <p class="section-subheading">20 Best Selling Products</p>
+        <p class="section-subheading">20 Best Selling</p>
 
         <div class="slider-wrapper">
 
@@ -1622,10 +1604,11 @@
         <!-- Category Filter Tags -->
         <!-- Category Filter Tags -->
         <div class="category-section">
-          <p class="category-label">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-            Browse by Category
-          </p>
+            <p class="category-label" onclick="toggleCategoryPanel(this)">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+              Browse by Category
+              <span class="cat-chevron">▾</span>
+            </p>
           <div class="category-tags">
             <span class="cat-tag" onclick="filterCategory(this, 'fashion')">Fashion & Apparel</span>
             <span class="cat-tag" onclick="filterCategory(this, 'electronics')">Electronics & Technology</span>
@@ -1748,7 +1731,7 @@
       </div>
 
       <div class="cards-wrap">
-        <p class="section-subheading">20 Best Selling Products</p>
+        <p class="section-subheading">20 Best Selling</p>
 
         <div class="slider-wrapper">
 
@@ -1939,10 +1922,11 @@
         <!-- Category Filter Tags -->
         <!-- Category Filter Tags -->
         <div class="category-section">
-          <p class="category-label">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-            Browse by Category
-          </p>
+            <p class="category-label" onclick="toggleCategoryPanel(this)">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+              Browse by Category
+              <span class="cat-chevron">▾</span>
+            </p>
           <div class="category-tags">
             <span class="cat-tag" onclick="filterCategory(this, 'fashion')">Fashion & Apparel</span>
             <span class="cat-tag" onclick="filterCategory(this, 'electronics')">Electronics & Technology</span>
@@ -2158,14 +2142,7 @@
 
     // ── INIT: force closed state on all sections at page load ──
     document.addEventListener('DOMContentLoaded', () => {
-      document.querySelectorAll('.shop-section:not(.open) .cards-wrap').forEach(wrap => {
-        wrap.style.transition = 'none';
-        wrap.style.maxHeight  = '0';
-        wrap.style.opacity    = '0';
-        wrap.style.padding    = '0 24px';
-        wrap.style.overflow   = 'hidden';
-        requestAnimationFrame(() => { wrap.style.transition = ''; });
-      });
+
 
       initTouchSwipe();
       shuffleAllCards();
@@ -2190,7 +2167,7 @@
     }
 
     function shuffleAllCards() {
-      // Shuffle all 20 Best Selling products freely within each platform section
+      // Shuffle all 20 Best Selling freely within each platform section
       document.querySelectorAll('.shop-section').forEach(section => {
         const grids = section.querySelectorAll('.slider-grid');
         if (grids.length < 1) return;
@@ -2241,25 +2218,32 @@
 
 
     // ── COLLAPSIBLE SECTIONS ──
-    function toggleSection(header) {
-      const section = header.closest('.shop-section');
-      const wrap    = section.querySelector('.cards-wrap');
-      const isOpen  = section.classList.contains('open');
-
+    function toggleCategoryPanel(label) {
+      const section     = label.closest('.shop-section');
+      const panel       = section.querySelector('.category-panel');
+      const catSection  = label.closest('.category-section');
+      const isOpen      = panel.classList.contains('open');
+    
       if (isOpen) {
-        wrap.style.maxHeight = wrap.scrollHeight + 'px';
-        requestAnimationFrame(() => {
-          wrap.style.maxHeight = '0';
-          wrap.style.opacity   = '0';
-          wrap.style.padding   = '0 24px';
-        });
-        section.classList.remove('open');
+        const anim = panel.animate(
+          [{ maxHeight: panel.scrollHeight + 'px' }, { maxHeight: '0px' }],
+          { duration: 450, easing: 'cubic-bezier(0.4, 0, 0.2, 1)', fill: 'forwards' }
+        );
+        anim.onfinish = () => {
+          panel.classList.remove('open');
+          panel.style.maxHeight = '';
+          anim.cancel();
+        };
+        section.querySelectorAll('.cat-tag').forEach(t => t.classList.remove('active'));
+        section.querySelectorAll('.category-cards').forEach(g => g.classList.remove('active'));
+        catSection.classList.remove('cat-open');
       } else {
-        section.classList.add('open');
-        wrap.style.opacity   = '1';
-        wrap.style.padding   = '24px';
-        wrap.style.maxHeight = wrap.scrollHeight + 'px';
-        setTimeout(() => { wrap.style.maxHeight = '4000px'; }, 450);
+        panel.classList.add('open');
+        catSection.classList.add('cat-open');
+        panel.animate(
+          [{ maxHeight: '0px' }, { maxHeight: panel.scrollHeight + 'px' }],
+          { duration: 450, easing: 'cubic-bezier(0.4, 0, 0.2, 1)' }
+        ).onfinish = () => { panel.style.maxHeight = '4000px'; };
       }
     }
 
@@ -2426,6 +2410,8 @@
           panel.style.maxHeight = '';
           anim.cancel();
         };
+        const catSection = section.querySelector('.category-section');
+        if (catSection) catSection.classList.remove('cat-open');
         return;
       }
 
@@ -2434,8 +2420,11 @@
       const target = section.querySelector(`.category-cards[data-category="${category}"]`);
       if (target) target.classList.add('active');
 
+
       if (!panel.classList.contains('open')) {
         panel.classList.add('open');
+        const catSection = section.querySelector('.category-section');
+        if (catSection) catSection.classList.add('cat-open');
         panel.animate(
           [{ maxHeight: '0px' }, { maxHeight: panel.scrollHeight + 'px' }],
           { duration: 450, easing: 'cubic-bezier(0.4, 0, 0.2, 1)' }
@@ -2464,31 +2453,26 @@
     
       if (!sectionEl) return;
     
-      // Open section if collapsed
-      const wrap = sectionEl.querySelector('.cards-wrap');
-      const isOpen = sectionEl.classList.contains('open');
-      if (!isOpen) {
-        sectionEl.classList.add('open');
-        wrap.style.opacity   = '1';
-        wrap.style.padding   = '24px';
-        wrap.style.maxHeight = wrap.scrollHeight + 'px';
-        setTimeout(() => { wrap.style.maxHeight = '4000px'; }, 450);
-      }
-    
-      // Open category panel if needed
       if (categoryKey) {
+        const panel      = sectionEl.querySelector('.category-panel');
+        const catSection = sectionEl.querySelector('.category-section');
+        if (!panel.classList.contains('open')) {
+          panel.classList.add('open');
+          if (catSection) catSection.classList.add('cat-open');
+          panel.animate(
+            [{ maxHeight: '0px' }, { maxHeight: panel.scrollHeight + 'px' }],
+            { duration: 450, easing: 'cubic-bezier(0.4, 0, 0.2, 1)' }
+          ).onfinish = () => { panel.style.maxHeight = '4000px'; };
+        }
         setTimeout(() => {
           const tag = sectionEl.querySelector(`.cat-tag[onclick*="${categoryKey}"]`);
-          if (tag && !tag.classList.contains('active')) {
-            filterCategory(tag, categoryKey);
-          }
-        }, isOpen ? 0 : 460);
+          if (tag && !tag.classList.contains('active')) filterCategory(tag, categoryKey);
+        }, 460);
       }
     
-      // Smooth scroll
       setTimeout(() => {
         sectionEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, isOpen ? 50 : 500);
+      }, 50);
     }
 
   </script>
