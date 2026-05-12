@@ -175,15 +175,37 @@
     .back-link:hover { gap: 10px; }
 
     /* FOOTER */
-    footer {
+    .site-footer {
+      width: 100%;
+      margin-top: 80px;
+    
       background: var(--card);
       border-top: 1px solid var(--border);
-      padding: 32px 24px;
+    
+      padding: 34px 24px;
+    }
+    
+    .footer-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+    
       text-align: center;
+    
       font-size: 0.72rem;
       color: var(--muted);
     }
-    footer a { color: var(--accent); text-decoration: none; font-weight: 600; }
+    
+    .footer-inner a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    
+      transition: opacity 0.2s ease;
+    }
+    
+    .footer-inner a:hover {
+      opacity: 0.8;
+    }
 
     @media (max-width: 600px) {
       header { padding: 16px 18px; }
@@ -267,8 +289,18 @@
     
     </div>
 
-  <footer>
-    <p>© 2026 PinnedPicks™. All rights reserved. &nbsp; <a href="privacypolicy.html">Privacy Policy</a> &nbsp; <a href="termsandconditions.html">Terms &amp; Conditions</a></p>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>
+        © 2026 PinnedPicks™. All rights reserved.
+        &nbsp;
+        <a href="privacypolicy.html">Privacy Policy</a>
+        &nbsp;
+        <a href="termsandconditions.html">Terms &amp; Conditions</a>
+        &nbsp;
+        <a href="index.html">Home</a>
+      </p>
+    </div>
   </footer>
 
   <script>
